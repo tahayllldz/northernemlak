@@ -155,6 +155,18 @@ Vercel Linux'ta derlediği için yerel `.node` engeli sorun çıkarmaz.
 Yerelde `npm run dev` depodaki `app/globals.css` kopyasını kullanır; kaynağa
 stil eklediysen o kopyaya da elle yansıt, yoksa yerelde görünmez (Vercel'de görünür).
 
+## Kişisel veri kuralı — ihlal etme
+
+- Prototipteki **danışman adları, telefonları ve ruhsat numaraları kurgusaldır**
+  ve öyle kalmalı. Telefonlar `+90 533 000 00 0X` — tahsis edilmemiş blok,
+  kimseye ulaşmaz. Gerçek numara, gerçek isim, gerçek ruhsat no **girme**.
+- Soyisim yok, baş harf var (`Selin K.`). Kimse tanımlanabilir olmasın.
+- Danışman kartlarında "Demo kayıt" rozeti ve açıklama notu görünür kalmalı.
+- **Rakip siteden görsel/veri alma.** Başka bir sitenin filigranını taşıyan
+  fotoğraf yayına girmez (101evler'in telif notu: izinsiz kopyalanamaz).
+  Gerçek ilan görselleri yalnızca mülk sahibinin kendi çektiği ham dosyalardan
+  gelir; `gercekGorsel: true` ile işaretlenir.
+
 ## Uyarılar
 
 - **AI kotası** paket bazlı sınırlanacak + aylık bütçe tavanı + %80 alarmı. Kotasız bırakma.

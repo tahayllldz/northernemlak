@@ -200,7 +200,7 @@ async function uret(key, model, prompt, dosya, oran) {
     kapak: "${gorseller[0]}",
     gercekGorsel: true,
     gorseller: ${JSON.stringify(gorseller)},
-    emlakci: "yeliz-akinci",
+    emlakci: "selin-k",
     yayinTarihi: "${bugun}", guncelleme: "${bugun}",
     goruntulenme: 1,
     vitrin: true,

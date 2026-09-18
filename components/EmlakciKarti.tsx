@@ -23,6 +23,7 @@ export default function EmlakciKarti({ e, dil }: { e: Emlakci; dil: Dil }) {
         <span className="rounded bg-kum-100 px-2 py-1 text-[11.5px] text-deniz-700">
           {e.kidemYil}{t("yil", dil)}
         </span>
+        <span className="rounded bg-terra-100 px-2 py-1 text-[11.5px] text-terra-600">{t("demoKayit", dil)}</span>
         {e.ruhsatDogrulandi && (
           <span className="flex items-center gap-1 rounded bg-deniz-50 px-2 py-1 text-[11.5px] text-deniz-700">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" aria-hidden>
@@ -57,6 +58,10 @@ export default function EmlakciKarti({ e, dil }: { e: Emlakci; dil: Dil }) {
           {t("mesajGonder", dil)}
         </button>
       </div>
+
+      <p className="mt-4 border-t border-hat pt-3 text-[11.5px] leading-relaxed text-sis">
+        {t("demoKisiNot", dil)}
+      </p>
     </div>
   );
 }

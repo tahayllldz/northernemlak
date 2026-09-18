@@ -50,7 +50,7 @@ export default function Filtreler({ dil, adet }: { dil: Dil; adet: number }) {
 
 ${ozet}
 ${typeof window !== "undefined" ? window.location.href : ""}`;
-    return `https://wa.me/905338530080?text=${encodeURIComponent(metin)}`;
+    return `https://wa.me/905330000001?text=${encodeURIComponent(metin)}`;
   };
   const sayilar = sehirSayilari();
 

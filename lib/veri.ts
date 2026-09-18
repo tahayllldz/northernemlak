@@ -2,18 +2,18 @@
 import { Emlakci, Gelistirici, Ilan } from "./tipler";
 
 export const GELISTIRICILER: Gelistirici[] = [
-  { slug: "akdeniz-yapi",  ad: "Akdeniz Yapı Ltd.",        kurulusYili: 2004, teslimEdilenProje: 14, teslimEdilenKonut: 1120, ortalamaGecikmeAy: 2,  devamEdenProje: 3, sonTeslimYili: 2026 },
-  { slug: "bellapais-insaat", ad: "Bellapais İnşaat",      kurulusYili: 2012, teslimEdilenProje: 6,  teslimEdilenKonut: 410,  ortalamaGecikmeAy: 7,  devamEdenProje: 2, sonTeslimYili: 2025 },
-  { slug: "levant-development", ad: "Levant Development",  kurulusYili: 1998, teslimEdilenProje: 22, teslimEdilenKonut: 2340, ortalamaGecikmeAy: 1,  devamEdenProje: 4, sonTeslimYili: 2026 },
-  { slug: "long-beach-yapi", ad: "Long Beach Yapı",        kurulusYili: 2019, teslimEdilenProje: 2,  teslimEdilenKonut: 180,  ortalamaGecikmeAy: 14, devamEdenProje: 5, sonTeslimYili: 2024 },
+  { slug: "akdeniz-yapi",  ad: "Demo Yapı A",        kurulusYili: 2004, teslimEdilenProje: 14, teslimEdilenKonut: 1120, ortalamaGecikmeAy: 2,  devamEdenProje: 3, sonTeslimYili: 2026 },
+  { slug: "bellapais-insaat", ad: "Demo Yapı B",      kurulusYili: 2012, teslimEdilenProje: 6,  teslimEdilenKonut: 410,  ortalamaGecikmeAy: 7,  devamEdenProje: 2, sonTeslimYili: 2025 },
+  { slug: "levant-development", ad: "Demo Yapı C",  kurulusYili: 1998, teslimEdilenProje: 22, teslimEdilenKonut: 2340, ortalamaGecikmeAy: 1,  devamEdenProje: 4, sonTeslimYili: 2026 },
+  { slug: "long-beach-yapi", ad: "Demo Yapı D",        kurulusYili: 2019, teslimEdilenProje: 2,  teslimEdilenKonut: 180,  ortalamaGecikmeAy: 14, devamEdenProje: 5, sonTeslimYili: 2024 },
 ];
 
 export const EMLAKCILAR: Emlakci[] = [
-  { slug: "yeliz-akinci", ad: "Yeliz Akıncı", firma: "Kıbrıs Kıyı Emlak", kidemYil: 8, telefon: "+90 533 853 00 80", whatsapp: "905338530080", ruhsatNo: "KKTC-EM-2018-0431", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en"] },
-  { slug: "mert-ozan", ad: "Mert Ozan", firma: "Bellapais Property", kidemYil: 5, telefon: "+90 542 871 22 14", whatsapp: "905428712214", ruhsatNo: "KKTC-EM-2021-0912", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "ru"] },
-  { slug: "deniz-tuncel", ad: "Deniz Tuncel", firma: "Levant Estates", kidemYil: 11, telefon: "+90 548 330 45 09", whatsapp: "905483304509", ruhsatNo: "KKTC-EM-2015-0117", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "de"] },
-  { slug: "ayse-kurtulus", ad: "Ayşe Kurtuluş", firma: "Long Beach Yatırım", kidemYil: 3, telefon: "+90 533 442 77 65", whatsapp: "905334427765", ruhsatNo: "KKTC-EM-2023-1284", ruhsatDogrulandi: false, konustuguDiller: ["tr", "ru"] },
-  { slug: "kemal-arda", ad: "Kemal Arda", firma: "Arda İnşaat", kidemYil: 16, telefon: "+90 542 209 61 30", whatsapp: "905422096130", ruhsatNo: "KKTC-IN-2010-0044", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "ru", "fa"] },
+  { slug: "selin-k", ad: "Selin K.", firma: "Kuzey Pusula Emlak", kidemYil: 8, telefon: "+90 533 000 00 01", whatsapp: "905330000001", ruhsatNo: "KKTC-DEMO-0001", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en"] },
+  { slug: "emre-t", ad: "Emre T.", firma: "Zeytinlik Kıyı Emlak", kidemYil: 5, telefon: "+90 533 000 00 02", whatsapp: "905330000002", ruhsatNo: "KKTC-DEMO-0002", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "ru"] },
+  { slug: "derya-a", ad: "Derya A.", firma: "Beşparmak Panorama Emlak", kidemYil: 11, telefon: "+90 533 000 00 03", whatsapp: "905330000003", ruhsatNo: "KKTC-DEMO-0003", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "de"] },
+  { slug: "burak-y", ad: "Burak Y.", firma: "Karpaz Ufuk Emlak", kidemYil: 3, telefon: "+90 533 000 00 04", whatsapp: "905330000004", ruhsatNo: "KKTC-DEMO-0004", ruhsatDogrulandi: false, konustuguDiller: ["tr", "ru"] },
+  { slug: "nazli-o", ad: "Nazlı Ö.", firma: "Girne Mercan İnşaat", kidemYil: 16, telefon: "+90 533 000 00 05", whatsapp: "905330000005", ruhsatNo: "KKTC-DEMO-0005", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "ru", "fa"] },
 ];
 
 export const ILANLAR: Ilan[] = [
@@ -30,7 +30,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["asansor", "kapali-otopark", "ortak-havuz", "jenerator", "celik-kapi", "deniz-manzarasi", "sehir-ici"],
     kapak: "/gorsel/ilan/ilan-06.webp",
     gorseller: ["/gorsel/ilan/ilan-06.webp", "/gorsel/ilan/ilan-15.webp", "/gorsel/ilan/ilan-11.webp", "/gorsel/oda/oda-01.webp"],
-    emlakci: "yeliz-akinci",
+    emlakci: "selin-k",
     yayinTarihi: "2026-02-11", guncelleme: "2026-09-11",
     goruntulenme: 457,
     vitrin: true,
@@ -56,7 +56,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ozel-havuz", "bahce", "kapali-otopark", "jenerator", "somine", "deniz-manzarasi", "guvenlik-kamerasi"],
     kapak: "/gorsel/ilan/ilan-07.webp",
     gorseller: ["/gorsel/ilan/ilan-07.webp", "/gorsel/ilan/ilan-05.webp", "/gorsel/ilan/ilan-08.webp", "/gorsel/oda/oda-05.webp"],
-    emlakci: "deniz-tuncel",
+    emlakci: "derya-a",
     yayinTarihi: "2026-03-12", guncelleme: "2026-09-12",
     goruntulenme: 594,
     vitrin: true,
@@ -82,7 +82,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["bahce", "barbeku", "su-kuyusu", "otopark", "dag-manzarasi", "gunes-enerjisi"],
     kapak: "/gorsel/ilan/ilan-03.webp",
     gorseller: ["/gorsel/ilan/ilan-03.webp", "/gorsel/ilan/ilan-02.webp", "/gorsel/oda/oda-04.webp"],
-    emlakci: "mert-ozan",
+    emlakci: "emre-t",
     yayinTarihi: "2026-04-13", guncelleme: "2026-09-13",
     goruntulenme: 731,
     
@@ -108,7 +108,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ortak-havuz", "asansor", "guvenlik-kamerasi", "denize-sifir", "jenerator"],
     kapak: "/gorsel/ilan/ilan-19.webp",
     gorseller: ["/gorsel/ilan/ilan-19.webp", "/gorsel/ilan/ilan-04.webp", "/gorsel/oda/oda-09.webp"],
-    emlakci: "ayse-kurtulus",
+    emlakci: "burak-y",
     yayinTarihi: "2026-05-14", guncelleme: "2026-09-14",
     goruntulenme: 868,
     
@@ -134,7 +134,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["bahce", "somine", "teras", "dag-manzarasi", "deniz-manzarasi", "su-kuyusu"],
     kapak: "/gorsel/ilan/ilan-01.webp",
     gorseller: ["/gorsel/ilan/ilan-01.webp", "/gorsel/ilan/ilan-22.webp"],
-    emlakci: "deniz-tuncel",
+    emlakci: "derya-a",
     yayinTarihi: "2026-06-15", guncelleme: "2026-09-15",
     goruntulenme: 1005,
     
@@ -153,7 +153,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["asansor", "jenerator", "kapali-otopark", "yangin-alarmi", "sehir-ici"],
     kapak: "/gorsel/ilan/ilan-17.webp",
     gorseller: ["/gorsel/ilan/ilan-17.webp", "/gorsel/ilan/ilan-16.webp", "/gorsel/oda/oda-06.webp"],
-    emlakci: "kemal-arda",
+    emlakci: "nazli-o",
     yayinTarihi: "2026-07-16", guncelleme: "2026-09-16",
     goruntulenme: 1142,
     
@@ -179,7 +179,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ortak-havuz", "asansor", "otopark", "doga-manzarasi", "balkon"],
     kapak: "/gorsel/ilan/ilan-18.webp",
     gorseller: ["/gorsel/ilan/ilan-18.webp", "/gorsel/ilan/ilan-16.webp", "/gorsel/oda/oda-03.webp"],
-    emlakci: "mert-ozan",
+    emlakci: "emre-t",
     yayinTarihi: "2026-08-17", guncelleme: "2026-09-17",
     goruntulenme: 1279,
     
@@ -205,7 +205,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ozel-havuz", "denize-sifir", "bahce", "barbeku", "jenerator", "guvenlik-kamerasi", "teras"],
     kapak: "/gorsel/ilan/ilan-13.webp",
     gorseller: ["/gorsel/ilan/ilan-13.webp", "/gorsel/ilan/ilan-23.webp", "/gorsel/ilan/ilan-20.webp"],
-    emlakci: "deniz-tuncel",
+    emlakci: "derya-a",
     yayinTarihi: "2026-09-18", guncelleme: "2026-09-18",
     goruntulenme: 1416,
     vitrin: true,
@@ -224,7 +224,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["asansor", "otopark", "balkon", "celik-kapi", "sehir-ici"],
     kapak: "/gorsel/ilan/ilan-12.webp",
     gorseller: ["/gorsel/ilan/ilan-12.webp", "/gorsel/ilan/ilan-16.webp", "/gorsel/oda/oda-02.webp"],
-    emlakci: "kemal-arda",
+    emlakci: "nazli-o",
     yayinTarihi: "2026-01-10", guncelleme: "2026-09-10",
     goruntulenme: 1553,
     
@@ -250,7 +250,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["bahce", "su-kuyusu", "barbeku", "somine", "deniz-manzarasi", "doga-manzarasi"],
     kapak: "/gorsel/ilan/ilan-21.webp",
     gorseller: ["/gorsel/ilan/ilan-21.webp", "/gorsel/ilan/ilan-22.webp"],
-    emlakci: "yeliz-akinci",
+    emlakci: "selin-k",
     yayinTarihi: "2026-02-11", guncelleme: "2026-09-11",
     goruntulenme: 1690,
     
@@ -269,7 +269,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["asansor", "otopark", "balkon", "jenerator", "sehir-ici"],
     kapak: "/gorsel/ilan/ilan-15.webp",
     gorseller: ["/gorsel/ilan/ilan-15.webp", "/gorsel/ilan/ilan-17.webp", "/gorsel/oda/oda-08.webp"],
-    emlakci: "yeliz-akinci",
+    emlakci: "selin-k",
     yayinTarihi: "2026-03-12", guncelleme: "2026-09-12",
     goruntulenme: 1827,
     
@@ -295,7 +295,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["asansor", "ortak-havuz", "teras", "deniz-manzarasi", "jenerator", "kapali-otopark"],
     kapak: "/gorsel/ilan/ilan-23.webp",
     gorseller: ["/gorsel/ilan/ilan-23.webp", "/gorsel/ilan/ilan-11.webp", "/gorsel/oda/oda-07.webp"],
-    emlakci: "ayse-kurtulus",
+    emlakci: "burak-y",
     yayinTarihi: "2026-04-13", guncelleme: "2026-09-13",
     goruntulenme: 1964,
     vitrin: true,
@@ -321,7 +321,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ortak-havuz", "bahce", "otopark", "dag-manzarasi", "barbeku"],
     kapak: "/gorsel/ilan/ilan-14.webp",
     gorseller: ["/gorsel/ilan/ilan-14.webp", "/gorsel/ilan/ilan-08.webp", "/gorsel/oda/oda-10.webp"],
-    emlakci: "mert-ozan",
+    emlakci: "emre-t",
     yayinTarihi: "2026-05-14", guncelleme: "2026-09-14",
     goruntulenme: 2101,
     
@@ -347,7 +347,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["asansor", "otopark", "balkon", "gunes-enerjisi"],
     kapak: "/gorsel/ilan/ilan-16.webp",
     gorseller: ["/gorsel/ilan/ilan-16.webp", "/gorsel/ilan/ilan-18.webp"],
-    emlakci: "kemal-arda",
+    emlakci: "nazli-o",
     yayinTarihi: "2026-06-15", guncelleme: "2026-09-15",
     goruntulenme: 2238,
     
@@ -366,7 +366,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ozel-havuz", "bahce", "barbeku", "jenerator", "deniz-manzarasi", "guvenlik-kamerasi"],
     kapak: "/gorsel/ilan/ilan-08.webp",
     gorseller: ["/gorsel/ilan/ilan-08.webp", "/gorsel/ilan/ilan-05.webp"],
-    emlakci: "deniz-tuncel",
+    emlakci: "derya-a",
     yayinTarihi: "2026-07-16", guncelleme: "2026-09-16",
     goruntulenme: 2375,
     
@@ -385,7 +385,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["otopark", "balkon", "celik-kapi"],
     kapak: "/gorsel/ilan/ilan-09.webp",
     gorseller: ["/gorsel/ilan/ilan-09.webp", "/gorsel/ilan/ilan-17.webp"],
-    emlakci: "kemal-arda",
+    emlakci: "nazli-o",
     yayinTarihi: "2026-08-17", guncelleme: "2026-09-17",
     goruntulenme: 2512,
     
@@ -404,7 +404,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["yol-erisimi", "elektrik-altyapisi", "su-altyapisi", "deniz-manzarasi", "dag-manzarasi"],
     kapak: "/gorsel/ilan/ilan-20.webp",
     gorseller: ["/gorsel/ilan/ilan-20.webp", "/gorsel/ilan/ilan-01.webp"],
-    emlakci: "yeliz-akinci",
+    emlakci: "selin-k",
     yayinTarihi: "2026-09-18", guncelleme: "2026-09-18",
     goruntulenme: 2649,
     
@@ -423,7 +423,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["asansor", "balkon", "sehir-ici"],
     kapak: "/gorsel/ilan/ilan-10.webp",
     gorseller: ["/gorsel/ilan/ilan-10.webp", "/gorsel/ilan/ilan-19.webp"],
-    emlakci: "ayse-kurtulus",
+    emlakci: "burak-y",
     yayinTarihi: "2026-01-10", guncelleme: "2026-09-10",
     goruntulenme: 386,
     
@@ -442,7 +442,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ozel-havuz", "bahce", "somine", "jenerator", "deniz-manzarasi", "kapali-otopark"],
     kapak: "/gorsel/ilan/ilan-02.webp",
     gorseller: ["/gorsel/ilan/ilan-02.webp", "/gorsel/ilan/ilan-13.webp"],
-    emlakci: "deniz-tuncel",
+    emlakci: "derya-a",
     yayinTarihi: "2026-02-11", guncelleme: "2026-09-11",
     goruntulenme: 523,
     
@@ -461,7 +461,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ortak-havuz", "denize-sifir", "asansor", "guvenlik-kamerasi", "jenerator"],
     kapak: "/gorsel/ilan/ilan-04.webp",
     gorseller: ["/gorsel/ilan/ilan-04.webp", "/gorsel/ilan/ilan-06.webp"],
-    emlakci: "ayse-kurtulus",
+    emlakci: "burak-y",
     yayinTarihi: "2026-03-12", guncelleme: "2026-09-12",
     goruntulenme: 660,
     
@@ -480,7 +480,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["otopark", "balkon", "deniz-manzarasi"],
     kapak: "/gorsel/ilan/ilan-11.webp",
     gorseller: ["/gorsel/ilan/ilan-11.webp", "/gorsel/ilan/ilan-10.webp"],
-    emlakci: "mert-ozan",
+    emlakci: "emre-t",
     yayinTarihi: "2026-04-13", guncelleme: "2026-09-13",
     goruntulenme: 797,
     
@@ -499,7 +499,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["bahce", "su-kuyusu", "barbeku", "doga-manzarasi", "otopark"],
     kapak: "/gorsel/ilan/ilan-22.webp",
     gorseller: ["/gorsel/ilan/ilan-22.webp", "/gorsel/ilan/ilan-21.webp"],
-    emlakci: "yeliz-akinci",
+    emlakci: "selin-k",
     yayinTarihi: "2026-05-14", guncelleme: "2026-09-14",
     goruntulenme: 934,
     
@@ -518,7 +518,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["asansor", "kapali-otopark", "jenerator", "guvenlik-kamerasi", "balkon", "sehir-manzarasi"],
     kapak: "/gorsel/ilan/ilan-05.webp",
     gorseller: ["/gorsel/ilan/ilan-05.webp", "/gorsel/ilan/ilan-12.webp"],
-    emlakci: "kemal-arda",
+    emlakci: "nazli-o",
     yayinTarihi: "2026-06-15", guncelleme: "2026-09-15",
     goruntulenme: 1071,
     
@@ -536,7 +536,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ozel-havuz", "bahce", "kapali-otopark", "jenerator", "deniz-manzarasi"],
     kapak: "/gorsel/ilan/ilan-05.webp",
     gorseller: ["/gorsel/ilan/ilan-05.webp", "/gorsel/ilan/ilan-05.webp", "/gorsel/ilan/ilan-08.webp"],
-    emlakci: "yeliz-akinci",
+    emlakci: "selin-k",
     yayinTarihi: "2026-09-05", guncelleme: "2026-09-05",
     goruntulenme: 324,
     konum: { lat: 35.3391, lng: 33.2119 },
@@ -553,7 +553,7 @@ export const ILANLAR: Ilan[] = [
     ozellikler: ["ozel-havuz", "bahce", "kapali-otopark", "jenerator", "deniz-manzarasi"],
     kapak: "/gorsel/ilan/ilan-08.webp",
     gorseller: ["/gorsel/ilan/ilan-08.webp", "/gorsel/ilan/ilan-05.webp", "/gorsel/ilan/ilan-08.webp"],
-    emlakci: "mert-ozan",
+    emlakci: "emre-t",
     yayinTarihi: "2026-09-14", guncelleme: "2026-09-14",
     goruntulenme: 325,
     konum: { lat: 35.3391, lng: 33.2119 },

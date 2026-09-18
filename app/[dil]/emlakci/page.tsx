@@ -15,7 +15,8 @@ export default async function EmlakciListe({ params }: { params: Promise<{ dil: 
       <div className="h-[68px]" />
       <main id="icerik" className="kapsayici py-10">
         <h1 className="baslik mb-2 text-[32px] text-deniz-700">{t("emlakcilar", dil)}</h1>
-        <p className="mb-8 max-w-[56ch] text-[14.5px] text-sis">{t("neden1Metin", dil)}</p>
+        <p className="mb-3 max-w-[56ch] text-[14.5px] text-sis">{t("neden1Metin", dil)}</p>
+        <p className="mb-8 max-w-[70ch] text-[12px] leading-relaxed text-sis">{t("demoKisiNot", dil)}</p>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {EMLAKCILAR.map((e) => {
@@ -32,6 +33,7 @@ export default async function EmlakciListe({ params }: { params: Promise<{ dil: 
                 </div>
                 <div className="mt-3.5 flex flex-wrap gap-1.5">
                   <span className="rounded bg-kum-100 px-2 py-1 text-[11.5px] text-deniz-700">{e.kidemYil}{t("yil", dil)}</span>
+                  <span className="rounded bg-terra-100 px-2 py-1 text-[11.5px] text-terra-600">{t("demoKayit", dil)}</span>
                   {e.ruhsatDogrulandi && (
                     <span className="flex items-center gap-1 rounded bg-deniz-50 px-2 py-1 text-[11.5px] text-deniz-700">
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" aria-hidden>

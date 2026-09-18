@@ -245,6 +245,12 @@ const S = {
   mesajGonder:    { tr: "Mesaj gönder", en: "Send message", ru: "Написать" },
   whatsapp:       { tr: "WhatsApp", en: "WhatsApp", ru: "WhatsApp" },
   yil:            { tr: ". yılı", en: "th year", ru: "-й год" },
+  demoKayit: { tr: "Demo kayıt", en: "Demo record", ru: "Демо-запись" },
+  demoKisiNot: {
+    tr: "Bu prototipteki danışman adları, telefonları ve ruhsat numaraları kurgusaldır. Numaralar tahsis edilmemiş bir bloktandır, kimseye ulaşmaz.",
+    en: "Agent names, phone numbers and licence numbers in this prototype are fictional. The numbers are from an unassigned block and do not reach anyone.",
+    ru: "Имена агентов, телефоны и номера лицензий в прототипе вымышлены и никому не принадлежат.",
+  },
   konusulanDiller:{ tr: "Konuştuğu diller", en: "Speaks", ru: "Языки" },
   ruhsatli:       { tr: "Ruhsatlı emlakçı", en: "Licensed agent", ru: "Лицензированный агент" },
   digerIlanlari:  { tr: "Bu danışmanın diğer ilanları", en: "Other listings by this agent", ru: "Другие объявления агента" },
