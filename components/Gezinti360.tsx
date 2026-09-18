@@ -9,8 +9,16 @@ import { t } from "@/lib/sozluk";
  * Neden kendi yazdik: three.js / pannellum eklemek yerine ~120 satirlik bir
  * fragment shader yetiyor. CLAUDE.md "yeni agir bagimlilik ekleme" diyor.
  *
- * Kaynak goruntu 4:1 silindirik panorama (360 yatay, ~±38 dikey).
- * Dokuyu Next'in gorsel eniyileyicisinden cekiyoruz; PNG yerine WebP iniyor.
+ * Kaynak goruntu 4:1 silindirik panorama (~±38 dikey).
+ *
+ * ONEMLI: AI ile uretilen panoramalar gercekten 360 derece KAPANMIYOR —
+ * sol ve sag kenar birbirini tutmuyor (olculdu: ortalama kenar farki 26/255,
+ * en kotu satir 146/255). Sinirsiz dondurulurse kullanici sert bir dikise
+ * carpiyor. Bu yuzden `tam360` false iken yatay aci, dikis goruntuye hic
+ * girmeyecek sekilde sinirlaniyor ve otomatik donus ucta geri donuyor.
+ * Gercek 360 kamera cikisi kullanilirsa tam360 true verilir.
+ *
+ * Dikisi olcmek icin: node scripts/panorama-dikis.mjs <dosya>
  */
 
 const VS = `
@@ -68,13 +76,26 @@ function programYap(gl: WebGLRenderingContext) {
   return p;
 }
 
-export default function Gezinti360({ kaynak, odalar, dil, baslik }: { kaynak: string; odalar?: string[]; dil: Dil; baslik: string }) {
+export default function Gezinti360({ kaynak, odalar, dil, baslik, tam360 = false }: { kaynak: string; odalar?: string[]; dil: Dil; baslik: string; tam360?: boolean }) {
   const liste = odalar && odalar.length > 1 ? odalar : [kaynak];
   const [odaIndeks, setOdaIndeks] = useState(0);
   const aktifKaynak = liste[Math.min(odaIndeks, liste.length - 1)];
   const kutuRef = useRef<HTMLDivElement>(null);
   const tuvalRef = useRef<HTMLCanvasElement>(null);
-  const durum = useRef({ yaw: 0, pitch: 0, fov: 1.2, otomatik: true, surukluyor: false, sonX: 0, sonY: 0, pinch: 0 });
+  const durum = useRef({ yaw: 0, pitch: 0, fov: 1.2, otomatik: true, yon: -1, surukluyor: false, sonX: 0, sonY: 0, pinch: 0 });
+
+  /**
+   * Dikis goruntuye girmesin: gorus alaninin yarisi + emniyet payi kadar iceride dur.
+   * Pay 0.05 iken dikis sag sinirda kadraja giriyordu (olculdu); 0.25 rad (~14 derece)
+   * ile iki sinir da temiz. fov 1.2'de tarama araligi ~262 derece kaliyor.
+   */
+  const EMNIYET = 0.25;
+  const yawSinir = (fov: number) => Math.max(0.35, Math.PI - fov * 0.5 - EMNIYET);
+  const yawKilitle = (y: number, fov: number) => {
+    if (tam360) return y;
+    const s = yawSinir(fov);
+    return Math.max(-s, Math.min(s, y));
+  };
   const [yukleniyor, setYukleniyor] = useState(true);
   const [hata, setHata] = useState(false);
   const [tamEkran, setTamEkran] = useState(false);
@@ -120,7 +141,7 @@ export default function Gezinti360({ kaynak, odalar, dil, baslik }: { kaynak: st
     const doku = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, doku);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1, 1, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array([235, 227, 214]));
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, tam360 ? gl.REPEAT : gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
@@ -151,7 +172,13 @@ export default function Gezinti360({ kaynak, odalar, dil, baslik }: { kaynak: st
       const dt = Math.min(0.05, (zaman - sonZaman) / 1000);
       sonZaman = zaman;
       const d = durum.current;
-      if (d.otomatik && !d.surukluyor) d.yaw -= dt * 0.06;
+      if (d.otomatik && !d.surukluyor) {
+        d.yaw += d.yon * dt * 0.06;
+        if (!tam360) {
+          const s = yawSinir(d.fov);
+          if (d.yaw <= -s || d.yaw >= s) { d.yon *= -1; d.yaw = Math.max(-s, Math.min(s, d.yaw)); }
+        }
+      }
 
       const oran = Math.min(window.devicePixelRatio || 1, 2);
       const en = Math.round(tuval.clientWidth * oran);
@@ -159,6 +186,7 @@ export default function Gezinti360({ kaynak, odalar, dil, baslik }: { kaynak: st
       if (tuval.width !== en || tuval.height !== boy) { tuval.width = en; tuval.height = boy; }
       gl.viewport(0, 0, en, boy);
 
+      if (!tam360) d.yaw = Math.max(-yawSinir(d.fov), Math.min(yawSinir(d.fov), d.yaw));
       gl.uniform1f(u.yaw, d.yaw);
       gl.uniform1f(u.pitch, d.pitch);
       gl.uniform1f(u.fov, d.fov);
@@ -170,7 +198,7 @@ export default function Gezinti360({ kaynak, odalar, dil, baslik }: { kaynak: st
     requestAnimationFrame(ciz);
 
     return () => { calisiyor = false; gl.deleteTexture(doku); gl.deleteBuffer(tampon); gl.deleteProgram(program); };
-  }, [aktifKaynak]);
+  }, [aktifKaynak, tam360]);
 
   // --- Etkilesim ---
   const basla = (x: number, y: number) => {
@@ -181,7 +209,7 @@ export default function Gezinti360({ kaynak, odalar, dil, baslik }: { kaynak: st
     const d = durum.current;
     if (!d.surukluyor) return;
     const k = d.fov / 900;
-    d.yaw -= (x - d.sonX) * k;
+    d.yaw = yawKilitle(d.yaw - (x - d.sonX) * k, d.fov);
     d.pitch = Math.max(-0.6, Math.min(0.6, d.pitch + (y - d.sonY) * k));
     d.sonX = x; d.sonY = y;
   };
@@ -189,13 +217,14 @@ export default function Gezinti360({ kaynak, odalar, dil, baslik }: { kaynak: st
   const yakinlastir = (fark: number) => {
     const d = durum.current;
     d.fov = Math.max(0.6, Math.min(1.6, d.fov + fark));
+    d.yaw = yawKilitle(d.yaw, d.fov); // uzaklasinca sinir daralir
   };
 
   const tusBas = (e: React.KeyboardEvent) => {
     const d = durum.current;
     const adim = 0.08;
-    if (e.key === "ArrowLeft") { d.otomatik = false; d.yaw += adim; e.preventDefault(); }
-    else if (e.key === "ArrowRight") { d.otomatik = false; d.yaw -= adim; e.preventDefault(); }
+    if (e.key === "ArrowLeft") { d.otomatik = false; d.yaw = yawKilitle(d.yaw + adim, d.fov); e.preventDefault(); }
+    else if (e.key === "ArrowRight") { d.otomatik = false; d.yaw = yawKilitle(d.yaw - adim, d.fov); e.preventDefault(); }
     else if (e.key === "ArrowUp") { d.otomatik = false; d.pitch = Math.min(0.6, d.pitch + adim); e.preventDefault(); }
     else if (e.key === "ArrowDown") { d.otomatik = false; d.pitch = Math.max(-0.6, d.pitch - adim); e.preventDefault(); }
     else if (e.key === "+" || e.key === "=") yakinlastir(-0.1);

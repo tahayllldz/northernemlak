@@ -24,43 +24,67 @@ import { fileURLToPath } from "node:url";
 const KOK = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const UST = path.resolve(KOK, "..");
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
-const AI_MODEL = "gemini-2.5-flash-image";
+const AI_MODEL = "gemini-3.1-flash-image";
 const PANO_MODEL = "gemini-3.1-flash-image";
 
 const STILLER = [
   { id: "akdeniz",        ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" },
-    prompt: "warm Mediterranean style: lime-washed walls, natural linen, terracotta and olive tones, rattan and light oak furniture, ceramic details" },
+    prompt: "Mediterranean furniture and soft furnishings: natural linen upholstery, rattan and light oak pieces, terracotta and olive accessories, ceramic vases, olive branches" },
   { id: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" },
-    prompt: "modern minimalist style: clean lines, neutral greys and off-white, low-profile furniture, almost no ornament, uncluttered" },
+    prompt: "minimalist furniture and soft furnishings: low-profile neutral seating, no ornament, a single sculptural object, plain textiles, uncluttered surfaces" },
   { id: "iskandinav",     ad: { tr: "İskandinav", en: "Scandinavian", ru: "Скандинавский" },
-    prompt: "warm Scandinavian style: pale birch and ash wood, soft wool textiles, muted pastels, cosy lighting, plants" },
+    prompt: "Scandinavian furniture and soft furnishings: pale birch and ash furniture, chunky wool throws, muted pastel cushions, paper lampshades, potted plants" },
   { id: "modern-luks",    ad: { tr: "Modern Lüks", en: "Modern Luxury", ru: "Современная роскошь" },
-    prompt: "modern luxury style: dark walnut, brushed brass accents, marble surfaces, velvet upholstery, layered warm lighting" },
+    prompt: "luxury furniture and soft furnishings: velvet upholstery, walnut and brass furniture, layered table lamps, heavy drapery, a statement rug" },
 ];
 
-const AI_PROMPT = (stil) => `Virtually stage this room in ${stil}.
+const AI_PROMPT = (stil) => `Virtually stage this exact room by replacing only the loose furniture and decor with: ${stil}.
 
-Hard requirements:
-- Keep the room's architecture EXACTLY: walls, windows, doors, ceiling, floor plan,
-  camera angle and perspective must not change.
-- Only replace/add furniture, textiles, lighting fixtures and decor.
-- Keep the existing natural light direction and window views.
-- Photorealistic interior photography, no people, no text, no watermark, no logo.`;
+THIS IS A PHOTO EDIT, NOT A REDESIGN. The output must be recognisably the SAME room,
+photographed from the SAME spot. A viewer must be able to match it to the original
+one-to-one.
 
-const PANO_PROMPT = `Convert this interior photograph into a single seamless CYLINDRICAL 360 PANORAMA
-for a real-estate virtual tour viewer.
+MUST NOT CHANGE — copy these from the source photograph pixel-faithfully:
+- Camera position, angle, focal length, framing and perspective.
+- Room geometry: every wall, corner, ceiling line, doorway and opening.
+- Wall finishes and cladding, INCLUDING any decorative stone or brick feature wall —
+  keep it in the same place, same stone, same shape.
+- Flooring: same material, same colour, same plank direction. Do not lay new flooring.
+- Wall colour and paint.
+- Windows and doors: same number, same size, same position. Do not add or remove any.
+- Fixed items: air-conditioning unit, radiators, sockets, switches, thermostat,
+  kitchen units, refrigerator, doors and door hardware — all stay exactly where they are.
+- Anything visible through a doorway stays identical.
+- The television stays on the SAME wall, in the SAME place.
 
-Hard requirements:
-- Very wide panoramic format, 4:1 aspect ratio.
-- Covers a full 360 degrees horizontally: the left edge and the right edge MUST match
-  seamlessly so the image wraps continuously with no visible seam.
-- Straight, level horizon through the vertical centre. No fisheye, no barrel warp.
-- Extend the room realistically all the way around: invent the walls behind the original
-  camera position, keeping the same architecture, materials, colour palette, flooring and
-  furniture as the source photograph.
-- Consistent lighting and perspective across the whole width.
-- Photorealistic, no people, no text, no watermark, no logo, no black bars.`;
+MAY CHANGE: sofas, chairs, tables, rugs, cushions, throws, curtains, wall art,
+table lamps, plants and small decorative objects.
 
+Photorealistic interior photography, same time of day and same light direction as
+the source, no people, no text, no watermark, no logo.`;
+
+const PANO_PROMPT = `You are given several photographs taken from roughly the same spot in ONE room,
+looking in different directions. Stitch them into a SINGLE seamless 360° cylindrical panorama.
+
+Treat this as photo stitching, NOT as image generation:
+- Every wall, window, door, kitchen unit, appliance and piece of furniture in the output
+  must come from the supplied photographs. Do NOT invent rooms, furniture or windows
+  that are not visible in them.
+- Keep the real materials and colours: the stone feature wall, the wall paint, the floor
+  planks, the kitchen cabinet colour, the curtains, the actual sofas and tables.
+- Keep the real lighting: same time of day throughout. If the photographs are taken at
+  night with the lights on, the whole panorama is at night. Never mix day and night.
+- Where two photographs overlap, blend them. Where a small gap remains, extend the
+  adjacent wall, floor and ceiling plainly — a blank stretch of the same wall is far
+  better than invented furniture.
+- The left edge and the right edge must line up so the image wraps continuously.
+- Straight, level horizon through the vertical centre. No fisheye, no mirrors,
+  no duplicated copies of the same furniture.
+
+Output: one photorealistic 4:1 panorama, no people, no text, no watermark, no black bars.`;
+
+/** Model PNG degil JPEG donebiliyor; uzantiyi icerige gore ver. */
+const uz = (r) => (r?.mime === "image/jpeg" ? "jpeg" : "png");
 const yaz = (m = "") => console.log(m);
 const bitir = (m) => { console.error("\n  HATA: " + m + "\n"); process.exit(1); };
 
@@ -77,16 +101,17 @@ function envOku() {
   return env;
 }
 
-async function uret(key, model, prompt, dosya, oran) {
-  const veri = fs.readFileSync(dosya);
-  const uz = path.extname(dosya).toLowerCase();
-  const mime = uz === ".png" ? "image/png" : uz === ".webp" ? "image/webp" : "image/jpeg";
+async function uret(key, model, prompt, dosyalar, oran) {
+  const liste = Array.isArray(dosyalar) ? dosyalar : [dosyalar];
+  const parcalar = [{ text: prompt }];
+  for (const d of liste) {
+    const uz = path.extname(d).toLowerCase();
+    const mime = uz === ".png" ? "image/png" : uz === ".webp" ? "image/webp" : "image/jpeg";
+    parcalar.push({ inline_data: { mime_type: mime, data: fs.readFileSync(d).toString("base64") } });
+  }
   const gen = { responseModalities: ["IMAGE"] };
   if (oran) gen.imageConfig = { aspectRatio: oran };
-  const body = {
-    contents: [{ role: "user", parts: [{ text: prompt }, { inline_data: { mime_type: mime, data: veri.toString("base64") } }] }],
-    generationConfig: gen,
-  };
+  const body = { contents: [{ role: "user", parts: parcalar }], generationConfig: gen };
   for (let d = 1; d <= 4; d++) {
     const r = await fetch(`${BASE}/models/${model}:generateContent`, {
       method: "POST",
@@ -98,7 +123,7 @@ async function uret(key, model, prompt, dosya, oran) {
       const j = JSON.parse(metin);
       for (const p of j?.candidates?.[0]?.content?.parts || []) {
         const inl = p.inlineData || p.inline_data;
-        if (inl?.data) return { ok: true, buf: Buffer.from(inl.data, "base64") };
+        if (inl?.data) return { ok: true, buf: Buffer.from(inl.data, "base64"), mime: inl.mimeType || inl.mime_type || "image/png" };
       }
       return { ok: false, hata: `gorsel donmedi (${j?.promptFeedback?.blockReason || j?.candidates?.[0]?.finishReason || "?"})` };
     }
@@ -156,35 +181,53 @@ async function uret(key, model, prompt, dosya, oran) {
   // 2) AI sanal dekorasyon — ilk fotograf uzerinden
   const anaFoto = path.join(EV, path.basename(gorseller[0]));
   const aiTasarimlar = [];
+  /** Uretilmis dosyayi uzantisindan bagimsiz bul (model PNG de JPEG de donebiliyor) */
+  const varOlan = (klasor, govde) =>
+    ["jpeg", "png", "webp"].map((e) => `${govde}.${e}`).find((f) => fs.existsSync(path.join(klasor, f)));
+
   for (const s of STILLER) {
-    const hedef = path.join(AI, `${slug}__${s.id}.png`);
-    if (fs.existsSync(hedef)) { yaz(`  atlandi     ai/${slug}__${s.id}`); }
+    const govde = `${slug}__${s.id}`;
+    let dosya = varOlan(AI, govde);
+    if (dosya) yaz(`  atlandi     ai/${dosya}`);
     else {
       const r = await uret(key, AI_MODEL, AI_PROMPT(s.prompt), anaFoto);
-      if (r.ok) { fs.writeFileSync(hedef, r.buf); yaz(`  AI          ${s.id}  ${(r.buf.length / 1024).toFixed(0)}KB`); }
-      else { yaz(`  AI HATA     ${s.id}  ${r.hata}`); continue; }
+      if (!r.ok) { yaz(`  AI HATA     ${s.id}  ${r.hata}`); continue; }
+      dosya = `${govde}.${uz(r)}`;
+      fs.writeFileSync(path.join(AI, dosya), r.buf);
+      yaz(`  AI          ${s.id}  ${(r.buf.length / 1024).toFixed(0)}KB  ${r.mime}`);
     }
-    aiTasarimlar.push({ stil: s.id, ad: s.ad, gorsel: `/gorsel/ai/${slug}__${s.id}.png` });
+    aiTasarimlar.push({ stil: s.id, ad: s.ad, gorsel: `/gorsel/ai/${dosya}` });
   }
 
-  // 3) Her fotograf icin 360 panorama
+  // 3) TEK panorama — butun fotograflardan. Tek fotograftan 360 uretmek modeli
+  //    odanin %70'ini uydurmaya zorluyordu ve her seferinde baska bir ev cikiyordu.
   const panoramalar = [];
-  for (let n = 0; n < gorseller.length; n++) {
-    const kaynak = path.join(EV, path.basename(gorseller[n]));
-    const ad = `${slug}-${String(n + 1).padStart(2, "0")}.png`;
-    const hedef = path.join(PANO, ad);
-    if (fs.existsSync(hedef)) { yaz(`  atlandi     360/${ad}`); panoramalar.push(`/gorsel/360/${ad}`); continue; }
-    const r = await uret(key, PANO_MODEL, PANO_PROMPT, kaynak, "4:1");
-    if (r.ok) { fs.writeFileSync(hedef, r.buf); panoramalar.push(`/gorsel/360/${ad}`); yaz(`  360         ${ad}  ${(r.buf.length / 1024).toFixed(0)}KB`); }
-    else yaz(`  360 HATA    ${ad}  ${r.hata}`);
+  {
+    const govde = `${slug}-360`;
+    let dosya = varOlan(PANO, govde);
+    if (dosya) yaz(`  atlandi     360/${dosya}`);
+    else {
+      const girdiler = gorseller.map((g) => path.join(EV, path.basename(g)));
+      const r = await uret(key, PANO_MODEL, PANO_PROMPT, girdiler, "4:1");
+      if (r.ok) {
+        dosya = `${govde}.${uz(r)}`;
+        fs.writeFileSync(path.join(PANO, dosya), r.buf);
+        yaz(`  360         ${dosya}  ${(r.buf.length / 1024).toFixed(0)}KB  ${r.mime}`);
+      } else yaz(`  360 HATA    ${r.hata}`);
+    }
+    if (dosya) panoramalar.push(`/gorsel/360/${dosya}`);
   }
 
   // 4) Ilani veri.ts'e yaz
   const veriYolu = path.join(KOK, "lib", "veri.ts");
   let veri = fs.readFileSync(veriYolu, "utf8");
   const idler = [...veri.matchAll(/id: (\d+),/g)].map((m) => Number(m[1]));
-  const mevcut = veri.includes(`slug: "${slug}"`);
-  const id = mevcut ? Number(veri.match(new RegExp(`id: (\\\\d+), slug: "${slug}"`))?.[1]) : Math.max(...idler) + 1;
+  const slugYeri = veri.indexOf(`slug: "${slug}"`);
+  const mevcut = slugYeri >= 0;
+  // RegExp yerine duz metin: kacis katmanlari id'yi NaN yapiyordu ve kayit ikiye katlaniyordu.
+  const id = mevcut
+    ? Number(veri.slice(veri.lastIndexOf("id: ", slugYeri) + 4, slugYeri).replace(/\D/g, ""))
+    : Math.max(...idler) + 1;
   const bugun = new Date().toISOString().slice(0, 10);
 
   const kayit = `  {
@@ -211,16 +254,19 @@ async function uret(key, model, prompt, dosya, oran) {
 `;
 
   if (mevcut) {
-    const bas = veri.indexOf(`  {\n    id: ${id}, slug: "${slug}"`);
-    let d = 0, j = bas;
-    for (; j < veri.length; j++) { if (veri[j] === "{") d++; else if (veri[j] === "}") { d--; if (!d) { j += 2; break; } } }
-    veri = veri.slice(0, bas) + kayit + veri.slice(j);
-    yaz(`\n  ilan guncellendi (#${id})`);
+    /* Mevcut kaydi otomatik DEGISTIRMIYORUZ. Parantez sayarak TS dosyasi
+       duzenlemek veri.ts'i iki kez bozdu (kayit ucledi, id NaN oldu).
+       Yeni kayit dosyaya yazilir, elle degistirilir. */
+    const cikti = path.join(KOK, "scripts", `${slug}.ilan.txt`);
+    fs.writeFileSync(cikti, kayit);
+    yaz(`\n  ilan zaten var (#${id}) — veri.ts'e DOKUNULMADI.`);
+    yaz(`  Yeni kayit: ${cikti}`);
+    yaz(`  lib/veri.ts icindeki eski kaydi bununla degistir.`);
   } else {
     const son = veri.lastIndexOf("];");
     veri = veri.slice(0, son) + kayit + veri.slice(son);
+    fs.writeFileSync(veriYolu, veri);
     yaz(`\n  ilan eklendi (#${id})`);
   }
-  fs.writeFileSync(veriYolu, veri);
   yaz(`  /tr/ilan/${slug}\n`);
 })();

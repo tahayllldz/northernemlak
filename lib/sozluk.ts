@@ -227,12 +227,12 @@ const S = {
 
   gezinti360:    { tr: "360° gezinti", en: "360° tour", ru: "360° тур" },
   gezinti360Alt: {
-    tr: "Odanın içinde dolaşın. Sürükleyin, yakınlaştırın, tam ekrana alın.",
-    en: "Walk around inside the room. Drag, zoom, go fullscreen.",
-    ru: "Осмотритесь внутри комнаты. Перетаскивайте, приближайте, разверните.",
+    tr: "Odanın içinde dolaşın. Sürükleyin, yakınlaştırın, tam ekrana alın. Görüntü gerçek fotoğraflardan birleştirildi.",
+    en: "Look around inside the room. Drag, zoom, go fullscreen. Stitched from the real photographs.",
+    ru: "Осмотритесь в комнате. Перетаскивайте, приближайте, разверните. Собрано из реальных фотографий.",
   },
   odaSec:        { tr: "Oda", en: "Room", ru: "Комната" },
-  gezintiIpucu:  { tr: "Sürükleyin", en: "Drag to look around", ru: "Перетащите" },
+  gezintiIpucu:  { tr: "Sürükleyerek bakın", en: "Drag to look around", ru: "Перетащите, чтобы осмотреться" },
   tamEkran:      { tr: "Tam ekran", en: "Fullscreen", ru: "Полный экран" },
 
   aiBaslik:   { tr: "Bu evi nasıl döşerdiniz?", en: "How would you furnish this home?", ru: "Как бы вы обставили этот дом?" },
