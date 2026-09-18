@@ -88,7 +88,33 @@ veritabanı (şu an `lib/veri.ts` statik — Supabase/Postgres'e taşınacak).
   ve liste altında bir cümlelik ifşa notu görünür (funda.nl modeli). Kaldırma.
 - Erişilebilirlik tabanı: `:focus-visible` halkası, `prefers-reduced-motion`,
   "içeriğe atla" bağlantısı, `#icerik` çıpası. Bozma.
+- **Özellikler artık kod**, görüntü metni değil (`OzellikKodu` + `OZELLIK_ADI`).
+  Eskiden `veri.ts` Türkçe metin tutuyordu ve Rusça sayfada Türkçe yazıyordu.
+  Yeni özellik eklerken: `tipler.ts` → `sozluk.ts` → `OZELLIK_GRUPLARI`. Metin yazma.
+- **Filtre iki katman**: birincil kontroller + hızlı çipler üst çubukta, gerisi
+  `FiltrePaneli` içinde (mobilde alttan açılan sayfa). Üst çubuğu şişirme.
+- **Harita yerine `Konum` bölümü**: sahte harita yer tutucusu koymuyoruz, gerçek
+  hesaplanmış kuş uçuşu mesafe gösteriyoruz (`mesafeler()`). Harita Faz 1'de
+  gelince bu bölüm silinmez, yanına gelir.
+- **`lang` sarmalayıcı div'de** (`app/[dil]/layout.tsx`). Kök `<html lang="tr">`
+  sabit; `text-transform: uppercase` en yakın `lang`'e göre çalışır ve Türkçe
+  kuralı İngilizce etiketleri bozuyordu. Kaldırma.
+- **Favoriler prototip illüzyonudur** — sadece localStorage, cihaz bazlı.
+  Müşteriye "favoriler çalışıyor" denmez; sayfada da bunu söyleyen bir not var.
 - Detaylı gerekçeler: `analiz/arayuz-analizi.md`.
+
+## Yayın
+
+Canlı: **https://northernemlak.vercel.app** (Vercel, production).
+
+```
+vercel deploy --prod --yes
+```
+
+`npm run build` önce `npm run css` çalıştırıp Tailwind'i kaynaktan derler.
+Vercel Linux'ta derlediği için yerel `.node` engeli sorun çıkarmaz.
+Yerelde `npm run dev` depodaki `app/globals.css` kopyasını kullanır; kaynağa
+stil eklediysen o kopyaya da elle yansıt, yoksa yerelde görünmez (Vercel'de görünür).
 
 ## Uyarılar
 

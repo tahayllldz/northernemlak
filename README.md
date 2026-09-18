@@ -2,6 +2,8 @@
 
 Kuzey Kıbrıs emlak platformu prototipi. Next.js 16 + TypeScript + Tailwind 4.
 
+Canlı: **https://northernemlak.vercel.app**
+
 ## Çalıştırma
 
 ```bash
@@ -28,6 +30,17 @@ public/gorsel/
   oda/                boş oda fotoğrafları
   ai/                 AI sanal dekorasyon çıktıları (40 adet)
 ```
+
+## Yayın
+
+```bash
+vercel deploy --prod --yes
+```
+
+`npm run build` önce `npm run css` ile Tailwind'i `app/globals.tailwind.css`
+kaynağından derler. Bu makinede Application Control `.node` ikililerini engellediği
+için yerelde derlenemez; depodaki `app/globals.css` yalnızca `npm run dev` için
+fallback kopyadır. Kaynağa stil eklersen o kopyaya da yansıt.
 
 ## Notlar
 

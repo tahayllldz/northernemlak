@@ -451,12 +451,50 @@ hatırlatacağım.
 
 ---
 
-## 6. Sıradaki adım
+## 6. Uygulama durumu — 18 Eylül 2026
 
-Kod yazmadım. Onayını bekliyorum:
+Canlı: **https://northernemlak.vercel.app**
 
-1. **Kademe A'nın tamamı** mı, yoksa seçtiklerin mi?
-2. **5.2** — `ozellikler` dönüşümü için `lib/veri.ts`'e dokunmama izin var mı?
-3. **5.3** — üreteç nerede? Yoksa türetme yaklaşımı tamam mı?
-4. **5.1** — harita yer tutucusu yerine `Konum` bölümü fikri tamam mı?
-5. **5.4** — AI bölümü: ana sayfayı mı büyütelim, yoksa liste tarafına mı taşıyalım?
+### Yapıldı
+
+| # | İş | Not |
+|---|---|---|
+| A1 | Kart sadeleştirme | Gölge/çerçeve/yükselme kaldırıldı, hover tek harekete indi, tipografik ölçek açıldı |
+| A2 | Kartta tapu çipi + filtrede tapu | Yabancı kısıtı yalnızca kısıtlıyken gösteriliyor |
+| A3 | Erişilebilirlik tabanı | `:focus-visible`, `prefers-reduced-motion`, `sis` → `#5A666F` (5.19:1), `kum-400` metinden çıktı, içeriğe atla, galeri/filtre etiketleri |
+| A4 | Aralık filtreleri | Fiyat min–max, oda, banyo, m² min–max, bina yaşı |
+| A5 | m² birim fiyatı | Kartta ve detay künyesinde |
+| A6 | Göreli tazelik | Kartta `guncelleme`, detayda göreli + mutlak birlikte |
+| A7 | Vitrin ifşası | "Öne çıkarılmış" + liste altında ücretli yerleşim notu |
+| B1 | Özellik kodlaması + hızlı çipler | 25 değer koda çevrildi, 3 dil, 4 grup |
+| B2 | İki katmanlı filtre + panel | Mobilde alttan açılan sayfa, sayı rozeti, ESC + odak tuzağı |
+| B3 | Tam ekran galeri | ← → ESC, odak tuzağı, sayaç, şerit |
+| B4 | Detay yapışkan başlığı | Fiyat + bölüm menüsü + sonuçlara dön + paylaş + favori |
+| B5 | Mobil alt iletişim çubuğu | Fiyat, favori, WhatsApp, telefon |
+| B6 | Favoriler | localStorage, başlıkta sayaç, `/favoriler` sayfası, prototip uyarısı |
+| B7 | İskelet yükleme | `loading.tsx` + boş durum yeniden tasarımı |
+| C | Oda notasyonu çevirisi | `3+1` EN/RU'da açılıyor |
+| C | Danışmanın konuştuğu diller | `Emlakci.konustuguDiller`, TR/EN/RU/DE/FA |
+| C | Şehir çiplerinde ilan sayısı | Filtre seçicisinde |
+| 5.1 | Harita yerine `Konum` bölümü | Gerçek kuş uçuşu mesafeler (haversine), sahte harita yok |
+
+### Yol boyunca bulunup düzeltilenler
+
+- `<html lang="tr">` tüm dillerde sabitti; `text-transform: uppercase` Türkçe kuralıyla
+  İngilizce etiketleri bozuyordu (`PRİCE`). `lang` sarmalayıcı div'e taşındı.
+- Bileşen CSS sınıfları Tailwind yardımcı sınıflarını eziyordu (`hidden lg:flex` çalışmıyordu).
+  Hepsi `@layer components` içine alındı.
+- Liste sayfası başlığı "Tüm ilanları gör" yazıyordu (CTA metni başlık olarak kullanılmış).
+- Font `@import`'ları CSS'ten JS import'una taşındı — her derlemeden sonra elle geri
+  ekleme zorunluluğu ortadan kalktı.
+- Tailwind derlemesi `npm run build`'e bağlandı; Vercel Linux'ta derliyor, yerel
+  Application Control engeli artık iş akışını kesmiyor.
+
+### Yapılmadı (bilinçli)
+
+- **Proje / maketten satış katmanı** — Faz 1. Prototip kapsamını aşıyor, ama en büyük boşluk.
+- **KDV / devir harcı şeffaflığı** — Faz 1, veri modeli işi.
+- Kaydedilmiş arama ve uyarı (üyelik gerektirir), ilan karşılaştırma, video,
+  dönüm/evlek gösterimi, fiyat geçmişi, bölge rehberi, çift para birimi.
+- **Ana sayfadaki AI bölümü** — 5.4'teki itirazım duruyor: sorun ses seviyesi değil
+  konum olabilir. Ayrı bir tur hak ediyor.
