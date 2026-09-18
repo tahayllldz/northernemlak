@@ -36,20 +36,22 @@ export interface GetiriSonuc {
   ogrenciSehri: boolean;
 }
 
-/** Ayni sehir + tip + +-1 oda araligindaki kiralik ilanlarin medyani */
+/**
+ * Ayni sehir + benzer oda sayisindaki kiralik ilanlarin m2 basi kira medyani.
+ * Ornek bulunamazsa kademe kademe genisletilir; kullanilan ornek sayisi
+ * ekranda yazar ki tahminin ne kadar saglam oldugu gorunsun.
+ */
 function kiraTahmini(ilan: Ilan) {
   const hedefOda = odaSayisi(ilan.oda);
-  const benzer = ILANLAR.filter(
-    (k) =>
-      k.islem === "kiralik" &&
-      k.sehir === ilan.sehir &&
-      Math.abs(odaSayisi(k.oda) - hedefOda) <= 1
-  );
-  const havuz = benzer.length >= 2
-    ? benzer
-    : ILANLAR.filter((k) => k.islem === "kiralik" && Math.abs(odaSayisi(k.oda) - hedefOda) <= 1);
-
-  if (havuz.length < 2) return null;
+  const kiralik = ILANLAR.filter((k) => k.islem === "kiralik");
+  const kademeler = [
+    kiralik.filter((k) => k.sehir === ilan.sehir && Math.abs(odaSayisi(k.oda) - hedefOda) <= 1),
+    kiralik.filter((k) => k.sehir === ilan.sehir),
+    kiralik.filter((k) => Math.abs(odaSayisi(k.oda) - hedefOda) <= 1),
+    kiralik,
+  ];
+  const havuz = kademeler.find((k) => k.length >= 2) ?? kademeler.find((k) => k.length >= 1);
+  if (!havuz || havuz.length === 0) return null;
 
   // m2 basina kira medyani -> bu mulkun m2'siyle olcekle
   const birim = havuz.map((k) => k.fiyat / Math.max(1, k.m2)).sort((a, b) => a - b);
