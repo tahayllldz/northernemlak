@@ -37,11 +37,11 @@ export default function DetayUst({
           <span className="hidden sm:inline">{t("sonucaDon", dil)}</span>
         </Link>
 
-        <p className="baslik shrink-0 text-[17px] leading-none text-deniz-700">
+        <p className="baslik hidden shrink-0 text-[17px] leading-none text-deniz-700 lg:block">
           {fiyatYaz(ilan.fiyat, para, dil)}
         </p>
 
-        <nav className="cip-serit hidden flex-1 lg:flex" aria-label={t("konum", dil)}>
+        <nav className="cip-serit hidden flex-1 lg:flex" aria-label={t("bolumler", dil)}>
           {bolumler.map((b) => (
             <a key={b.id} href={`#${b.id}`} className="bolum-bag">{b.ad}</a>
           ))}

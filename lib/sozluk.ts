@@ -127,6 +127,7 @@ const S = {
     en: "Approximate straight-line distances. Map and driving distance arrive in Phase 1.",
     ru: "Приблизительные расстояния по прямой. Карта появится в первой фазе.",
   },
+  bolumler:     { tr: "Sayfa bölümleri", en: "Page sections", ru: "Разделы страницы" },
   sonucaDon:    { tr: "Sonuçlara dön", en: "Back to results", ru: "К результатам" },
   iletisim:     { tr: "İletişim", en: "Contact", ru: "Связаться" },
   paylas:       { tr: "Paylaş", en: "Share", ru: "Поделиться" },

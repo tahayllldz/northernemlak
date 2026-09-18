@@ -37,7 +37,7 @@ export default function Galeri({ gorseller, baslik, dil }: { gorseller: string[]
       </div>
 
       {gorseller.length > 1 && (
-        <div className="mt-2.5 flex gap-2 overflow-x-auto pb-1">
+        <div className="cip-serit mt-2.5">
           {gorseller.map((g, n) => (
             <button key={g} onClick={() => setI(n)} type="button"
               aria-label={`${t("foto", dil)} ${n + 1}`} aria-current={n === i ? "true" : undefined}
