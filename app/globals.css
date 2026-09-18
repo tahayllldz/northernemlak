@@ -13,6 +13,7 @@
 
 
 
+
 /* --- yerel dev aynasi: kaynaktan elle kopyalandi, Vercel derlemesinde yeniden uretilir --- */
 :root{--color-sis:#5A666F;--color-sis-acik:#8A949B;}
 .text-sis{color:#5A666F;}
@@ -301,6 +302,47 @@
 
   /* Yapiskan basliklarin altina cipa kaymasi (bolum baglantilari icin) */
   [id^="bolum-"] { scroll-margin-top: 132px; }
+
+  /* =================================================================
+     360 GEZINTI
+     ================================================================= */
+  .gezinti {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--color-kum-200);
+    box-shadow: 0 1px 2px rgba(28,32,36,.04), 0 8px 24px -12px rgba(28,32,36,.14);
+  }
+  .gezinti-tam {
+    border-radius: 0;
+    aspect-ratio: auto;
+    width: 100vw; height: 100dvh;
+  }
+  .gezinti-tuval {
+    display: block; width: 100%; height: 100%;
+    cursor: grab; touch-action: none;
+  }
+  .gezinti-tuval:active { cursor: grabbing; }
+  .gezinti-yukleniyor { position: absolute; inset: 0; }
+
+  .gezinti-ipucu {
+    position: absolute; left: 12px; bottom: 12px;
+    display: inline-flex; align-items: center; gap: 6px;
+    border-radius: 999px; padding: 6px 12px;
+    background: rgba(0,0,0,.45); color: #fff;
+    font-size: 12px; backdrop-filter: blur(6px);
+    pointer-events: none;
+  }
+  .gezinti-dugme {
+    position: absolute; right: 12px; top: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 36px; width: 36px; border-radius: 999px;
+    background: rgba(255,255,255,.9); color: var(--color-deniz-700);
+    backdrop-filter: blur(6px);
+    transition: background-color .15s ease;
+  }
+  .gezinti-dugme:hover { background: #fff; }
 
   /* =================================================================
      ISKELET YUKLEME

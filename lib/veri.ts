@@ -27,7 +27,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-02-11", guncelleme: "2026-09-11",
     goruntulenme: 457,
     vitrin: true,
-    aiOdaGorseli: "/gorsel/oda/oda-01.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-01.webp", gezinti360: "/gorsel/360/oda-01__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-01__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-01__modern-minimal.webp" },
@@ -53,7 +53,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-03-12", guncelleme: "2026-09-12",
     goruntulenme: 594,
     vitrin: true,
-    aiOdaGorseli: "/gorsel/oda/oda-05.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-05.webp", gezinti360: "/gorsel/360/oda-05__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-05__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-05__modern-minimal.webp" },
@@ -79,7 +79,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-04-13", guncelleme: "2026-09-13",
     goruntulenme: 731,
     
-    aiOdaGorseli: "/gorsel/oda/oda-04.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-04.webp", gezinti360: "/gorsel/360/oda-04__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-04__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-04__modern-minimal.webp" },
@@ -105,7 +105,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-05-14", guncelleme: "2026-09-14",
     goruntulenme: 868,
     
-    aiOdaGorseli: "/gorsel/oda/oda-09.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-09.webp", gezinti360: "/gorsel/360/oda-09__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-09__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-09__modern-minimal.webp" },
@@ -150,7 +150,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-07-16", guncelleme: "2026-09-16",
     goruntulenme: 1142,
     
-    aiOdaGorseli: "/gorsel/oda/oda-06.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-06.webp", gezinti360: "/gorsel/360/oda-06__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-06__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-06__modern-minimal.webp" },
@@ -176,7 +176,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-08-17", guncelleme: "2026-09-17",
     goruntulenme: 1279,
     
-    aiOdaGorseli: "/gorsel/oda/oda-03.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-03.webp", gezinti360: "/gorsel/360/oda-03__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-03__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-03__modern-minimal.webp" },
@@ -221,7 +221,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-01-10", guncelleme: "2026-09-10",
     goruntulenme: 1553,
     
-    aiOdaGorseli: "/gorsel/oda/oda-02.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-02.webp", gezinti360: "/gorsel/360/oda-02__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-02__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-02__modern-minimal.webp" },
@@ -266,7 +266,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-03-12", guncelleme: "2026-09-12",
     goruntulenme: 1827,
     
-    aiOdaGorseli: "/gorsel/oda/oda-08.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-08.webp", gezinti360: "/gorsel/360/oda-08__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-08__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-08__modern-minimal.webp" },
@@ -292,7 +292,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-04-13", guncelleme: "2026-09-13",
     goruntulenme: 1964,
     vitrin: true,
-    aiOdaGorseli: "/gorsel/oda/oda-07.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-07.webp", gezinti360: "/gorsel/360/oda-07__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-07__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-07__modern-minimal.webp" },
@@ -318,7 +318,7 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-05-14", guncelleme: "2026-09-14",
     goruntulenme: 2101,
     
-    aiOdaGorseli: "/gorsel/oda/oda-10.webp",
+    aiOdaGorseli: "/gorsel/oda/oda-10.webp", gezinti360: "/gorsel/360/oda-10__akdeniz.png",
     aiTasarimlar: [
       { stil: "akdeniz", ad: { tr: "Akdeniz", en: "Mediterranean", ru: "Средиземноморский" }, gorsel: "/gorsel/ai/oda-10__akdeniz.webp" },
       { stil: "modern-minimal", ad: { tr: "Modern Minimal", en: "Modern Minimal", ru: "Модерн-минимализм" }, gorsel: "/gorsel/ai/oda-10__modern-minimal.webp" },

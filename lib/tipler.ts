@@ -74,5 +74,6 @@ export interface Ilan {
   vitrin?: boolean;
   aiOdaGorseli?: string;       // bos oda fotografi
   aiTasarimlar?: AiTasarim[];
+  gezinti360?: string;         // 4:1 silindirik panorama (AI uretimi, temsili)
   konum: { lat: number; lng: number };
 }

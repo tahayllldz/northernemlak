@@ -8,6 +8,7 @@ import DetayUst from "@/components/DetayUst";
 import MobilIletisim from "@/components/MobilIletisim";
 import Konum from "@/components/Konum";
 import Maliyet from "@/components/Maliyet";
+import Gezinti360 from "@/components/Gezinti360";
 import SonBakilanlar, { SonBakilanKaydet } from "@/components/SonBakilanlar";
 import IlanKarti from "@/components/IlanKarti";
 import { Fiyat } from "@/components/Fiyat";
@@ -33,6 +34,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
 
   const bolumler = [
     { id: "bolum-tapu", ad: t("tapuTipi", dil) },
+    ...(ilan.gezinti360 ? [{ id: "bolum-360", ad: t("gezinti360", dil) }] : []),
     ...(ilan.aiTasarimlar?.length ? [{ id: "bolum-ai", ad: t("aiIleTasarlandi", dil) }] : []),
     { id: "bolum-maliyet", ad: t("maliyetBaslik", dil) },
     { id: "bolum-aciklama", ad: t("aciklama", dil) },
@@ -127,6 +129,15 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
 
             {/* TOPLAM MALIYET — rakipte karsiligi yok */}
             <Maliyet ilan={ilan} dil={dil} />
+
+            {/* 360 GEZINTI */}
+            {ilan.gezinti360 && (
+              <section id="bolum-360">
+                <h2 className="baslik mb-1.5 text-[22px] text-deniz-700">{t("gezinti360", dil)}</h2>
+                <p className="mb-4 max-w-[62ch] text-[13.5px] leading-relaxed text-sis">{t("gezinti360Alt", dil)}</p>
+                <Gezinti360 kaynak={ilan.gezinti360} dil={dil} baslik={ilan.baslik[dil]} />
+              </section>
+            )}
 
             {/* AI TASARIM */}
             {ilan.aiTasarimlar?.length ? (

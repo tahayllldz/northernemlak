@@ -96,6 +96,15 @@ const S = {
   goruntulenme:{ tr: "görüntülenme", en: "views", ru: "просмотров" },
   makineCeviri:{ tr: "NorthernEmlak tarafından çevrildi", en: "Translated by NorthernEmlak", ru: "Переведено NorthernEmlak" },
 
+  gezinti360:    { tr: "360° gezinti", en: "360° tour", ru: "360° тур" },
+  gezinti360Alt: {
+    tr: "Odanın içinde dolaşın. Sürükleyin, yakınlaştırın, tam ekrana alın.",
+    en: "Walk around inside the room. Drag, zoom, go fullscreen.",
+    ru: "Осмотритесь внутри комнаты. Перетаскивайте, приближайте, разверните.",
+  },
+  gezintiIpucu:  { tr: "Sürükleyin", en: "Drag to look around", ru: "Перетащите" },
+  tamEkran:      { tr: "Tam ekran", en: "Fullscreen", ru: "Полный экран" },
+
   aiBaslik:   { tr: "Bu evi nasıl döşerdiniz?", en: "How would you furnish this home?", ru: "Как бы вы обставили этот дом?" },
   aiAlt:      { tr: "Boş odanın dört farklı tasarımı. Yapay zekâ ile üretildi, temsilîdir.", en: "Four designs of the empty room. AI-generated, for illustration only.", ru: "Четыре варианта дизайна пустой комнаты. Создано ИИ, иллюстративно." },
   orijinal:   { tr: "Orijinal", en: "Original", ru: "Оригинал" },
