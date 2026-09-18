@@ -68,7 +68,10 @@ function programYap(gl: WebGLRenderingContext) {
   return p;
 }
 
-export default function Gezinti360({ kaynak, dil, baslik }: { kaynak: string; dil: Dil; baslik: string }) {
+export default function Gezinti360({ kaynak, odalar, dil, baslik }: { kaynak: string; odalar?: string[]; dil: Dil; baslik: string }) {
+  const liste = odalar && odalar.length > 1 ? odalar : [kaynak];
+  const [odaIndeks, setOdaIndeks] = useState(0);
+  const aktifKaynak = liste[Math.min(odaIndeks, liste.length - 1)];
   const kutuRef = useRef<HTMLDivElement>(null);
   const tuvalRef = useRef<HTMLCanvasElement>(null);
   const durum = useRef({ yaw: 0, pitch: 0, fov: 1.2, otomatik: true, surukluyor: false, sonX: 0, sonY: 0, pinch: 0 });
@@ -133,12 +136,12 @@ export default function Gezinti360({ kaynak, dil, baslik }: { kaynak: string; di
     // Eniyileyici bir sebeple reddederse ham dosyaya dus; gezinti yine calissin.
     let denendi = false;
     gorsel.onerror = () => {
-      if (!denendi) { denendi = true; gorsel.src = kaynak; return; }
+      if (!denendi) { denendi = true; gorsel.src = aktifKaynak; return; }
       setHata(true); setYukleniyor(false);
     };
     // Next'in eniyileyicisi ayni kaynaktan WebP dondurur.
     // q yalnizca 75 olabilir (Next 16 varsayilan images.qualities); 80 -> HTTP 400.
-    gorsel.src = `/_next/image?url=${encodeURIComponent(kaynak)}&w=2048&q=75`;
+    gorsel.src = `/_next/image?url=${encodeURIComponent(aktifKaynak)}&w=2048&q=75`;
 
     let calisiyor = true;
     let sonZaman = performance.now();
@@ -167,7 +170,7 @@ export default function Gezinti360({ kaynak, dil, baslik }: { kaynak: string; di
     requestAnimationFrame(ciz);
 
     return () => { calisiyor = false; gl.deleteTexture(doku); gl.deleteBuffer(tampon); gl.deleteProgram(program); };
-  }, [kaynak]);
+  }, [aktifKaynak]);
 
   // --- Etkilesim ---
   const basla = (x: number, y: number) => {
@@ -228,6 +231,18 @@ export default function Gezinti360({ kaynak, dil, baslik }: { kaynak: string; di
       />
 
       {yukleniyor && <div className="gezinti-yukleniyor"><span className="iskelet block h-full w-full" /></div>}
+
+      {liste.length > 1 && (
+        <div className="gezinti-odalar">
+          {liste.map((_, n) => (
+            <button key={n} type="button" onClick={() => { setYukleniyor(true); setOdaIndeks(n); }}
+              aria-pressed={n === odaIndeks}
+              className={`gezinti-oda ${n === odaIndeks ? "secili" : ""}`}>
+              {t("odaSec", dil)} {n + 1}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="gezinti-ipucu">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>

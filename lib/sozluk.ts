@@ -231,6 +231,7 @@ const S = {
     en: "Walk around inside the room. Drag, zoom, go fullscreen.",
     ru: "Осмотритесь внутри комнаты. Перетаскивайте, приближайте, разверните.",
   },
+  odaSec:        { tr: "Oda", en: "Room", ru: "Комната" },
   gezintiIpucu:  { tr: "Sürükleyin", en: "Drag to look around", ru: "Перетащите" },
   tamEkran:      { tr: "Tam ekran", en: "Fullscreen", ru: "Полный экран" },
 

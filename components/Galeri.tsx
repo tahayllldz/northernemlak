@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Dil } from "@/lib/tipler";
 import { t } from "@/lib/sozluk";
 
-export default function Galeri({ gorseller, baslik, dil }: { gorseller: string[]; baslik: string; dil: Dil }) {
+export default function Galeri({ gorseller, baslik, dil, gercek = false }: { gorseller: string[]; baslik: string; dil: Dil; gercek?: boolean }) {
   const [i, setI] = useState(0);
   const [tamEkran, setTamEkran] = useState(false);
   const git = useCallback(
@@ -33,7 +33,7 @@ export default function Galeri({ gorseller, baslik, dil }: { gorseller: string[]
             </span>
           </>
         )}
-        <span className="damga z-[2]">{t("temsiliGorsel", dil)}</span>
+        {!gercek && <span className="damga z-[2]">{t("temsiliGorsel", dil)}</span>}
       </div>
 
       {gorseller.length > 1 && (
@@ -50,7 +50,7 @@ export default function Galeri({ gorseller, baslik, dil }: { gorseller: string[]
       )}
 
       {tamEkran && (
-        <TamEkran gorseller={gorseller} baslik={baslik} dil={dil} i={i} setI={setI} git={git}
+        <TamEkran gorseller={gorseller} baslik={baslik} dil={dil} gercek={gercek} i={i} setI={setI} git={git}
           kapat={() => setTamEkran(false)} />
       )}
     </div>
@@ -59,9 +59,9 @@ export default function Galeri({ gorseller, baslik, dil }: { gorseller: string[]
 
 /** Tam ekran galeri: ok tuslari, ESC, odak tuzagi. */
 function TamEkran({
-  gorseller, baslik, dil, i, setI, git, kapat,
+  gorseller, baslik, dil, gercek, i, setI, git, kapat,
 }: {
-  gorseller: string[]; baslik: string; dil: Dil;
+  gorseller: string[]; baslik: string; dil: Dil; gercek: boolean;
   i: number; setI: (n: number) => void; git: (y: number) => void; kapat: () => void;
 }) {
   const kutuRef = useRef<HTMLDivElement>(null);
@@ -99,7 +99,7 @@ function TamEkran({
 
       <div className="ekran-govde">
         <Image src={gorseller[i]} alt={baslik} fill sizes="100vw" className="object-contain" />
-        <span className="damga">{t("temsiliGorsel", dil)}</span>
+        {!gercek && <span className="damga">{t("temsiliGorsel", dil)}</span>}
       </div>
 
       {gorseller.length > 1 && (

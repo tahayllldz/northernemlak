@@ -56,7 +56,7 @@ export default function IlanKarti({ ilan, dil, oncelik = false }: { ilan: Ilan; 
             </span>
           )}
 
-          <span className="damga">{t("temsiliGorsel", dil)}</span>
+          {!ilan.gercekGorsel && <span className="damga">{t("temsiliGorsel", dil)}</span>}
         </div>
 
         <div className="pt-3.5">

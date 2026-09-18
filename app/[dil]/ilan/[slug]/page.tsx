@@ -80,7 +80,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
 
         <div className="grid gap-8 lg:grid-cols-[1fr_336px]">
           <div className="min-w-0 space-y-8">
-            <Galeri gorseller={ilan.gorseller} baslik={ilan.baslik[dil]} dil={dil} />
+            <Galeri gorseller={ilan.gorseller} baslik={ilan.baslik[dil]} dil={dil} gercek={!!ilan.gercekGorsel} />
 
             <div>
               <div className="flex flex-wrap items-center gap-2">
@@ -155,7 +155,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
               <section id="bolum-360">
                 <h2 className="baslik mb-1.5 text-[22px] text-deniz-700">{t("gezinti360", dil)}</h2>
                 <p className="mb-4 max-w-[62ch] text-[13.5px] leading-relaxed text-sis">{t("gezinti360Alt", dil)}</p>
-                <Gezinti360 kaynak={ilan.gezinti360} dil={dil} baslik={ilan.baslik[dil]} />
+                <Gezinti360 kaynak={ilan.gezinti360} odalar={ilan.gezintiOdalari} dil={dil} baslik={ilan.baslik[dil]} />
               </section>
             )}
 

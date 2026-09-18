@@ -95,6 +95,7 @@ export interface Ilan {
   ozellikler: OzellikKodu[];
   gorseller: string[];
   kapak: string;
+  gercekGorsel?: boolean;      // gercek mulk fotografi — "temsili" damgasi basilmaz
   emlakci: string;             // slug
   yayinTarihi: string;
   guncelleme: string;
@@ -103,5 +104,6 @@ export interface Ilan {
   aiOdaGorseli?: string;       // bos oda fotografi
   aiTasarimlar?: AiTasarim[];
   gezinti360?: string;         // 4:1 silindirik panorama (AI uretimi, temsili)
+  gezintiOdalari?: string[];   // oda oda 360 — her odayi ayri gezebilmek icin
   konum: { lat: number; lng: number };
 }

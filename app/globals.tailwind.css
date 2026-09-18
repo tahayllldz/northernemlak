@@ -441,6 +441,22 @@ h1, h2, h3, .baslik { font-family: var(--font-baslik); font-weight: 500; letter-
     font-size: 12px; backdrop-filter: blur(6px);
     pointer-events: none;
   }
+  .gezinti-odalar {
+    position: absolute; left: 12px; top: 12px;
+    display: flex; gap: 6px; max-width: calc(100% - 70px);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .gezinti-odalar::-webkit-scrollbar { display: none; }
+  .gezinti-oda {
+    flex: none;
+    border-radius: 999px; padding: 6px 12px;
+    background: rgba(0,0,0,.42); color: rgba(255,255,255,.85);
+    font-size: 12px; backdrop-filter: blur(6px);
+    transition: background-color .15s ease, color .15s ease;
+  }
+  .gezinti-oda:hover { background: rgba(0,0,0,.6); color: #fff; }
+  .gezinti-oda.secili { background: rgba(255,255,255,.92); color: var(--color-deniz-700); font-weight: 500; }
+
   .gezinti-dugme {
     position: absolute; right: 12px; top: 12px;
     display: inline-flex; align-items: center; justify-content: center;
