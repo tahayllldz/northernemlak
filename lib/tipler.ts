@@ -63,6 +63,7 @@ export interface Ilan {
   tapu: TapuTipi;
   yabanciUygun: boolean;
   aidat?: number;              // GBP / ay
+  kdvDahil: boolean;           // fiyata KDV dahil mi — KKTC alicisinin en buyuk surprizi
   ozellikler: OzellikKodu[];
   gorseller: string[];
   kapak: string;

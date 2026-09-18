@@ -7,12 +7,14 @@ import EmlakciKarti from "@/components/EmlakciKarti";
 import DetayUst from "@/components/DetayUst";
 import MobilIletisim from "@/components/MobilIletisim";
 import Konum from "@/components/Konum";
+import Maliyet from "@/components/Maliyet";
+import SonBakilanlar, { SonBakilanKaydet } from "@/components/SonBakilanlar";
 import IlanKarti from "@/components/IlanKarti";
 import { Fiyat } from "@/components/Fiyat";
 import { Dil } from "@/lib/tipler";
 import { t, ozellikAdi } from "@/lib/sozluk";
 import { ILANLAR } from "@/lib/veri";
-import { emlakciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz, odaYaz } from "@/lib/yardimci";
+import { emlakciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz, odaYaz, alanYaz } from "@/lib/yardimci";
 
 export function generateStaticParams() {
   return ["tr", "en", "ru"].flatMap((dil) => ILANLAR.map((i) => ({ dil, slug: i.slug })));
@@ -32,6 +34,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
   const bolumler = [
     { id: "bolum-tapu", ad: t("tapuTipi", dil) },
     ...(ilan.aiTasarimlar?.length ? [{ id: "bolum-ai", ad: t("aiIleTasarlandi", dil) }] : []),
+    { id: "bolum-maliyet", ad: t("maliyetBaslik", dil) },
     { id: "bolum-aciklama", ad: t("aciklama", dil) },
     { id: "bolum-ozellikler", ad: t("ozellikler", dil) },
     { id: "bolum-konum", ad: t("konum", dil) },
@@ -40,7 +43,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
   const kunye: [string, string][] = [
     [t("oda", dil), odaYaz(ilan.oda, dil)],
     [t("banyo", dil), String(ilan.banyo)],
-    [t("alan", dil), `${ilan.m2} m²`],
+    [t(ilan.tip === "arsa" ? "arsaBuyuklugu" : "alan", dil), alanYaz(ilan.m2, ilan.tip, dil)],
     ...(ilan.islem === "satilik" && m2Fiyat ? [[t("m2Fiyat", dil), m2Fiyat] as [string, string]] : []),
     [t("binaYasi", dil), ilan.binaYasi === 0 ? "—" : String(ilan.binaYasi)],
     [t("esyaDurumu", dil), t(ilan.esyali === "esyali" ? "esyali" : ilan.esyali === "esyasiz" ? "esyasiz" : "yari", dil)],
@@ -52,6 +55,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
       <Ustbilgi dil={dil} />
       <div className="h-[68px]" />
       <DetayUst ilan={ilan} dil={dil} bolumler={bolumler} />
+      <SonBakilanKaydet id={ilan.id} />
 
       <main id="icerik" className="kapsayici py-7 pb-28 lg:pb-7">
         <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-[12.5px] text-sis">
@@ -121,6 +125,9 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
               <p className="border-t border-deniz-100 px-5 py-2.5 text-[11.5px] text-deniz-500">{t("tapuNot", dil)}</p>
             </section>
 
+            {/* TOPLAM MALIYET — rakipte karsiligi yok */}
+            <Maliyet ilan={ilan} dil={dil} />
+
             {/* AI TASARIM */}
             {ilan.aiTasarimlar?.length ? (
               <div id="bolum-ai"><AiTasarim orijinal={ilan.aiOdaGorseli!} tasarimlar={ilan.aiTasarimlar} dil={dil} /></div>
@@ -188,6 +195,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
             </div>
           </section>
         )}
+        <SonBakilanlar dil={dil} haric={ilan.id} />
       </main>
 
       <MobilIletisim ilan={ilan} e={e} dil={dil} />

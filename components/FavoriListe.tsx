@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { Dil } from "@/lib/tipler";
 import { t } from "@/lib/sozluk";
@@ -6,9 +7,11 @@ import { ILANLAR } from "@/lib/veri";
 import IlanKarti from "./IlanKarti";
 import IlanIskelet from "./IlanIskelet";
 import { useFavoriler } from "./Favoriler";
+import Karsilastirma from "./Karsilastirma";
 
 export default function FavoriListe({ dil }: { dil: Dil }) {
   const { favoriler, hazir } = useFavoriler();
+  const [karsilastir, setKarsilastir] = useState(false);
 
   // Sunucuda bos, istemcide localStorage'dan gelir — arada iskelet goster
   if (!hazir) return <IlanIskelet adet={4} />;
@@ -34,6 +37,26 @@ export default function FavoriListe({ dil }: { dil: Dil }) {
 
   return (
     <>
+      {liste.length >= 2 && (
+        <div className="mb-6 flex flex-wrap items-center gap-3">
+          <button type="button" onClick={() => setKarsilastir((v) => !v)}
+            className={`flex items-center gap-2 rounded-md px-4 py-2.5 text-[14px] font-medium transition
+              ${karsilastir ? "bg-deniz-700 text-kum-50" : "border border-hat bg-white text-murekkep hover:border-deniz-300"}`}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M9 4v16M15 4v16M4 9h16M4 15h16" strokeLinecap="round" />
+            </svg>
+            {karsilastir ? t("karsilastirmaKapat", dil) : `${t("ilanKarsilastir", dil)} (${Math.min(liste.length, 6)})`}
+          </button>
+          {karsilastir && <span className="text-[12.5px] text-sis">{t("karsilastirmaNot", dil)}</span>}
+        </div>
+      )}
+
+      {karsilastir && (
+        <div className="mb-10 overflow-hidden rounded-xl border border-hat">
+          <Karsilastirma ilanlar={liste.slice(0, 6)} dil={dil} />
+        </div>
+      )}
+
       <div className="grid gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {liste.map((i, n) => <IlanKarti key={i.id} ilan={i} dil={dil} oncelik={n < 4} />)}
       </div>

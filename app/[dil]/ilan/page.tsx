@@ -3,6 +3,7 @@ import Link from "next/link";
 import Ustbilgi from "@/components/Ustbilgi";
 import Filtreler from "@/components/Filtreler";
 import IlanKarti from "@/components/IlanKarti";
+import SonBakilanlar from "@/components/SonBakilanlar";
 import { Dil } from "@/lib/tipler";
 import { t } from "@/lib/sozluk";
 import { filtreOku, ilanlariSuz, aktifFiltreSayisi } from "@/lib/yardimci";
@@ -60,6 +61,8 @@ export default async function ListeSayfasi({
             )}
           </>
         )}
+
+        <SonBakilanlar dil={dil} />
       </main>
     </>
   );

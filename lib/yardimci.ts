@@ -208,3 +208,18 @@ export function odaYaz(oda: string, dil: Dil) {
   const ek = dil === "en" ? `${yatak} bed + lounge` : `${yatak} спальни + гостиная`;
   return `${oda} · ${ek}`;
 }
+
+/**
+ * KKTC'de arazi donum/evlek ile olculur (1 donum = 1.337,8 m² = 4 evlek).
+ * 101evler bunun icin ayri bir "Alan Donusturucu" araci koymus; biz alanin
+ * yanina yaziyoruz. Yalnizca arsa ilanlarinda anlamli.
+ */
+export const M2_DONUM = 1337.8;
+
+export function alanYaz(m2: number, tip: string, dil: Dil) {
+  const temel = `${m2.toLocaleString(dil === "tr" ? "tr-TR" : dil === "ru" ? "ru-RU" : "en-GB")} m²`;
+  if (tip !== "arsa" || m2 < M2_DONUM / 2) return temel;
+  const donum = m2 / M2_DONUM;
+  const yerel = dil === "tr" ? "tr-TR" : dil === "ru" ? "ru-RU" : "en-GB";
+  return `${donum.toLocaleString(yerel, { maximumFractionDigits: 1 })} ${t("donum", dil)} · ${temel}`;
+}
