@@ -109,6 +109,37 @@ veritabanı (şu an `lib/veri.ts` statik — Supabase/Postgres'e taşınacak).
   `Ilan.kdvDahil` zorunlu alan — emlakçı beyan eder.
 - **Karşılaştırma favorilerin devamı**, kartın üstünde ayrı bir kontrol değil.
   Kart sade kalsın diye bilerek böyle; karta "karşılaştır" kutusu ekleme.
+## Farklılaştırıcı özellikler — ürünün asıl iddiası
+
+Bunlar "güzel olmuş" özellikler değil, ürünün satış argümanı. Silme, sulandırma.
+
+- **360° gezinti** (`components/Gezinti360.tsx`) — bağımlılıksız WebGL silindirik
+  panorama görüntüleyici (~120 satır shader). three.js/pannellum **eklenmedi**.
+  Kaynak 4:1 panorama, `scripts/panorama-uret.mjs` ile üretiliyor
+  (`gemini-3.1-flash-image`; 2.5 bu en-boy oranını desteklemiyor).
+  Panoramalar AI üretimi, filigran zorunlu. Gerçek ilanlarda 360 kamera çıkışı
+  aynı görüntüleyiciye girer.
+- **Tapu zinciri** (`components/TapuZinciri.tsx`) — mülkün tapu sürecinin
+  neresinde olduğu. `Ilan.tapuAsama`. Dünyada başka portalda yok; KKTC'ye özel.
+- **Geliştirici sicili** (`components/GelistiriciKarti.tsx`) — teslim performansı.
+  Yalnızca tartışılmaz olan yayınlanır: ilan edilen vs gerçekleşen teslim.
+  Yorum yok, puan yok. Hukuki risk bu yüzden sınırlı tutuldu.
+- **Toplam maliyet** (`lib/maliyet.ts`) — oranlar prototip varsayılanı,
+  **avukata doğrulatılmadan yayına çıkmaz**.
+- **Yatırım getirisi** (`lib/getiri.ts`) — üniversite dönemi mevsimselliğiyle
+  (9 ay tam + 3 ay düşük sezon). Kira **uydurulmuyor**: kendi kiralık
+  ilanlarımızın m² medyanından geliyor, örnek sayısı ekranda yazıyor.
+- **Mükerrer ilan şeffaflığı** (`components/BenzerUyari.tsx`) — çoklu acente
+  fiyat farkını gösterir. **Ticari olarak tartışmalı**: gelir emlakçıdan gelir,
+  bu özellik alıcıyı korur. Kaldırma kararı müşterinin, bizim değil.
+- **Altyapı hazırlığı** — jeneratör/su/güneş. Bölge bazlı kesinti istatistiği
+  **yok, çünkü açık veri yok**. Uydurma.
+- **Sesli ilan turu** — tarayıcının SpeechSynthesis'i, sıfır maliyet.
+  Dil için ses yoksa düğme hiç görünmez.
+- **WhatsApp arama takibi** — KKTC'de e-posta ölü. Prototipte demo numaraya
+  gider, Faz 1'de platform hattına bağlanır.
+- **Görüntüleme rotası** — uçakla gelen alıcı için favorileri coğrafi sıraya dizer.
+
 - Detaylı gerekçeler: `analiz/arayuz-analizi.md`.
 
 ## Yayın

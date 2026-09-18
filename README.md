@@ -42,6 +42,13 @@ kaynağından derler. Bu makinede Application Control `.node` ikililerini engell
 için yerelde derlenemez; depodaki `app/globals.css` yalnızca `npm run dev` için
 fallback kopyadır. Kaynağa stil eklersen o kopyaya da yansıt.
 
+## Farklılaştırıcılar
+
+360° gezinti · tapu zinciri · geliştirici sicili · toplam maliyet hesabı ·
+yatırım getirisi (üniversite dönemi mevsimselliği) · mükerrer ilan şeffaflığı ·
+altyapı hazırlığı · sesli ilan turu · WhatsApp arama takibi · görüntüleme rotası
+
+Gerekçeleri ve hangisinin rakipte olup olmadığı: 
 ## Notlar
 
 - Tüm görseller **temsilîdir** (Pexels). Gerçek mülkleri yansıtmaz.

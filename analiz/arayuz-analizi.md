@@ -501,6 +501,32 @@ Canlı: **https://northernemlak.vercel.app**
 | **Dönüm / evlek gösterimi** | Arsa ilanlarında `3,2 dönüm · 4.280 m²`. 101evler bunun için ayrı bir çevirici araç koymuş. |
 | **404 sayfaları** | Kök 404 (geçersiz dil kodu) ve ilan bulunamadı, üç dilde. |
 
+### Üçüncü turda eklenenler — farklılaştırıcılar
+
+Bunlar rakip analizinden değil, **KKTC'nin kendi tuhaflıklarından** çıktı.
+
+| İş | Nerede var? |
+|---|---|
+| **360° gezinti** | Bağımlılıksız WebGL görüntüleyici. 101evler'de video var, 360 yok. |
+| **Tapu zinciri** | Mülkün süreç içindeki yeri (İnşaat → Kayıt → BK izni → İzin → Devir) + tipik kalan süre. **Dünyada hiçbir portalda yok** — çünkü sadece KKTC'nin problemi. |
+| **Geliştirici sicili** | Teslim edilen proje/konut, ortalama gecikme. PropertyFinder geliştirici adını yazıyor, sicil vermiyor. |
+| **Yatırım getirisi** | Üniversite dönemi mevsimselliği (9 ay tam + 3 ay düşük). Rightmove/funda getiri hesabı yapmıyor; PropertyFinder mortgage hesaplıyor — KKTC'de mortgage yok. |
+| **Mükerrer ilan şeffaflığı** | Aynı mülkün farklı ofislerdeki fiyat farkı. Portallar bunu **gizler**, biz gösteriyoruz. Ticari tartışma konusu — bkz. 5.6. |
+| **Altyapı hazırlığı** | Jeneratör/su/güneş, neden gerekli olduğunu söyleyerek. funda'nın enerji sınıfının KKTC karşılığı. |
+| **Sesli ilan turu** | Tarayıcının kendi SpeechSynthesis'i. Emlakta yapan yok. |
+| **WhatsApp arama takibi** | Rightmove/funda e-posta yolluyor; KKTC'de e-posta ölü. |
+| **Görüntüleme rotası** | Uçakla gelen alıcı için favorileri coğrafi sıraya dizer. Compass/Airbnb yapmıyor — onların alıcısı zaten şehirde. |
+| **Fiyat düştü göstergesi** | Üstü çizili eski fiyat (The Agency modeli). |
+
+### 5.6 — Mükerrer ilan şeffaflığı için ticari uyarı
+
+Bu özellik alıcıyı korur, **emlakçıyı rahatsız eder.** Müşterinin geliri emlakçıdan
+geliyor. Hiçbir portalın bunu yapmamasının sebebi teknik değil, ticari.
+
+Prototipte yumuşak sürümü var: "aynı mülk" iddia edilmiyor, "çok benziyor" deniyor
+ve fiyat aralığı gösteriliyor. Müşteri isterse fiyatları gizleyip yalnızca uyarıya
+indirebiliriz. **Karar müşterinin — ama seçeneği bildiğini bilmeli.**
+
 ### Yapılmadı (bilinçli)
 
 - **Proje / maketten satış katmanı** — Faz 1. Prototip kapsamını aşıyor, ama en büyük boşluk.
