@@ -85,7 +85,7 @@ export default function IlanKarti({ ilan, dil, oncelik = false }: { ilan: Ilan; 
                 {t("yabanciUygunDegil", dil)}
               </span>
             )}
-            <span className="ml-auto text-[11.5px] text-sis">{tazelikYaz(ilan.yayinTarihi, dil)}</span>
+            <span className="ml-auto text-[11.5px] text-sis">{tazelikYaz(ilan.guncelleme, dil)}</span>
           </div>
         </div>
       </article>

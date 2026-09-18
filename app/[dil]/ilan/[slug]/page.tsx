@@ -7,7 +7,7 @@ import EmlakciKarti from "@/components/EmlakciKarti";
 import IlanKarti from "@/components/IlanKarti";
 import { Fiyat } from "@/components/Fiyat";
 import { Dil } from "@/lib/tipler";
-import { t } from "@/lib/sozluk";
+import { t, ozellikAdi } from "@/lib/sozluk";
 import { ILANLAR } from "@/lib/veri";
 import { emlakciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz } from "@/lib/yardimci";
 
@@ -135,7 +135,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
                   <span key={o} className="flex items-center gap-1.5 rounded-md border border-hat bg-white px-3 py-1.5 text-[13.5px] text-murekkep">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C4663A" strokeWidth="2.6" aria-hidden>
                       <path d="m5 13 4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    {o}
+                    {ozellikAdi(o, dil)}
                   </span>
                 ))}
               </div>

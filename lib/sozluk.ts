@@ -1,4 +1,4 @@
-import { Dil } from "./tipler";
+import { Dil, Metin, OzellikGrubu, OzellikKodu } from "./tipler";
 
 export const DILLER: { kod: Dil; ad: string; kisa: string }[] = [
   { kod: "tr", ad: "Türkçe", kisa: "TR" },
@@ -26,6 +26,20 @@ const S = {
   enCok:      { tr: "En çok", en: "Max", ru: "До" },
   filtreler:  { tr: "Filtreler", en: "Filters", ru: "Фильтры" },
   temizle:    { tr: "Temizle", en: "Clear", ru: "Сбросить" },
+  hepsi:      { tr: "Hepsi", en: "All", ru: "Все" },
+  tumFiltreler:{ tr: "Tüm filtreler", en: "All filters", ru: "Все фильтры" },
+  kapat:      { tr: "Kapat", en: "Close", ru: "Закрыть" },
+  sonucuGoster:{ tr: "ilanı göster", en: "listings", ru: "объявлений" },
+  goster:     { tr: "Göster", en: "Show", ru: "Показать" },
+  fiyatGbp:   { tr: "Fiyat (£)", en: "Price (£)", ru: "Цена (£)" },
+  enAzOda:    { tr: "En az oda", en: "Min bedrooms", ru: "Спален от" },
+  enAzBanyo:  { tr: "En az banyo", en: "Min bathrooms", ru: "Ванных от" },
+  alanAralik: { tr: "Alan (m²)", en: "Area (m²)", ru: "Площадь (м²)" },
+  enFazlaYas: { tr: "En fazla bina yaşı", en: "Max building age", ru: "Возраст здания до" },
+  tumTapular: { tr: "Tüm tapu tipleri", en: "All title types", ru: "Все типы титула" },
+  farketmez:  { tr: "Farketmez", en: "Any", ru: "Любой" },
+  yabanciFiltre:{ tr: "Sadece yabancı alıcıya uygun", en: "Eligible for foreign buyers only", ru: "Только доступные иностранцам" },
+  aiFiltre:   { tr: "AI tasarımlı", en: "With AI design", ru: "С AI-дизайном" },
   sonuc:      { tr: "ilan bulundu", en: "listings found", ru: "объявлений найдено" },
   sirala:     { tr: "Sırala", en: "Sort", ru: "Сортировка" },
   sonEklenen: { tr: "Son eklenen", en: "Newest", ru: "Новые" },
@@ -40,6 +54,7 @@ const S = {
     ru: "«Продвигаемые» объявления оплачены агентом и влияют на порядок выдачи.",
   },
   oneCikanlar: { tr: "Öne çıkan ilanlar", en: "Featured listings", ru: "Рекомендуемые объявления" },
+  tumIlanlarBaslik: { tr: "Tüm ilanlar", en: "All listings", ru: "Все объявления" },
   tumIlanlar:  { tr: "Tüm ilanları gör", en: "See all listings", ru: "Все объявления" },
   aiIleTasarlandi: { tr: "AI tasarım mevcut", en: "AI design available", ru: "Доступен AI-дизайн" },
 
@@ -116,6 +131,57 @@ const S = {
   altbilgiHak: { tr: "Tüm hakları saklıdır.", en: "All rights reserved.", ru: "Все права защищены." },
   altbilgiNot: { tr: "Bu bir prototiptir. İlanlar ve görseller temsilîdir, gerçek mülkleri yansıtmaz.", en: "This is a prototype. Listings and images are illustrative and do not represent real properties.", ru: "Это прототип. Объявления и изображения иллюстративны." },
 } as const;
+
+/** Ozellik kodlarinin uc dilde karsiligi. Kod -> metin ayrimi icin bkz. tipler.ts */
+export const OZELLIK_ADI: Record<OzellikKodu, Metin> = {
+  "asansor":           { tr: "Asansör", en: "Lift", ru: "Лифт" },
+  "jenerator":         { tr: "Jeneratör", en: "Generator", ru: "Генератор" },
+  "somine":            { tr: "Şömine", en: "Fireplace", ru: "Камин" },
+  "celik-kapi":        { tr: "Çelik kapı", en: "Security door", ru: "Бронедверь" },
+  "guvenlik-kamerasi": { tr: "Güvenlik kamerası", en: "CCTV", ru: "Видеонаблюдение" },
+  "yangin-alarmi":     { tr: "Yangın alarmı", en: "Fire alarm", ru: "Пожарная сигнализация" },
+  "gunes-enerjisi":    { tr: "Güneş enerjisi", en: "Solar power", ru: "Солнечная энергия" },
+  "ozel-havuz":        { tr: "Özel havuz", en: "Private pool", ru: "Частный бассейн" },
+  "ortak-havuz":       { tr: "Ortak havuz", en: "Shared pool", ru: "Общий бассейн" },
+  "bahce":             { tr: "Bahçe", en: "Garden", ru: "Сад" },
+  "balkon":            { tr: "Balkon", en: "Balcony", ru: "Балкон" },
+  "teras":             { tr: "Teras", en: "Terrace", ru: "Терраса" },
+  "barbeku":           { tr: "Barbekü", en: "Barbecue", ru: "Барбекю" },
+  "otopark":           { tr: "Otopark", en: "Parking", ru: "Парковка" },
+  "kapali-otopark":    { tr: "Kapalı otopark", en: "Covered parking", ru: "Крытая парковка" },
+  "deniz-manzarasi":   { tr: "Deniz manzarası", en: "Sea view", ru: "Вид на море" },
+  "denize-sifir":      { tr: "Denize sıfır", en: "Beachfront", ru: "Первая линия моря" },
+  "dag-manzarasi":     { tr: "Dağ manzarası", en: "Mountain view", ru: "Вид на горы" },
+  "doga-manzarasi":    { tr: "Doğa manzarası", en: "Countryside view", ru: "Вид на природу" },
+  "sehir-manzarasi":   { tr: "Şehir manzarası", en: "City view", ru: "Вид на город" },
+  "sehir-ici":         { tr: "Şehir içi", en: "In town", ru: "В черте города" },
+  "yol-erisimi":       { tr: "Yol erişimi", en: "Road access", ru: "Подъездная дорога" },
+  "su-altyapisi":      { tr: "Su altyapısı", en: "Mains water", ru: "Водоснабжение" },
+  "elektrik-altyapisi":{ tr: "Elektrik altyapısı", en: "Mains electricity", ru: "Электроснабжение" },
+  "su-kuyusu":         { tr: "Su kuyusu", en: "Water well", ru: "Скважина" },
+};
+
+/** Panelde yogunlugu yonetmek icin gruplama (idealista/funda modeli). */
+export const OZELLIK_GRUPLARI: Record<OzellikGrubu, { ad: Metin; kodlar: OzellikKodu[] }> = {
+  manzara: {
+    ad: { tr: "Konum ve manzara", en: "Location & view", ru: "Расположение и вид" },
+    kodlar: ["deniz-manzarasi", "denize-sifir", "dag-manzarasi", "doga-manzarasi", "sehir-manzarasi", "sehir-ici"],
+  },
+  disMekan: {
+    ad: { tr: "Dış mekân", en: "Outdoor", ru: "Снаружи" },
+    kodlar: ["ozel-havuz", "ortak-havuz", "bahce", "balkon", "teras", "barbeku", "otopark", "kapali-otopark"],
+  },
+  konfor: {
+    ad: { tr: "Konfor ve güvenlik", en: "Comfort & security", ru: "Комфорт и безопасность" },
+    kodlar: ["asansor", "jenerator", "somine", "celik-kapi", "guvenlik-kamerasi", "yangin-alarmi", "gunes-enerjisi"],
+  },
+  arsa: {
+    ad: { tr: "Arsa altyapısı", en: "Land infrastructure", ru: "Инфраструктура участка" },
+    kodlar: ["yol-erisimi", "su-altyapisi", "elektrik-altyapisi", "su-kuyusu"],
+  },
+};
+
+export const ozellikAdi = (kod: OzellikKodu, dil: Dil) => OZELLIK_ADI[kod]?.[dil] ?? kod;
 
 export type SozlukAnahtar = keyof typeof S;
 export const t = (anahtar: SozlukAnahtar, dil: Dil): string => S[anahtar][dil];

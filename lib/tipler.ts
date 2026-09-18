@@ -5,6 +5,21 @@ export type TapuTipi = "turk-kocani" | "esdeger" | "tmd" | "leasehold";
 export type IslemTipi = "satilik" | "kiralik";
 export type EmlakTipi = "daire" | "villa" | "rezidans" | "mustakil" | "arsa" | "ticari";
 
+/**
+ * Ozellikler kod olarak saklanir, goruntu metni olarak degil.
+ * Onceden Turkce metin tutuluyordu ve RU/EN sayfalarda Turkce yaziyordu;
+ * ozellik filtresi de coklu dilde calisamazdi. Metinler OZELLIK_ADI'nda.
+ */
+export type OzellikGrubu = "konfor" | "disMekan" | "manzara" | "arsa";
+export type OzellikKodu =
+  | "asansor" | "jenerator" | "somine" | "celik-kapi" | "guvenlik-kamerasi"
+  | "yangin-alarmi" | "gunes-enerjisi"
+  | "ozel-havuz" | "ortak-havuz" | "bahce" | "balkon" | "teras" | "barbeku"
+  | "otopark" | "kapali-otopark"
+  | "deniz-manzarasi" | "denize-sifir" | "dag-manzarasi" | "doga-manzarasi"
+  | "sehir-manzarasi" | "sehir-ici"
+  | "yol-erisimi" | "su-altyapisi" | "elektrik-altyapisi" | "su-kuyusu";
+
 export interface Emlakci {
   slug: string;
   ad: string;
@@ -43,7 +58,7 @@ export interface Ilan {
   tapu: TapuTipi;
   yabanciUygun: boolean;
   aidat?: number;              // GBP / ay
-  ozellikler: string[];
+  ozellikler: OzellikKodu[];
   gorseller: string[];
   kapak: string;
   emlakci: string;             // slug

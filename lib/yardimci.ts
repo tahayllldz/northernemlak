@@ -1,4 +1,4 @@
-import { Dil, Ilan, TapuTipi } from "./tipler";
+import { Dil, Ilan, OzellikKodu, TapuTipi } from "./tipler";
 import { EMLAKCILAR, ILANLAR } from "./veri";
 import { t } from "./sozluk";
 
@@ -72,8 +72,50 @@ export function tarihYaz(iso: string, dil: Dil) {
     { day: "2-digit", month: "short", year: "numeric" });
 }
 
+/** "3+1" -> 3 · "1+0" -> 1 · "—" -> 0 */
+export const odaSayisi = (oda: string) => {
+  const n = parseInt(oda, 10);
+  return Number.isFinite(n) ? n : 0;
+};
+
+/** Hizli cip olarak disarida duran ozellikler (Airbnb modeli: 5 disarida, gerisi panelde) */
+export const HIZLI_OZELLIKLER: OzellikKodu[] = [
+  "deniz-manzarasi", "ozel-havuz", "jenerator", "otopark", "bahce",
+];
+
 export interface Filtre {
-  islem?: string; sehir?: string; tip?: string; min?: number; max?: number; ai?: boolean; q?: string; sirala?: string;
+  islem?: string; sehir?: string; tip?: string;
+  min?: number; max?: number;
+  oda?: number; banyo?: number;
+  m2min?: number; m2max?: number; yas?: number;
+  tapu?: string; yabanci?: boolean;
+  ozellikler?: OzellikKodu[];
+  ai?: boolean; q?: string; sirala?: string;
+}
+
+/** URL arama parametrelerini Filtre'ye cevirir. Tek dogruluk kaynagi burasi. */
+export function filtreOku(sp: Record<string, string | undefined>): Filtre {
+  const sayi = (v?: string) => { const n = Number(v); return v && Number.isFinite(n) && n > 0 ? n : undefined; };
+  return {
+    islem: sp.islem, sehir: sp.sehir, tip: sp.tip, tapu: sp.tapu, q: sp.q, sirala: sp.sirala,
+    min: sayi(sp.min), max: sayi(sp.max),
+    oda: sayi(sp.oda), banyo: sayi(sp.banyo),
+    m2min: sayi(sp.m2min), m2max: sayi(sp.m2max), yas: sayi(sp.yas),
+    yabanci: sp.yabanci === "1",
+    ai: sp.ai === "1",
+    ozellikler: sp.oz ? (sp.oz.split(",").filter(Boolean) as OzellikKodu[]) : undefined,
+  };
+}
+
+/** Kac filtre aktif — "Filtreler (3)" rozetini besler (The Agency modeli). */
+export function aktifFiltreSayisi(sp: URLSearchParams | Record<string, string | undefined>): number {
+  const giris = sp instanceof URLSearchParams ? Object.fromEntries(sp.entries()) : sp;
+  let n = 0;
+  for (const [k, v] of Object.entries(giris)) {
+    if (!v || k === "sirala" || k === "q") continue;
+    n += k === "oz" ? v.split(",").filter(Boolean).length : 1;
+  }
+  return n;
 }
 
 export function ilanlariSuz(f: Filtre, dil: Dil = "tr"): Ilan[] {
@@ -81,8 +123,17 @@ export function ilanlariSuz(f: Filtre, dil: Dil = "tr"): Ilan[] {
   if (f.islem)  liste = liste.filter((i) => i.islem === f.islem);
   if (f.sehir)  liste = liste.filter((i) => i.sehir === f.sehir);
   if (f.tip)    liste = liste.filter((i) => i.tip === f.tip);
+  if (f.tapu)   liste = liste.filter((i) => i.tapu === f.tapu);
   if (f.min)    liste = liste.filter((i) => i.fiyat >= f.min!);
   if (f.max)    liste = liste.filter((i) => i.fiyat <= f.max!);
+  if (f.oda)    liste = liste.filter((i) => odaSayisi(i.oda) >= f.oda!);
+  if (f.banyo)  liste = liste.filter((i) => i.banyo >= f.banyo!);
+  if (f.m2min)  liste = liste.filter((i) => i.m2 >= f.m2min!);
+  if (f.m2max)  liste = liste.filter((i) => i.m2 <= f.m2max!);
+  if (f.yas)    liste = liste.filter((i) => i.binaYasi <= f.yas!);
+  if (f.yabanci) liste = liste.filter((i) => i.yabanciUygun);
+  if (f.ozellikler?.length)
+    liste = liste.filter((i) => f.ozellikler!.every((o) => i.ozellikler.includes(o)));
   if (f.ai)     liste = liste.filter((i) => !!i.aiTasarimlar?.length);
   if (f.q) {
     const q = f.q.toLocaleLowerCase("tr");
@@ -96,3 +147,9 @@ export function ilanlariSuz(f: Filtre, dil: Dil = "tr"): Ilan[] {
   else liste.sort((a, b) => (a.vitrin === b.vitrin ? b.guncelleme.localeCompare(a.guncelleme) : a.vitrin ? -1 : 1));
   return liste;
 }
+
+export const TAPULAR: TapuTipi[] = ["turk-kocani", "esdeger", "tmd", "leasehold"];
+
+/** Her sehirde kac ilan var — bos kategoriye tiklatmamak icin (propertyfinder modeli) */
+export const sehirSayilari = () =>
+  SEHIRLER.map((s) => ({ sehir: s, adet: ILANLAR.filter((i) => i.sehir === s).length }));
