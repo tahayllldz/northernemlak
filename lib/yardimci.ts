@@ -153,3 +153,45 @@ export const TAPULAR: TapuTipi[] = ["turk-kocani", "esdeger", "tmd", "leasehold"
 /** Her sehirde kac ilan var — bos kategoriye tiklatmamak icin (propertyfinder modeli) */
 export const sehirSayilari = () =>
   SEHIRLER.map((s) => ({ sehir: s, adet: ILANLAR.filter((i) => i.sehir === s).length }));
+
+/* ---------------------------------------------------------------
+   MESAFELER — harita Faz 1'de. Sahte harita koymak yerine gercek
+   hesaplanmis kus ucusu mesafe gosteriyoruz (bkz. analiz/arayuz-analizi.md 5.1).
+   --------------------------------------------------------------- */
+
+const ONEMLI_NOKTALAR: Record<string, { lat: number; lng: number }> = {
+  "Girne":      { lat: 35.3364, lng: 33.3192 },
+  "Lefkoşa":    { lat: 35.1856, lng: 33.3823 },
+  "Gazimağusa": { lat: 35.1254, lng: 33.9419 },
+  "İskele":     { lat: 35.2896, lng: 33.8903 },
+  "Güzelyurt":  { lat: 35.1986, lng: 32.9930 },
+};
+const ERCAN = { lat: 35.1547, lng: 33.4961 };
+
+/** Haversine, km. */
+function kusUcusuKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+  const R = 6371;
+  const rad = (d: number) => (d * Math.PI) / 180;
+  const dLat = rad(b.lat - a.lat), dLng = rad(b.lng - a.lng);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+const kmYaz = (km: number) => (km < 10 ? km.toFixed(1) : String(Math.round(km)));
+
+export function mesafeler(konum: { lat: number; lng: number }, sehir: string, dil: Dil) {
+  const liste: { ad: string; km: string }[] = [];
+  const merkez = ONEMLI_NOKTALAR[sehir];
+  if (merkez) liste.push({ ad: `${sehirAdi(sehir, dil)} — ${t("sehirMerkezi", dil)}`, km: kmYaz(kusUcusuKm(konum, merkez)) });
+  liste.push({ ad: t("havalimani", dil), km: kmYaz(kusUcusuKm(konum, ERCAN)) });
+
+  // En yakin diger iki sehir merkezi — yabanci alici cevreyi tanimiyor
+  const digerleri = Object.entries(ONEMLI_NOKTALAR)
+    .filter(([s]) => s !== sehir)
+    .map(([s, n]) => ({ ad: sehirAdi(s, dil), ham: kusUcusuKm(konum, n) }))
+    .sort((a, b) => a.ham - b.ham)
+    .slice(0, 2)
+    .map((x) => ({ ad: x.ad, km: kmYaz(x.ham) }));
+
+  return [...liste, ...digerleri];
+}

@@ -5,11 +5,13 @@ import Logo from "./Logo";
 import DilSecici from "./DilSecici";
 import ParaSecici from "./ParaSecici";
 import { useAyarlar } from "./Ayarlar";
+import { useFavoriler } from "./Favoriler";
 import { Dil } from "@/lib/tipler";
 import { t } from "@/lib/sozluk";
 
 export default function Ustbilgi({ dil, seffaf = false }: { dil: Dil; seffaf?: boolean }) {
   const { para, setPara } = useAyarlar();
+  const { favoriler, hazir } = useFavoriler();
   const [kaydi, setKaydi] = useState(false);
   useEffect(() => {
     const f = () => setKaydi(window.scrollY > 24);
@@ -40,6 +42,17 @@ export default function Ustbilgi({ dil, seffaf = false }: { dil: Dil; seffaf?: b
           ))}
         </nav>
         <div className="flex items-center gap-0.5">
+          <Link href={`/${dil}/favoriler`} aria-label={t("favoriler", dil)}
+            className={`relative flex h-9 w-9 items-center justify-center rounded-md transition
+              ${koyu ? "text-kum-100 hover:bg-white/10" : "text-murekkep hover:bg-kum-200"}`}>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+              <path d="M12 20.3 4.6 13a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9A4.6 4.6 0 0 1 19.4 13z"
+                strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {hazir && favoriler.length > 0 && (
+              <span className="sayi-rozet absolute -right-0.5 -top-0.5">{favoriler.length}</span>
+            )}
+          </Link>
           <ParaSecici deger={para} degisti={setPara} koyu={koyu} />
           <DilSecici dil={dil} koyu={koyu} />
           <Link href={`/${dil}/ilan`}

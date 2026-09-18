@@ -283,3 +283,80 @@ h1, h2, h3, .baslik { font-family: var(--font-baslik); font-weight: 500; letter-
   font-weight: 500; color: var(--color-sis);
   margin-bottom: 7px;
 }
+
+/* =================================================================
+   TAM EKRAN GALERI
+   ================================================================= */
+.ekran {
+  position: fixed; inset: 0; z-index: 70;
+  display: flex; flex-direction: column;
+  background: #0B0C0D;
+  animation: fon-ac .18s ease both;
+}
+.ekran-bas {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 14px 16px;
+  padding-top: max(14px, env(safe-area-inset-top));
+}
+.ekran-govde { position: relative; flex: 1; min-height: 0; }
+.ekran-dugme {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; width: 40px; border-radius: 999px;
+  background: rgba(255,255,255,.14); color: #fff;
+  line-height: 1; backdrop-filter: blur(4px);
+  transition: background-color .15s ease;
+}
+.ekran-dugme:hover { background: rgba(255,255,255,.26); }
+.ekran-serit {
+  display: flex; gap: 7px;
+  overflow-x: auto; padding: 12px 16px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  scrollbar-width: none;
+}
+.ekran-serit::-webkit-scrollbar { display: none; }
+
+/* =================================================================
+   MOBIL ALT ILETISIM CUBUGU
+   Kullanici iletisim icin sayfanin basina donmek zorunda kalmasin.
+   ================================================================= */
+.alt-cubuk {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  background: rgba(251,249,245,.97);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--color-hat);
+}
+@media (min-width: 1024px) { .alt-cubuk { display: none } }
+
+/* =================================================================
+   DETAY YAPISKAN BASLIGI
+   Detay sayfasi uzun; PropertyFinder modeli daralmis baslik + bolum menusu.
+   ================================================================= */
+.detay-ust {
+  position: sticky; top: 68px; z-index: 25;
+  border-bottom: 1px solid var(--color-hat);
+  background: rgba(251,249,245,.95);
+  backdrop-filter: blur(10px);
+}
+.bolum-bag {
+  font-size: 13px; color: var(--color-sis);
+  padding: 4px 2px; white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.bolum-bag:hover { color: var(--color-terra-500); border-color: var(--color-terra-500); }
+
+/* Yapiskan basliklarin altina cipa kaymasi (bolum baglantilari icin) */
+[id^="bolum-"] { scroll-margin-top: 132px; }
+
+/* =================================================================
+   ISKELET YUKLEME
+   ================================================================= */
+@keyframes parilti { 0% { opacity: .55 } 50% { opacity: 1 } 100% { opacity: .55 } }
+.iskelet {
+  background: var(--color-kum-200);
+  border-radius: 6px;
+  animation: parilti 1.4s ease-in-out infinite;
+}

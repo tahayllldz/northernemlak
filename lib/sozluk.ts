@@ -109,6 +109,30 @@ const S = {
   digerIlanlari:  { tr: "Bu danışmanın diğer ilanları", en: "Other listings by this agent", ru: "Другие объявления агента" },
   benzerIlanlar:  { tr: "Benzer ilanlar", en: "Similar listings", ru: "Похожие объявления" },
 
+  favoriler:       { tr: "Favoriler", en: "Saved", ru: "Избранное" },
+  favoriyeEkle:    { tr: "Favorilere ekle", en: "Save listing", ru: "В избранное" },
+  favorindenCikar: { tr: "Favorilerden çıkar", en: "Remove from saved", ru: "Убрать из избранного" },
+  favoriYok:       { tr: "Henüz favori eklemediniz.", en: "You haven't saved any listings yet.", ru: "Вы пока ничего не сохранили." },
+  favoriNot:       {
+    tr: "Favoriler şu an yalnızca bu tarayıcıda saklanır. Üyelik sistemi Faz 1'de gelecek.",
+    en: "Saved listings are stored in this browser only. Accounts arrive in Phase 1.",
+    ru: "Избранное хранится только в этом браузере. Аккаунты появятся в первой фазе.",
+  },
+
+  konumBaslik:  { tr: "Konum ve mesafeler", en: "Location & distances", ru: "Расположение и расстояния" },
+  havalimani:   { tr: "Ercan Havalimanı", en: "Ercan Airport", ru: "Аэропорт Эрджан" },
+  sehirMerkezi: { tr: "Şehir merkezi", en: "City centre", ru: "Центр города" },
+  kusUcusu:     {
+    tr: "Kuş uçuşu yaklaşık mesafedir; harita ve yol mesafesi Faz 1'de gelecek.",
+    en: "Approximate straight-line distances. Map and driving distance arrive in Phase 1.",
+    ru: "Приблизительные расстояния по прямой. Карта появится в первой фазе.",
+  },
+  sonucaDon:    { tr: "Sonuçlara dön", en: "Back to results", ru: "К результатам" },
+  iletisim:     { tr: "İletişim", en: "Contact", ru: "Связаться" },
+  paylas:       { tr: "Paylaş", en: "Share", ru: "Поделиться" },
+  kopyalandi:   { tr: "Bağlantı kopyalandı", en: "Link copied", ru: "Ссылка скопирована" },
+  tumFotograflar:{ tr: "Tüm fotoğraflar", en: "All photos", ru: "Все фото" },
+
   temsiliGorsel: { tr: "Temsilî görsel", en: "Stock image", ru: "Иллюстрация" },
   foto:          { tr: "Fotoğraf", en: "Photo", ru: "Фото" },
   oncekiFoto:    { tr: "Önceki fotoğraf", en: "Previous photo", ru: "Предыдущее фото" },

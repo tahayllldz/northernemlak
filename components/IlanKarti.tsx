@@ -5,6 +5,7 @@ import { Ilan, Dil } from "@/lib/tipler";
 import { fiyatYaz, m2FiyatYaz, tazelikYaz, sehirAdi, tipAdi, tapuAdi } from "@/lib/yardimci";
 import { t } from "@/lib/sozluk";
 import { useAyarlar } from "./Ayarlar";
+import { FavoriDugme } from "./Favoriler";
 
 /**
  * Kart tasarimi: Compass ve Airbnb ayni sonuca varmis — kart kabi yok.
@@ -42,8 +43,12 @@ export default function IlanKarti({ ilan, dil, oncelik = false }: { ilan: Ilan; 
             </span>
           )}
 
+          <span className="absolute right-2.5 top-2.5">
+            <FavoriDugme id={ilan.id} dil={dil} />
+          </span>
+
           {aiVar && (
-            <span className="rozet-foto absolute right-2.5 top-2.5 bg-white/92 text-terra-600">
+            <span className="rozet-foto absolute bottom-2.5 left-2.5 bg-white/92 text-terra-600">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M12 2l1.9 5.7L19.6 9l-5.7 1.9L12 16.6l-1.9-5.7L4.4 9l5.7-1.3L12 2z" />
               </svg>

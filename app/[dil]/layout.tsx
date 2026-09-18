@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Ayarlar from "@/components/Ayarlar";
 import Altbilgi from "@/components/Altbilgi";
+import DilAyarla from "@/components/DilAyarla";
 import { Dil } from "@/lib/tipler";
 import { t } from "@/lib/sozluk";
 
@@ -13,12 +14,17 @@ export default async function DilLayout(
 ) {
   const { dil } = await params;
   if (!["tr", "en", "ru"].includes(dil)) notFound();
+  const d = dil as Dil;
   return (
     <Ayarlar>
-      <a href="#icerik" className="atla">{t("iceriveAtla", dil as Dil)}</a>
-      <div className="flex min-h-dvh flex-col">
+      <DilAyarla dil={d} />
+      <a href="#icerik" className="atla">{t("iceriveAtla", d)}</a>
+      {/* lang burada: text-transform en yakin lang'e gore calisir.
+          Kok <html lang="tr"> sabit kaldigi icin EN/RU sayfalarda
+          buyuk harf etiketler Turkce kuralina gore bozuluyordu. */}
+      <div lang={d} className="flex min-h-dvh flex-col">
         <div className="flex-1">{children}</div>
-        <Altbilgi dil={dil as Dil} />
+        <Altbilgi dil={d} />
       </div>
     </Ayarlar>
   );

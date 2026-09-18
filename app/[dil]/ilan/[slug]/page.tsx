@@ -4,6 +4,9 @@ import Ustbilgi from "@/components/Ustbilgi";
 import Galeri from "@/components/Galeri";
 import AiTasarim from "@/components/AiTasarim";
 import EmlakciKarti from "@/components/EmlakciKarti";
+import DetayUst from "@/components/DetayUst";
+import MobilIletisim from "@/components/MobilIletisim";
+import Konum from "@/components/Konum";
 import IlanKarti from "@/components/IlanKarti";
 import { Fiyat } from "@/components/Fiyat";
 import { Dil } from "@/lib/tipler";
@@ -26,6 +29,14 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
   // Not: m2 fiyati sunucuda GBP olarak yazilir; para birimi secimi istemci tarafinda.
   const m2Fiyat = m2FiyatYaz(ilan.fiyat, ilan.m2, "GBP", dil);
 
+  const bolumler = [
+    { id: "bolum-tapu", ad: t("tapuTipi", dil) },
+    ...(ilan.aiTasarimlar?.length ? [{ id: "bolum-ai", ad: t("aiIleTasarlandi", dil) }] : []),
+    { id: "bolum-aciklama", ad: t("aciklama", dil) },
+    { id: "bolum-ozellikler", ad: t("ozellikler", dil) },
+    { id: "bolum-konum", ad: t("konum", dil) },
+  ];
+
   const kunye: [string, string][] = [
     [t("oda", dil), ilan.oda],
     [t("banyo", dil), String(ilan.banyo)],
@@ -40,8 +51,9 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
     <>
       <Ustbilgi dil={dil} />
       <div className="h-[68px]" />
+      <DetayUst ilan={ilan} dil={dil} bolumler={bolumler} />
 
-      <main id="icerik" className="kapsayici py-7">
+      <main id="icerik" className="kapsayici py-7 pb-28 lg:pb-7">
         <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-[12.5px] text-sis">
           <Link href={`/${dil}`} className="transition hover:text-terra-500">{t("marka", dil)}</Link><span>/</span>
           <Link href={`/${dil}/ilan?sehir=${encodeURIComponent(ilan.sehir)}`} className="transition hover:text-terra-500">{sehirAdi(ilan.sehir, dil)}</Link><span>/</span>
@@ -83,7 +95,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
             </div>
 
             {/* TAPU — farklilastirici */}
-            <section className="overflow-hidden rounded-xl border-2 border-deniz-100 bg-deniz-50">
+            <section id="bolum-tapu" className="overflow-hidden rounded-xl border-2 border-deniz-100 bg-deniz-50">
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4 px-5 py-4">
                 <div>
                   <p className="etiket text-deniz-500">{t("tapuTipi", dil)}</p>
@@ -111,11 +123,11 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
 
             {/* AI TASARIM */}
             {ilan.aiTasarimlar?.length ? (
-              <AiTasarim orijinal={ilan.aiOdaGorseli!} tasarimlar={ilan.aiTasarimlar} dil={dil} />
+              <div id="bolum-ai"><AiTasarim orijinal={ilan.aiOdaGorseli!} tasarimlar={ilan.aiTasarimlar} dil={dil} /></div>
             ) : null}
 
             {/* ACIKLAMA */}
-            <section>
+            <section id="bolum-aciklama">
               <h2 className="baslik mb-3 text-[22px] text-deniz-700">{t("aciklama", dil)}</h2>
               <p className="max-w-[70ch] text-[15px] leading-[1.75] text-murekkep/85">{ilan.aciklama[dil]}</p>
               {ilan.cevrilmis && dil !== "tr" && (
@@ -128,7 +140,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
             </section>
 
             {/* OZELLIKLER */}
-            <section>
+            <section id="bolum-ozellikler">
               <h2 className="baslik mb-3 text-[22px] text-deniz-700">{t("ozellikler", dil)}</h2>
               <div className="flex flex-wrap gap-2">
                 {ilan.ozellikler.map((o) => (
@@ -140,6 +152,8 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
                 ))}
               </div>
             </section>
+
+            <Konum dil={dil} bolge={ilan.bolge} sehir={ilan.sehir} konum={ilan.konum} />
 
             {/* KUNYE ALT */}
             <section className="rounded-xl border border-hat bg-white px-5 py-4 text-[13px]">
@@ -160,7 +174,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
           </div>
 
           {/* YAN SUTUN */}
-          <aside className="lg:sticky lg:top-[88px] lg:self-start">
+          <aside className="lg:sticky lg:top-[136px] lg:self-start">
             <EmlakciKarti e={e} dil={dil} />
           </aside>
         </div>
@@ -175,6 +189,8 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
           </section>
         )}
       </main>
+
+      <MobilIletisim ilan={ilan} e={e} dil={dil} />
     </>
   );
 }
