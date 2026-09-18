@@ -87,6 +87,46 @@ const S = {
   yabanciUygunDegil:{ tr: "Yabancı alımı kısıtlı", en: "Restricted for foreign buyers", ru: "Ограничено для иностранцев" },
   tapuNot:    { tr: "Bilgilendirme amaçlıdır, hukuki tavsiye değildir.", en: "For information only, not legal advice.", ru: "Только для информации, не юридическая консультация." },
 
+  // --- Sesli tur ---
+  sesliDinle:  { tr: "Açıklamayı dinle", en: "Listen to description", ru: "Прослушать описание" },
+  sesliDurdur: { tr: "Durdur", en: "Stop", ru: "Остановить" },
+  sesliNot: {
+    tr: "Rus ve İranlı alıcıların önemli kısmı yazılı İngilizceyi rahat okumuyor. Açıklama kendi dilinizde sesli okunur.",
+    en: "Many Russian and Iranian buyers don't read written English comfortably. The description is read aloud in your language.",
+    ru: "Описание озвучивается на вашем языке.",
+  },
+
+  // --- WhatsApp arama takibi ---
+  whatsappTakip: { tr: "Bu aramayı WhatsApp'tan takip et", en: "Follow this search on WhatsApp", ru: "Следить за поиском в WhatsApp" },
+  whatsappNot: {
+    tr: "KKTC'de e-posta ölü, herkes WhatsApp'ta. Rakipler arama bildirimini e-postayla yolluyor.",
+    en: "Email is dead in North Cyprus; everyone is on WhatsApp. Competitors send search alerts by email.",
+    ru: "В Северном Кипре все в WhatsApp, а не в почте.",
+  },
+  whatsappMesaj: { tr: "Merhaba, şu aramaya uyan yeni ilan çıkınca haber verir misiniz?", en: "Hello, could you notify me when a new listing matches this search?", ru: "Здравствуйте, сообщите, когда появится новое объявление по этому запросу?" },
+
+  // --- Goruntuleme rotasi ---
+  rotaBaslik: { tr: "Görüntüleme rotası", en: "Viewing route", ru: "Маршрут просмотра" },
+  rotaAlt: {
+    tr: "Yabancı alıcı iki günlüğüne uçakla gelip sekiz mülk geziyor. Favorileriniz coğrafi olarak sıraya dizildi.",
+    en: "Foreign buyers fly in for two days and view eight properties. Your saved listings are ordered geographically.",
+    ru: "Иностранные покупатели прилетают на два дня. Избранное упорядочено географически.",
+  },
+  rotaOlustur:  { tr: "Rota oluştur", en: "Build route", ru: "Построить маршрут" },
+  rotaKapat:    { tr: "Rotayı kapat", en: "Close route", ru: "Закрыть маршрут" },
+  rotaToplam:   { tr: "Toplam yol", en: "Total distance", ru: "Общее расстояние" },
+  rotaSure:     { tr: "Tahmini süre", en: "Estimated time", ru: "Ожидаемое время" },
+  rotaNot: {
+    tr: "Kuş uçuşu mesafeden hesaplanır; her görüntüleme için 30 dakika eklenir. Gerçek yol mesafesi harita ile Faz 1'de gelecek.",
+    en: "Calculated from straight-line distance, plus 30 minutes per viewing. Real driving distance arrives with the map in Phase 1.",
+    ru: "Рассчитано по прямой, плюс 30 минут на просмотр.",
+  },
+  saatKisa: { tr: "sa", en: "h", ru: "ч" },
+  dakKisa:  { tr: "dk", en: "min", ru: "мин" },
+
+  // --- Fiyat gecmisi ---
+  fiyatDustu: { tr: "Fiyat düştü", en: "Price reduced", ru: "Цена снижена" },
+
   // --- Kira getirisi ---
   getiriBaslik: { tr: "Yatırım getirisi", en: "Investment return", ru: "Доходность инвестиции" },
   getiriAlt: {

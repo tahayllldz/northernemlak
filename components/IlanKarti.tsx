@@ -64,6 +64,11 @@ export default function IlanKarti({ ilan, dil, oncelik = false }: { ilan: Ilan; 
             <p className="baslik text-[22px] leading-none text-deniz-700">
               {fiyatYaz(ilan.fiyat, para, dil)}
               {ilan.islem === "kiralik" && <span className="text-[13px] text-sis">{t("ayda", dil)}</span>}
+              {ilan.oncekiFiyat && (
+                <span className="ml-2 align-middle text-[13px] font-normal text-sis line-through">
+                  {fiyatYaz(ilan.oncekiFiyat, para, dil)}
+                </span>
+              )}
             </p>
             <span className="shrink-0 text-[12.5px] text-sis">
               {t(ilan.islem === "satilik" ? "satilik" : "kiralik", dil)} · {tipAdi(ilan.tip, dil)}

@@ -8,6 +8,7 @@ import IlanKarti from "./IlanKarti";
 import IlanIskelet from "./IlanIskelet";
 import { useFavoriler } from "./Favoriler";
 import Karsilastirma from "./Karsilastirma";
+import Rota from "./Rota";
 
 export default function FavoriListe({ dil }: { dil: Dil }) {
   const { favoriler, hazir } = useFavoriler();
@@ -37,6 +38,8 @@ export default function FavoriListe({ dil }: { dil: Dil }) {
 
   return (
     <>
+      <Rota ilanlar={liste} dil={dil} />
+
       {liste.length >= 2 && (
         <div className="mb-6 flex flex-wrap items-center gap-3">
           <button type="button" onClick={() => setKarsilastir((v) => !v)}

@@ -30,6 +30,28 @@ export default function Filtreler({ dil, adet }: { dil: Dil; adet: number }) {
   };
 
   const filtreSayisi = aktifFiltreSayisi(sp);
+
+  /**
+   * KKTC'de e-posta olu, herkes WhatsApp'ta. Rightmove/funda arama bildirimini
+   * e-postayla yolluyor; burada ayni ozellik dogru kanaldan veriliyor.
+   * Prototipte demo numaraya gider, Faz 1'de platform hattina baglanir.
+   */
+  const whatsappBaglanti = () => {
+    const parcalar: string[] = [];
+    if (g("islem")) parcalar.push(t(g("islem") === "kiralik" ? "kiralik" : "satilik", dil));
+    if (g("sehir")) parcalar.push(sehirAdi(g("sehir"), dil));
+    if (g("tip")) parcalar.push(tipAdi(g("tip"), dil));
+    if (g("tapu")) parcalar.push(`${t("tapuTipi", dil)}: ${g("tapu")}`);
+    if (g("oda")) parcalar.push(`${g("oda")}+ ${t("oda", dil).toLowerCase()}`);
+    if (g("min") || g("max")) parcalar.push(`£${g("min") || "0"}–${g("max") || "∞"}`);
+    for (const kod of secili) parcalar.push(ozellikAdi(kod, dil));
+    const ozet = parcalar.length ? parcalar.join(" · ") : t("tumIlanlarBaslik", dil);
+    const metin = `${t("whatsappMesaj", dil)}
+
+${ozet}
+${typeof window !== "undefined" ? window.location.href : ""}`;
+    return `https://wa.me/905338530080?text=${encodeURIComponent(metin)}`;
+  };
   const sayilar = sehirSayilari();
 
   return (
@@ -109,6 +131,14 @@ export default function Filtreler({ dil, adet }: { dil: Dil; adet: number }) {
               aria-pressed={!!g("yabanci")} className="cip-dugme">
               {t("yabanciUygun", dil)}
             </button>
+
+            <a href={whatsappBaglanti()} target="_blank" rel="noreferrer"
+              className="cip-dugme border-deniz-100 bg-deniz-50 text-deniz-700">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366" aria-hidden>
+                <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z" />
+              </svg>
+              {t("whatsappTakip", dil)}
+            </a>
 
             {HIZLI_OZELLIKLER.map((kod) => (
               <button key={kod} type="button" onClick={() => ozellikDegis(kod)}

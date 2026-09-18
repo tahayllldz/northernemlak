@@ -76,6 +76,7 @@ export interface Ilan {
   islem: IslemTipi;
   tip: EmlakTipi;
   fiyat: number;               // GBP
+  oncekiFiyat?: number;        // fiyat dustuyse eski deger (The Agency modeli)
   sehir: string;
   bolge: string;
   oda: string;

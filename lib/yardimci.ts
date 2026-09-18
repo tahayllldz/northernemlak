@@ -170,7 +170,7 @@ const ONEMLI_NOKTALAR: Record<string, { lat: number; lng: number }> = {
 const ERCAN = { lat: 35.1547, lng: 33.4961 };
 
 /** Haversine, km. */
-function kusUcusuKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+export function kusUcusuKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
   const R = 6371;
   const rad = (d: number) => (d * Math.PI) / 180;
   const dLat = rad(b.lat - a.lat), dLng = rad(b.lng - a.lng);

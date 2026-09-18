@@ -14,6 +14,7 @@ import GelistiriciKarti from "@/components/GelistiriciKarti";
 import Getiri from "@/components/Getiri";
 import Altyapi from "@/components/Altyapi";
 import BenzerUyari from "@/components/BenzerUyari";
+import SesliTur from "@/components/SesliTur";
 import SonBakilanlar, { SonBakilanKaydet } from "@/components/SonBakilanlar";
 import IlanKarti from "@/components/IlanKarti";
 import { Fiyat } from "@/components/Fiyat";
@@ -97,7 +98,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
                 </svg>
                 {ilan.bolge}, {sehirAdi(ilan.sehir, dil)}
               </p>
-              <div className="mt-4"><Fiyat gbp={ilan.fiyat} kiralik={ilan.islem === "kiralik"} dil={dil} buyuk /></div>
+              <div className="mt-4"><Fiyat gbp={ilan.fiyat} onceki={ilan.oncekiFiyat} kiralik={ilan.islem === "kiralik"} dil={dil} buyuk /></div>
             </div>
 
             {/* kunye */}
@@ -167,6 +168,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
             <section id="bolum-aciklama">
               <h2 className="baslik mb-3 text-[22px] text-deniz-700">{t("aciklama", dil)}</h2>
               <p className="max-w-[70ch] text-[15px] leading-[1.75] text-murekkep/85">{ilan.aciklama[dil]}</p>
+              <SesliTur metin={ilan.aciklama[dil]} dil={dil} />
               {ilan.cevrilmis && dil !== "tr" && (
                 <p className="mt-3 inline-flex items-center gap-1.5 rounded bg-kum-200 px-2.5 py-1 text-[11.5px] text-sis">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
