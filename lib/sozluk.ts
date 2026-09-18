@@ -87,6 +87,48 @@ const S = {
   yabanciUygunDegil:{ tr: "Yabancı alımı kısıtlı", en: "Restricted for foreign buyers", ru: "Ограничено для иностранцев" },
   tapuNot:    { tr: "Bilgilendirme amaçlıdır, hukuki tavsiye değildir.", en: "For information only, not legal advice.", ru: "Только для информации, не юридическая консультация." },
 
+  // --- Tapu zinciri ---
+  tapuZinciri:   { tr: "Tapu süreci", en: "Title process", ru: "Процесс оформления титула" },
+  tapuZinciriAlt:{
+    tr: "KKTC'de asıl soru tapunun tipi değil, sürecin neresinde olduğu. Bu mülk şu an burada:",
+    en: "In North Cyprus the real question isn't the deed type but where in the process it sits. This property is here:",
+    ru: "Главный вопрос — не тип титула, а стадия процесса. Этот объект находится здесь:",
+  },
+  asInsaat:       { tr: "İnşaat halinde", en: "Under construction", ru: "Строится" },
+  asKayit:        { tr: "Sözleşme tapuda kayıtlı", en: "Contract registered", ru: "Договор зарегистрирован" },
+  asIzinBekliyor: { tr: "Bakanlar Kurulu izni bekleniyor", en: "Awaiting Council of Ministers permit", ru: "Ожидание разрешения" },
+  asIzinAlindi:   { tr: "İzin alındı", en: "Permit granted", ru: "Разрешение получено" },
+  asDevredildi:   { tr: "Tapu satıcı adına", en: "Title in seller's name", ru: "Титул на имя продавца" },
+  tapuSureNot:    { tr: "Bu aşamadan sonra tipik bekleme", en: "Typical wait from this stage", ru: "Типичное ожидание с этой стадии" },
+  tapuAy:         { tr: "ay", en: "months", ru: "мес." },
+  tapuZinciriUyari:{
+    tr: "Süreler KKTC'de gözlemlenen tipik aralıklardır, taahhüt değildir. Her dosya farklı ilerler.",
+    en: "Durations are typical observed ranges in North Cyprus, not a commitment. Every file differs.",
+    ru: "Сроки — типичные наблюдаемые диапазоны, не обязательство.",
+  },
+
+  // --- Gelistirici sicili ---
+  gelistiriciBaslik:{ tr: "Geliştirici sicili", en: "Developer track record", ru: "История застройщика" },
+  gelistiriciAlt:{
+    tr: "Maketten alımda tek gerçek soru: teslim eder mi? İlan edilen teslim tarihi ile gerçekleşeni karşılaştırıyoruz.",
+    en: "The only real question when buying off-plan: will they deliver? We compare announced vs actual handover dates.",
+    ru: "Единственный реальный вопрос при покупке на стадии проекта: сдадут ли?",
+  },
+  kurulus:        { tr: "Kuruluş", en: "Founded", ru: "Основана" },
+  teslimEdilen:   { tr: "Teslim edilen proje", en: "Projects delivered", ru: "Сдано проектов" },
+  teslimKonut:    { tr: "Teslim edilen konut", en: "Units delivered", ru: "Сдано единиц" },
+  ortGecikme:     { tr: "Ortalama gecikme", en: "Average delay", ru: "Средняя задержка" },
+  devamEden:      { tr: "Devam eden proje", en: "Ongoing projects", ru: "Текущие проекты" },
+  gecikmeYok:     { tr: "Zamanında", en: "On time", ru: "Вовремя" },
+  sicilIyi:       { tr: "Güçlü sicil", en: "Strong record", ru: "Хорошая история" },
+  sicilOrta:      { tr: "Orta sicil", en: "Mixed record", ru: "Смешанная история" },
+  sicilZayif:     { tr: "Zayıf sicil", en: "Weak record", ru: "Слабая история" },
+  gelistiriciUyari:{
+    tr: "Veriler prototip demosudur. Gerçek sürümde yalnızca doğrulanabilir teslim tarihleri yayınlanır.",
+    en: "Data shown is a prototype demo. The live product publishes only verifiable handover dates.",
+    ru: "Данные — демонстрация прототипа.",
+  },
+
   ozellikler: { tr: "Özellikler", en: "Features", ru: "Особенности" },
   aciklama:   { tr: "Açıklama", en: "Description", ru: "Описание" },
   konum:      { tr: "Konum", en: "Location", ru: "Расположение" },

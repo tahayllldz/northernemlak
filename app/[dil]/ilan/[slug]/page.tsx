@@ -9,13 +9,15 @@ import MobilIletisim from "@/components/MobilIletisim";
 import Konum from "@/components/Konum";
 import Maliyet from "@/components/Maliyet";
 import Gezinti360 from "@/components/Gezinti360";
+import TapuZinciri from "@/components/TapuZinciri";
+import GelistiriciKarti from "@/components/GelistiriciKarti";
 import SonBakilanlar, { SonBakilanKaydet } from "@/components/SonBakilanlar";
 import IlanKarti from "@/components/IlanKarti";
 import { Fiyat } from "@/components/Fiyat";
 import { Dil } from "@/lib/tipler";
 import { t, ozellikAdi } from "@/lib/sozluk";
 import { ILANLAR } from "@/lib/veri";
-import { emlakciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz, odaYaz, alanYaz } from "@/lib/yardimci";
+import { emlakciBul, gelistiriciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz, odaYaz, alanYaz } from "@/lib/yardimci";
 
 export function generateStaticParams() {
   return ["tr", "en", "ru"].flatMap((dil) => ILANLAR.map((i) => ({ dil, slug: i.slug })));
@@ -27,6 +29,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
   const ilan = ilanBul(slug);
   if (!ilan) notFound();
   const e = emlakciBul(ilan.emlakci);
+  const gelistirici = gelistiriciBul(ilan.gelistirici);
 
   const benzer = ILANLAR.filter((x) => x.id !== ilan.id && (x.sehir === ilan.sehir || x.tip === ilan.tip)).slice(0, 4);
   // Not: m2 fiyati sunucuda GBP olarak yazilir; para birimi secimi istemci tarafinda.
@@ -34,6 +37,8 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
 
   const bolumler = [
     { id: "bolum-tapu", ad: t("tapuTipi", dil) },
+    { id: "bolum-tapu-zinciri", ad: t("tapuZinciri", dil) },
+    ...(gelistirici ? [{ id: "bolum-gelistirici", ad: t("gelistiriciBaslik", dil) }] : []),
     ...(ilan.gezinti360 ? [{ id: "bolum-360", ad: t("gezinti360", dil) }] : []),
     ...(ilan.aiTasarimlar?.length ? [{ id: "bolum-ai", ad: t("aiIleTasarlandi", dil) }] : []),
     { id: "bolum-maliyet", ad: t("maliyetBaslik", dil) },
@@ -126,6 +131,12 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
               </div>
               <p className="border-t border-deniz-100 px-5 py-2.5 text-[11.5px] text-deniz-500">{t("tapuNot", dil)}</p>
             </section>
+
+            {/* TAPU ZINCIRI — rakipte karsiligi yok */}
+            <TapuZinciri asama={ilan.tapuAsama} dil={dil} />
+
+            {/* GELISTIRICI SICILI — yalnizca proje / sifir konutlarda */}
+            {gelistirici && <GelistiriciKarti g={gelistirici} dil={dil} />}
 
             {/* TOPLAM MALIYET — rakipte karsiligi yok */}
             <Maliyet ilan={ilan} dil={dil} />

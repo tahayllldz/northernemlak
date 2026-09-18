@@ -14,6 +14,7 @@
 
 
 
+
 /* --- yerel dev aynasi: kaynaktan elle kopyalandi, Vercel derlemesinde yeniden uretilir --- */
 :root{--color-sis:#5A666F;--color-sis-acik:#8A949B;}
 .text-sis{color:#5A666F;}
@@ -302,6 +303,62 @@
 
   /* Yapiskan basliklarin altina cipa kaymasi (bolum baglantilari icin) */
   [id^="bolum-"] { scroll-margin-top: 132px; }
+
+  /* =================================================================
+     TAPU ZINCIRI
+     Yatay adim hatti; mobilde dikey. Rakipte karsiligi yok.
+     ================================================================= */
+  .zincir {
+    display: flex; flex-direction: column;
+    gap: 0; padding: 18px 20px;
+  }
+  .zincir-adim {
+    position: relative;
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0;
+  }
+  /* adimlar arasi dikey cizgi */
+  .zincir-adim:not(:last-child)::before {
+    content: ""; position: absolute;
+    left: 10px; top: 30px; bottom: -8px;
+    width: 2px; background: var(--color-kum-300);
+  }
+  .zincir-adim.gecildi:not(:last-child)::before { background: var(--color-deniz-300); }
+
+  .zincir-nokta {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex: none; width: 22px; height: 22px;
+    border-radius: 999px;
+    border: 2px solid var(--color-kum-300);
+    background: #fff; color: #fff;
+  }
+  .zincir-adim.gecildi .zincir-nokta {
+    background: var(--color-deniz-500);
+    border-color: var(--color-deniz-500);
+  }
+  .zincir-adim.aktif .zincir-nokta {
+    background: var(--color-terra-500);
+    border-color: var(--color-terra-500);
+    box-shadow: 0 0 0 4px rgba(196,102,58,.18);
+  }
+
+  .zincir-metin { font-size: 14px; color: var(--color-sis); }
+  .zincir-adim.gecildi .zincir-metin { color: var(--color-murekkep); }
+  .zincir-adim.aktif .zincir-metin { color: var(--color-terra-600); font-weight: 600; }
+
+  @media (min-width: 900px) {
+    .zincir { flex-direction: row; gap: 4px; }
+    .zincir-adim {
+      flex: 1; flex-direction: column; align-items: flex-start;
+      gap: 9px; padding: 0 12px 0 0;
+    }
+    .zincir-adim:not(:last-child)::before {
+      left: 26px; right: 4px; top: 10px; bottom: auto;
+      width: auto; height: 2px;
+    }
+    .zincir-metin { font-size: 12.5px; line-height: 1.35; }
+  }
 
   /* =================================================================
      360 GEZINTI

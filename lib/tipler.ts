@@ -24,6 +24,31 @@ export type OzellikKodu =
  *  propertyfinder.ae bunu danisman kartinda gosteriyor, rakipte yok. */
 export type KonusulanDil = "tr" | "en" | "ru" | "de" | "fa";
 
+/**
+ * TAPU ZINCIRI — mulkun su an sureclerin neresinde oldugu.
+ * KKTC'de asil soru tapunun tipi degil, nerede takildigi. Yabanci alici
+ * Bakanlar Kurulu iznini beklerken yillar gecebiliyor ve hicbir portal
+ * bunu gostermiyor.
+ */
+export type TapuAsama =
+  | "insaat"         // insaat halinde / maketten
+  | "kayit"          // sozlesme tapu dairesine kayitli, izin basvurusu yok
+  | "izin-bekliyor"  // Bakanlar Kurulu izni surecte
+  | "izin-alindi"    // izin cikti, devir bekliyor
+  | "devredildi";    // tapu satici adina, temiz devir
+
+/** Muteahhit sicili — maketten alicinin tek gercek sorusu: teslim eder mi? */
+export interface Gelistirici {
+  slug: string;
+  ad: string;
+  kurulusYili: number;
+  teslimEdilenProje: number;
+  teslimEdilenKonut: number;
+  ortalamaGecikmeAy: number;   // ilan edilen teslim vs gerceklesen
+  devamEdenProje: number;
+  sonTeslimYili: number;
+}
+
 export interface Emlakci {
   slug: string;
   ad: string;
@@ -61,6 +86,8 @@ export interface Ilan {
   toplamKat?: number;
   esyali: "esyali" | "esyasiz" | "yarı";
   tapu: TapuTipi;
+  tapuAsama: TapuAsama;
+  gelistirici?: string;        // slug — yalnizca proje/sifir konutlarda
   yabanciUygun: boolean;
   aidat?: number;              // GBP / ay
   kdvDahil: boolean;           // fiyata KDV dahil mi — KKTC alicisinin en buyuk surprizi

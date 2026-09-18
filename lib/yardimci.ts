@@ -1,5 +1,5 @@
 import { Dil, Ilan, OzellikKodu, TapuTipi } from "./tipler";
-import { EMLAKCILAR, ILANLAR } from "./veri";
+import { EMLAKCILAR, GELISTIRICILER, ILANLAR } from "./veri";
 import { t } from "./sozluk";
 
 export const KURLAR = { GBP: 1, EUR: 1.17, USD: 1.27, TRY: 61.8 } as const;
@@ -20,6 +20,7 @@ export function tapuAdi(tapu: TapuTipi, dil: Dil) {
 
 export const emlakciBul = (slug: string) => EMLAKCILAR.find((e) => e.slug === slug)!;
 export const ilanBul = (slug: string) => ILANLAR.find((i) => i.slug === slug);
+export const gelistiriciBul = (slug?: string) => (slug ? GELISTIRICILER.find((g) => g.slug === slug) : undefined);
 
 export const SEHIRLER = [...new Set(ILANLAR.map((i) => i.sehir))];
 export const TIPLER = [...new Set(ILANLAR.map((i) => i.tip))];
