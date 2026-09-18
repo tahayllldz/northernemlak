@@ -146,25 +146,8 @@ export default function Gezinti360({ kaynak, odalar, dil, baslik, tam360 = false
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-    const gorsel = new Image();
-    gorsel.crossOrigin = "anonymous";
-    gorsel.onload = () => {
-      gl.bindTexture(gl.TEXTURE_2D, doku);
-      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, gorsel);
-      setYukleniyor(false);
-    };
-    // Eniyileyici bir sebeple reddederse ham dosyaya dus; gezinti yine calissin.
-    let denendi = false;
-    gorsel.onerror = () => {
-      if (!denendi) { denendi = true; gorsel.src = aktifKaynak; return; }
-      setHata(true); setYukleniyor(false);
-    };
-    // Next'in eniyileyicisi ayni kaynaktan WebP dondurur.
-    // q yalnizca 75 olabilir (Next 16 varsayilan images.qualities); 80 -> HTTP 400.
-    gorsel.src = `/_next/image?url=${encodeURIComponent(aktifKaynak)}&w=2048&q=75`;
-
     let calisiyor = true;
+    let devam = true;
     let sonZaman = performance.now();
 
     const ciz = (zaman: number) => {
@@ -193,9 +176,32 @@ export default function Gezinti360({ kaynak, odalar, dil, baslik, tam360 = false
       gl.uniform1f(u.en, en);
       gl.uniform1f(u.boy, boy);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
+      if (devam) requestAnimationFrame(ciz);
+    };
+
+    const gorsel = new Image();
+    gorsel.crossOrigin = "anonymous";
+    gorsel.onload = () => {
+      gl.bindTexture(gl.TEXTURE_2D, doku);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, gorsel);
+      setYukleniyor(false);
+      // Ilk kareyi requestAnimationFrame'i beklemeden ciz: arka plan sekmelerinde
+      // ve ekran goruntusu alan araclarda rAF donduruluyor, tuval bos kaliyordu.
+      devam = false;
+      ciz(performance.now());
+      devam = true;
       requestAnimationFrame(ciz);
     };
-    requestAnimationFrame(ciz);
+    // Eniyileyici bir sebeple reddederse ham dosyaya dus; gezinti yine calissin.
+    let denendi = false;
+    gorsel.onerror = () => {
+      if (!denendi) { denendi = true; gorsel.src = aktifKaynak; return; }
+      setHata(true); setYukleniyor(false);
+    };
+    // Next'in eniyileyicisi ayni kaynaktan WebP dondurur.
+    // q yalnizca 75 olabilir (Next 16 varsayilan images.qualities); 80 -> HTTP 400.
+    gorsel.src = `/_next/image?url=${encodeURIComponent(aktifKaynak)}&w=2048&q=75`;
 
     return () => { calisiyor = false; gl.deleteTexture(doku); gl.deleteBuffer(tampon); gl.deleteProgram(program); };
   }, [aktifKaynak, tam360]);
