@@ -13,7 +13,7 @@ export default async function EmlakciListe({ params }: { params: Promise<{ dil: 
     <>
       <Ustbilgi dil={dil} />
       <div className="h-[68px]" />
-      <main className="kapsayici py-10">
+      <main id="icerik" className="kapsayici py-10">
         <h1 className="baslik mb-2 text-[32px] text-deniz-700">{t("emlakcilar", dil)}</h1>
         <p className="mb-8 max-w-[56ch] text-[14.5px] text-sis">{t("neden1Metin", dil)}</p>
 

@@ -32,19 +32,19 @@ export default function Filtreler({ dil, adet }: { dil: Dil; adet: number }) {
           ))}
         </div>
 
-        <select value={g("sehir")} onChange={(e) => ayarla("sehir", e.target.value)} className={kutu}>
+        <select aria-label={t("tumSehirler", dil)} value={g("sehir")} onChange={(e) => ayarla("sehir", e.target.value)} className={kutu}>
           <option value="">{t("tumSehirler", dil)}</option>
           {SEHIRLER.map((s) => <option key={s} value={s}>{sehirAdi(s, dil)}</option>)}
         </select>
 
-        <select value={g("tip")} onChange={(e) => ayarla("tip", e.target.value)} className={kutu}>
+        <select aria-label={t("tumTipler", dil)} value={g("tip")} onChange={(e) => ayarla("tip", e.target.value)} className={kutu}>
           <option value="">{t("tumTipler", dil)}</option>
           {TIPLER.map((x) => <option key={x} value={x}>{tipAdi(x, dil)}</option>)}
         </select>
 
         <input value={g("max")} onChange={(e) => ayarla("max", e.target.value.replace(/\D/g, ""))}
-          placeholder={`${t("enCok", dil)} £`} inputMode="numeric"
-          className={`${kutu} w-[110px] cursor-text placeholder:text-kum-400`} />
+          placeholder={`${t("enCok", dil)} £`} inputMode="numeric" aria-label={`${t("enCok", dil)} £`}
+          className={`${kutu} w-[110px] cursor-text placeholder:text-sis`} />
 
         <button onClick={() => ayarla("ai", g("ai") ? "" : "1")}
           className={`flex items-center gap-1.5 rounded-md border px-3.5 py-2 text-[13px] font-medium transition
@@ -64,7 +64,7 @@ export default function Filtreler({ dil, adet }: { dil: Dil; adet: number }) {
 
         <div className="ml-auto flex items-center gap-3">
           <span className="text-[13px] text-sis"><b className="font-semibold text-murekkep">{adet}</b> {t("sonuc", dil)}</span>
-          <select value={g("sirala")} onChange={(e) => ayarla("sirala", e.target.value)} className={kutu}>
+          <select aria-label={t("sirala", dil)} value={g("sirala")} onChange={(e) => ayarla("sirala", e.target.value)} className={kutu}>
             <option value="">{t("sonEklenen", dil)}</option>
             <option value="fiyat-artan">{t("fiyatArtan", dil)}</option>
             <option value="fiyat-azalan">{t("fiyatAzalan", dil)}</option>

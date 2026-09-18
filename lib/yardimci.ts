@@ -44,6 +44,28 @@ export const SEHIR_ADI: Record<string, Record<Dil, string>> = {
 export const sehirAdi = (s: string, dil: Dil) => SEHIR_ADI[s]?.[dil] ?? s;
 export const tipAdi = (tip: string, dil: Dil) => TIP_ADI[tip]?.[dil] ?? tip;
 
+/** m2 birim fiyati. Yatirimcinin tek karsilastirma metrigi; rakipte yok. */
+export function m2FiyatYaz(gbp: number, m2: number, para: ParaBirimi = "GBP", dil: Dil = "tr") {
+  if (!m2 || m2 <= 0) return null;
+  const deger = Math.round((gbp * KURLAR[para]) / m2);
+  const yerel = dil === "tr" ? "tr-TR" : dil === "ru" ? "ru-RU" : "en-GB";
+  return `${SIMGE[para]}${deger.toLocaleString(yerel)}/m²`;
+}
+
+/** Mutlak tarih yerine goreli tazelik: "12 gun once". Guven sinyali. */
+export function tazelikYaz(iso: string, dil: Dil, bugun = new Date()) {
+  const gun = Math.max(0, Math.floor((bugun.getTime() - new Date(iso).getTime()) / 86_400_000));
+  if (gun === 0) return t("bugunEklendi", dil);
+  if (gun === 1) return t("dunEklendi", dil);
+  if (gun < 14) return `${gun} ${t("gunOnce", dil)}`;
+  if (gun < 60) return `${Math.floor(gun / 7)} ${t("haftaOnce", dil)}`;
+  return `${Math.floor(gun / 30)} ${t("ayOnce", dil)}`;
+}
+
+/** Ilan 30 gunden eskiyse tazeleme dongusu icin isaret (CLAUDE.md Faz 1). */
+export const bayatMi = (iso: string, bugun = new Date()) =>
+  (bugun.getTime() - new Date(iso).getTime()) / 86_400_000 > 30;
+
 export function tarihYaz(iso: string, dil: Dil) {
   const d = new Date(iso);
   return d.toLocaleDateString(dil === "tr" ? "tr-TR" : dil === "ru" ? "ru-RU" : "en-GB",

@@ -32,7 +32,7 @@ export default function EmlakciKarti({ e, dil }: { e: Emlakci; dil: Dil }) {
           </span>
         )}
       </div>
-      <p className="mt-2 font-mono text-[10.5px] tracking-tight text-kum-400">{e.ruhsatNo}</p>
+      <p className="mt-2 font-mono text-[10.5px] tracking-tight text-sis">{e.ruhsatNo}</p>
 
       <div className="mt-4 space-y-2">
         <button onClick={() => setAcik(true)}

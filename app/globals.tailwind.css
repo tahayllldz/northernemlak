@@ -22,7 +22,10 @@
   --color-terra-600: #A5502B;
 
   --color-murekkep: #1C2024;
-  --color-sis:      #6B7780;
+  /* sis: kum-100 zemininde 4.05:1 idi (WCAG AA'da kaliyordu) -> 5.19:1 */
+  --color-sis:      #5A666F;
+  /* yalnizca buyuk/dekoratif metin icin, govde metninde kullanma */
+  --color-sis-acik: #8A949B;
   --color-hat:      #E4DDD1;
 
   --font-baslik: "Playfair Display Variable", Georgia, serif;
@@ -64,3 +67,97 @@ h1, h2, h3, .baslik { font-family: var(--font-baslik); font-weight: 500; letter-
 
 @keyframes belir { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .belir { animation: belir .5s cubic-bezier(.2,.7,.3,1) both; }
+
+/* =================================================================
+   ERISILEBILIRLIK
+   ================================================================= */
+
+/* Odak halkasi. Onceden hic yoktu; klavyeyle gezen kullanici
+   nerede oldugunu goremiyordu. */
+:focus-visible {
+  outline: 2px solid var(--color-terra-500);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+/* Fare ile tiklamada halka cikmasin */
+:focus:not(:focus-visible) { outline: none; }
+
+/* Hareket azaltma tercihi */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ekran okuyucuya gorunur, goze gorunmez */
+.gizli-metin {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Icerige atla baglantisi */
+.atla {
+  position: absolute; left: 12px; top: -60px; z-index: 100;
+  background: var(--color-deniz-700); color: var(--color-kum-50);
+  padding: 10px 16px; border-radius: 6px; font-size: 14px;
+  transition: top .15s ease;
+}
+.atla:focus { top: 12px; }
+
+/* =================================================================
+   ILAN KARTI — Compass / Airbnb modeli
+   Kart kabi yok: govde yok, cerceve yok, golge yok. Fotograf karttir.
+   ================================================================= */
+
+.kart-medya {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--color-kum-200);
+}
+.kart-foto {
+  object-fit: cover;
+  transition: transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.kart:hover .kart-foto,
+.kart:focus-visible .kart-foto { transform: scale(1.035); }
+
+/* Fotograf ustundeki tek satirlik rozet */
+.rozet-foto {
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: 4px; padding: 4px 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: .04em;
+  backdrop-filter: blur(4px);
+}
+
+/* "Temsili gorsel" damgasi — CLAUDE.md geregi her yerde gorunur kalir */
+.damga {
+  position: absolute; right: 8px; bottom: 8px;
+  border-radius: 3px; padding: 2px 6px;
+  background: rgba(0,0,0,.42); color: rgba(255,255,255,.82);
+  font-size: 9px; text-transform: uppercase; letter-spacing: .1em;
+  backdrop-filter: blur(4px);
+}
+
+/* Kucuk bilgi cipi (tapu tipi, ozellik, filtre) */
+.cip {
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1px solid var(--color-hat);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 11.5px; line-height: 1.5;
+  color: var(--color-deniz-700);
+  background: #fff;
+  white-space: nowrap;
+}
+.cip-tapu { border-color: var(--color-deniz-100); background: var(--color-deniz-50); }
+.cip-uyari { border-color: var(--color-terra-100); background: #FDF4F0; color: var(--color-terra-600); }
+
+/* Kartin ince ayirici cizgisi */
+.kart-ayirac { border-top: 1px solid var(--color-hat); }

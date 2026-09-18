@@ -28,7 +28,7 @@ export default async function AnaSayfa({ params }: { params: Promise<{ dil: stri
       <Ustbilgi dil={dil} seffaf />
 
       {/* KAHRAMAN */}
-      <section className="relative min-h-[660px] overflow-hidden md:min-h-[760px]">
+      <section id="icerik" className="relative min-h-[660px] overflow-hidden md:min-h-[760px]">
         <Image src="/gorsel/ilan/ilan-07.webp" alt="" fill priority sizes="100vw"
           className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-br from-deniz-900/88 via-deniz-900/62 to-deniz-700/30" />
@@ -135,7 +135,7 @@ export default async function AnaSayfa({ params }: { params: Promise<{ dil: stri
               {t("tumIlanlar", dil)}
             </Link>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
             {oneCikan.map((i, n) => <IlanKarti key={i.id} ilan={i} dil={dil} oncelik={n < 3} />)}
           </div>
         </div>

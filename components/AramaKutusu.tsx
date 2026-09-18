@@ -58,7 +58,7 @@ export default function AramaKutusu({ dil, buyuk = false }: { dil: Dil; buyuk?: 
           <span className="etiket mb-0.5 block text-sis">{t("enCok", dil)} (£)</span>
           <input value={max} onChange={(e) => setMax(e.target.value.replace(/\D/g, ""))}
             inputMode="numeric" placeholder="500000"
-            className="w-full bg-transparent text-[14px] text-murekkep outline-none placeholder:text-kum-400" />
+            className="w-full bg-transparent text-[14px] text-murekkep outline-none placeholder:text-sis" />
         </label>
 
         <button type="submit"

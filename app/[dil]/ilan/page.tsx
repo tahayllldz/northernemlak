@@ -29,16 +29,25 @@ export default async function ListeSayfasi({
         <Filtreler dil={dil} adet={liste.length} />
       </Suspense>
 
-      <main className="kapsayici py-8">
+      <main id="icerik" className="kapsayici py-8">
         <h1 className="baslik mb-6 text-[28px] text-deniz-700">{baslik}</h1>
         {liste.length === 0 ? (
           <div className="rounded-lg border border-hat bg-white py-20 text-center">
             <p className="text-[15px] text-sis">{t("sonucYok", dil)}</p>
           </div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {liste.map((i, n) => <IlanKarti key={i.id} ilan={i} dil={dil} oncelik={n < 4} />)}
-          </div>
+          <>
+            <div className="grid gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {liste.map((i, n) => <IlanKarti key={i.id} ilan={i} dil={dil} oncelik={n < 4} />)}
+            </div>
+
+            {/* Ucretli yerlesim ifsasi — funda.nl yapiyor, 101evler yapmiyor. */}
+            {liste.some((i) => i.vitrin) && (
+              <p className="mt-10 max-w-[70ch] border-t border-hat pt-4 text-[12px] leading-relaxed text-sis">
+                {t("vitrinIfsa", dil)}
+              </p>
+            )}
+          </>
         )}
       </main>
     </>

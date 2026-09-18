@@ -33,6 +33,12 @@ const S = {
   fiyatAzalan:{ tr: "Fiyat (azalan)", en: "Price (high to low)", ru: "Цена (по убыванию)" },
 
   vitrin:      { tr: "Vitrin", en: "Featured", ru: "Рекомендуем" },
+  oneCikarilmis: { tr: "Öne çıkarılmış", en: "Promoted", ru: "Продвигаемое" },
+  vitrinIfsa:  {
+    tr: "“Öne çıkarılmış” ilanlar emlakçı tarafından ücretli olarak öne alınmıştır ve sıralamayı etkiler.",
+    en: "“Promoted” listings are paid placements by the agent and affect ranking.",
+    ru: "«Продвигаемые» объявления оплачены агентом и влияют на порядок выдачи.",
+  },
   oneCikanlar: { tr: "Öne çıkan ilanlar", en: "Featured listings", ru: "Рекомендуемые объявления" },
   tumIlanlar:  { tr: "Tüm ilanları gör", en: "See all listings", ru: "Все объявления" },
   aiIleTasarlandi: { tr: "AI tasarım mevcut", en: "AI design available", ru: "Доступен AI-дизайн" },
@@ -47,6 +53,14 @@ const S = {
   yari:   { tr: "Yarı eşyalı", en: "Part furnished", ru: "Частично меблирована" },
   aidat:  { tr: "Site aidatı", en: "Site fee", ru: "Взнос за обслуживание" },
   ayda:   { tr: "/ay", en: "/mo", ru: "/мес" },
+  m2Fiyat:{ tr: "m² birim fiyatı", en: "Price per m²", ru: "Цена за м²" },
+
+  bugunEklendi: { tr: "Bugün eklendi", en: "Added today", ru: "Добавлено сегодня" },
+  dunEklendi:   { tr: "Dün eklendi", en: "Added yesterday", ru: "Добавлено вчера" },
+  gunOnce:      { tr: "gün önce", en: "days ago", ru: "дн. назад" },
+  haftaOnce:    { tr: "hafta önce", en: "weeks ago", ru: "нед. назад" },
+  ayOnce:       { tr: "ay önce", en: "months ago", ru: "мес. назад" },
+  yayindaSure:  { tr: "Yayında", en: "Listed", ru: "В продаже" },
 
   tapuTipi:   { tr: "Tapu tipi", en: "Title deed", ru: "Тип титула" },
   turkKocani: { tr: "Türk Koçanı", en: "Turkish Title", ru: "Турецкий титул" },
@@ -81,6 +95,10 @@ const S = {
   benzerIlanlar:  { tr: "Benzer ilanlar", en: "Similar listings", ru: "Похожие объявления" },
 
   temsiliGorsel: { tr: "Temsilî görsel", en: "Stock image", ru: "Иллюстрация" },
+  foto:          { tr: "Fotoğraf", en: "Photo", ru: "Фото" },
+  oncekiFoto:    { tr: "Önceki fotoğraf", en: "Previous photo", ru: "Предыдущее фото" },
+  sonrakiFoto:   { tr: "Sonraki fotoğraf", en: "Next photo", ru: "Следующее фото" },
+  iceriveAtla:   { tr: "İçeriğe atla", en: "Skip to content", ru: "Перейти к содержимому" },
   prototipUyari: { tr: "Prototip — ilanlar ve görseller temsilîdir", en: "Prototype — listings and images are illustrative", ru: "Прототип — объявления и изображения иллюстративны" },
 
   neden1Baslik: { tr: "Tapu şeffaflığı", en: "Title transparency", ru: "Прозрачность титула" },

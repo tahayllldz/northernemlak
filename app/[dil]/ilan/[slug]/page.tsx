@@ -9,7 +9,7 @@ import { Fiyat } from "@/components/Fiyat";
 import { Dil } from "@/lib/tipler";
 import { t } from "@/lib/sozluk";
 import { ILANLAR } from "@/lib/veri";
-import { emlakciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz } from "@/lib/yardimci";
+import { emlakciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz } from "@/lib/yardimci";
 
 export function generateStaticParams() {
   return ["tr", "en", "ru"].flatMap((dil) => ILANLAR.map((i) => ({ dil, slug: i.slug })));
@@ -23,11 +23,14 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
   const e = emlakciBul(ilan.emlakci);
 
   const benzer = ILANLAR.filter((x) => x.id !== ilan.id && (x.sehir === ilan.sehir || x.tip === ilan.tip)).slice(0, 4);
+  // Not: m2 fiyati sunucuda GBP olarak yazilir; para birimi secimi istemci tarafinda.
+  const m2Fiyat = m2FiyatYaz(ilan.fiyat, ilan.m2, "GBP", dil);
 
   const kunye: [string, string][] = [
     [t("oda", dil), ilan.oda],
     [t("banyo", dil), String(ilan.banyo)],
     [t("alan", dil), `${ilan.m2} m²`],
+    ...(ilan.islem === "satilik" && m2Fiyat ? [[t("m2Fiyat", dil), m2Fiyat] as [string, string]] : []),
     [t("binaYasi", dil), ilan.binaYasi === 0 ? "—" : String(ilan.binaYasi)],
     [t("esyaDurumu", dil), t(ilan.esyali === "esyali" ? "esyali" : ilan.esyali === "esyasiz" ? "esyasiz" : "yari", dil)],
     ...(ilan.aidat ? [[t("aidat", dil), `£${ilan.aidat}${t("ayda", dil)}`] as [string, string]] : []),
@@ -38,12 +41,12 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
       <Ustbilgi dil={dil} />
       <div className="h-[68px]" />
 
-      <main className="kapsayici py-7">
+      <main id="icerik" className="kapsayici py-7">
         <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-[12.5px] text-sis">
           <Link href={`/${dil}`} className="transition hover:text-terra-500">{t("marka", dil)}</Link><span>/</span>
           <Link href={`/${dil}/ilan?sehir=${encodeURIComponent(ilan.sehir)}`} className="transition hover:text-terra-500">{sehirAdi(ilan.sehir, dil)}</Link><span>/</span>
           <span className="text-murekkep">{ilan.bolge}</span>
-          <span className="ml-auto font-mono text-kum-400">#{ilan.id}</span>
+          <span className="ml-auto font-mono text-sis">#{ilan.id}</span>
         </nav>
 
         <div className="grid gap-8 lg:grid-cols-[1fr_336px]">
@@ -142,15 +145,15 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
             <section className="rounded-xl border border-hat bg-white px-5 py-4 text-[13px]">
               <div className="grid gap-x-8 gap-y-2.5 sm:grid-cols-3">
                 {[[t("ilanNo", dil), `#${ilan.id}`],
-                  [t("yayin", dil), tarihYaz(ilan.yayinTarihi, dil)],
-                  [t("guncelleme", dil), tarihYaz(ilan.guncelleme, dil)]].map(([k, v]) => (
+                  [t("yayin", dil), `${tazelikYaz(ilan.yayinTarihi, dil)} · ${tarihYaz(ilan.yayinTarihi, dil)}`],
+                  [t("guncelleme", dil), `${tazelikYaz(ilan.guncelleme, dil)} · ${tarihYaz(ilan.guncelleme, dil)}`]].map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-3 sm:block">
                     <span className="text-sis">{k}</span>
                     <span className="font-medium text-murekkep sm:mt-0.5 sm:block">{v}</span>
                   </div>
                 ))}
               </div>
-              <p className="mt-3 border-t border-hat pt-3 text-[12px] text-kum-400">
+              <p className="mt-3 border-t border-hat pt-3 text-[12px] text-sis">
                 {ilan.goruntulenme.toLocaleString("tr-TR")} {t("goruntulenme", dil)}
               </p>
             </section>
@@ -166,7 +169,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
         {benzer.length > 0 && (
           <section className="mt-16">
             <h2 className="baslik mb-5 text-[24px] text-deniz-700">{t("benzerIlanlar", dil)}</h2>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
               {benzer.map((b) => <IlanKarti key={b.id} ilan={b} dil={dil} />)}
             </div>
           </section>

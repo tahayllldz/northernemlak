@@ -19,7 +19,7 @@ Faz 1'e müşteri "evet" demeden başlama.
 | Konu | Karar |
 |---|---|
 | Tasarım yönü | **Akdeniz Editoryal** — Compass / Sotheby's hissi, 101evler'in zıddı |
-| Palet | kum `#F5F0E8` · derin deniz `#1B4D5C` · terrakota `#C4663A` · mürekkep `#1C2024` · sis `#6B7780` |
+| Palet | kum `#F5F0E8` · derin deniz `#1B4D5C` · terrakota `#C4663A` · mürekkep `#1C2024` · sis `#5A666F` |
 | Tipografi | Playfair Display (başlık, serif) + Inter (gövde). `@fontsource-variable`, Google Fonts CDN değil |
 | Kart | 4:3 büyük fotoğraf, minimal metin, altında fiyat. Fotoğraf birinci sınıf vatandaş |
 | Diller | Prototip TR/EN/RU · tam sürüm +DE, FA (RTL), PL |
@@ -33,7 +33,13 @@ Faz 1'e müşteri "evet" demeden başlama.
 - Değişken, fonksiyon, dosya adları **Türkçe** (`ilanlariSuz`, `fiyatYaz`, `sozluk.ts`).
   Framework API'leri İngilizce kalır. Tutarlılığı bozma.
 - Next.js App Router, `params` bir **Promise** — `await params`.
-- Tailwind 4, tokenlar `app/globals.css` içinde `@theme` bloğunda. Rastgele hex kullanma.
+- Tailwind 4. **Kaynak `app/globals.tailwind.css`**, `@theme` bloğu orada.
+  `app/globals.css` üretilmiş çıktıdır, elle düzenlenmez — `npm run css` üretir ve
+  `npm run build` içinde otomatik çalışır (Vercel'de sorunsuz). Bu makinede Application
+  Control `.node` ikililerini engellediği için yerelde derlenemez; depodaki kopya
+  yalnızca `npm run dev` için fallback'tir. Rastgele hex kullanma.
+- Fontlar `app/layout.tsx` içinde JS import ile gelir (`@fontsource-variable/...`),
+  CSS `@import` ile değil — derleme sonrası elle geri ekleme derdi böylece bitti.
 - Metinler `lib/sozluk.ts` içinde, `t("anahtar", dil)` ile. Sayfaya sabit metin yazma.
 - Görseller `next/image`. Sürüklenebilir alanlarda `draggable={false}` + `pointer-events-none`
   (sürükleme, fare olaylarını yutuyor — AiTasarim'da bu yüzden Pointer Events kullanıldı).
@@ -65,6 +71,24 @@ veritabanı (şu an `lib/veri.ts` statik — Supabase/Postgres'e taşınacak).
 - Mükerrer ilan tespiti (perceptual hash)
 - XML/CSV toplu ilan aktarımı — emlakçının **kendi** portföyü (rakip siteden çekme yok, ToS ihlali)
 - 30 günlük ilan tazeleme döngüsü
+
+## Sonradan alınan kararlar (18 Eylül 2026 — arayüz turu)
+
+- **`sis` tonu `#6B7780` → `#5A666F` koyulaştırıldı.** Eski ton sayfanın asıl zemini
+  olan `kum-100` üstünde 4.05:1 veriyordu, WCAG AA'da kalıyordu. Yeni ton 5.19:1.
+  Palet yönü değişmedi, sadece erişilebilirlik eşiği geçildi. `kum-400` artık **metin
+  rengi olarak kullanılmaz** (beyaz üstünde 2.0:1) — yalnızca kenarlık/zemin.
+- **İlan kartında kap yok.** Gölge, çerçeve ve yükselme hareketi kaldırıldı; fotoğraf
+  karttır (Compass + Airbnb modeli). Fotoğraf üstünde en fazla iki rozet + zorunlu
+  "temsilî" damgası. Yeniden gölge/çerçeve ekleme.
+- **Kartta tapu tipi görünür.** Rakibin yapısal tapu alanı yok, bilgiyi başlığa CAPS
+  LOCK'la sıkıştırıyor. Kart üstündeki tapu çipi ürünün tek en güçlü farkı — kaldırma.
+  Yabancı kısıtı **yalnızca kısıtlıyken** gösterilir (olumsuz bilgi şaşırtıcı olandır).
+- **Ücretli yerleşim ifşası zorunlu.** `vitrin` ilanlar "Öne çıkarılmış" etiketi taşır
+  ve liste altında bir cümlelik ifşa notu görünür (funda.nl modeli). Kaldırma.
+- Erişilebilirlik tabanı: `:focus-visible` halkası, `prefers-reduced-motion`,
+  "içeriğe atla" bağlantısı, `#icerik` çıpası. Bozma.
+- Detaylı gerekçeler: `analiz/arayuz-analizi.md`.
 
 ## Uyarılar
 
