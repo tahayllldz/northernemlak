@@ -48,7 +48,8 @@ fallback kopyadır. Kaynağa stil eklersen o kopyaya da yansıt.
 yatırım getirisi (üniversite dönemi mevsimselliği) · mükerrer ilan şeffaflığı ·
 altyapı hazırlığı · sesli ilan turu · WhatsApp arama takibi · görüntüleme rotası
 
-Gerekçeleri ve hangisinin rakipte olup olmadığı: 
+Gerekçeleri ve hangisinin rakipte olup olmadığı: [analiz/arayuz-analizi.md](analiz/arayuz-analizi.md)
+
 ## Notlar
 
 - Tüm görseller **temsilîdir** (Pexels). Gerçek mülkleri yansıtmaz.
