@@ -20,6 +20,7 @@ const S = {
 
   ara:        { tr: "Ara", en: "Search", ru: "Поиск" },
   tumSehirler:{ tr: "Tüm bölgeler", en: "All regions", ru: "Все регионы" },
+  emlakTipi:  { tr: "Emlak tipi", en: "Property type", ru: "Тип недвижимости" },
   tumTipler:  { tr: "Tüm tipler", en: "All types", ru: "Все типы" },
   fiyatAralik:{ tr: "Fiyat aralığı", en: "Price range", ru: "Цена" },
   enAz:       { tr: "En az", en: "Min", ru: "От" },

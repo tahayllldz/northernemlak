@@ -490,6 +490,17 @@ Canlı: **https://northernemlak.vercel.app**
 - Tailwind derlemesi `npm run build`'e bağlandı; Vercel Linux'ta derliyor, yerel
   Application Control engeli artık iş akışını kesmiyor.
 
+### İkinci turda eklenenler
+
+| İş | Neden |
+|---|---|
+| **Toplam maliyet hesabı** | Bölüm 1.9'daki özgün tespit. KDV + tapu devir harcı + damga pulu + avukat + satın alma izni. £745.000 ilan → **£795.425** tahmini toplam. Rakipte hiç yok. Oranlar görünür ve uyarılı. |
+| **Karşılaştırma tablosu** | Favorilerin devamı olarak; farklı olan satırlar koyu zeminde işaretli (alıcı farkı arar, aynıyı değil). Karta yeni kontrol eklemeden. |
+| **Son incelediğiniz ilanlar** | 101evler'de sağ sütunda var; emlak kararı haftalar sürüyor. |
+| **Çift para birimi** | Fiyatın altında hep ikincil satır: £ seçiliyse ₺, değilse £. Satıcı ₺ düşünüyor, alıcı £. |
+| **Dönüm / evlek gösterimi** | Arsa ilanlarında `3,2 dönüm · 4.280 m²`. 101evler bunun için ayrı bir çevirici araç koymuş. |
+| **404 sayfaları** | Kök 404 (geçersiz dil kodu) ve ilan bulunamadı, üç dilde. |
+
 ### Yapılmadı (bilinçli)
 
 - **Proje / maketten satış katmanı** — Faz 1. Prototip kapsamını aşıyor, ama en büyük boşluk.

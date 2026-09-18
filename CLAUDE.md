@@ -101,6 +101,14 @@ veritabanı (şu an `lib/veri.ts` statik — Supabase/Postgres'e taşınacak).
   kuralı İngilizce etiketleri bozuyordu. Kaldırma.
 - **Favoriler prototip illüzyonudur** — sadece localStorage, cihaz bazlı.
   Müşteriye "favoriler çalışıyor" denmez; sayfada da bunu söyleyen bir not var.
+- **Toplam maliyet hesabı** (`lib/maliyet.ts` + `components/Maliyet.tsx`) — ilan
+  fiyatının üstüne binen KDV, tapu devir harcı, damga pulu, avukat, satın alma izni.
+  **Oranlar prototip varsayılanıdır, yayın öncesi KKTC avukatına doğrulatılmalı**
+  ve Faz 1'de yönetim panelinden düzenlenebilir olmalı. Arayüz bu belirsizliği
+  saklamıyor: her kalem oranıyla görünür, "tahmini" ibaresi ve uyarı metni duruyor.
+  `Ilan.kdvDahil` zorunlu alan — emlakçı beyan eder.
+- **Karşılaştırma favorilerin devamı**, kartın üstünde ayrı bir kontrol değil.
+  Kart sade kalsın diye bilerek böyle; karta "karşılaştır" kutusu ekleme.
 - Detaylı gerekçeler: `analiz/arayuz-analizi.md`.
 
 ## Yayın

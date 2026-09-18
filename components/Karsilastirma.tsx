@@ -26,7 +26,7 @@ export default function Karsilastirma({ ilanlar, dil }: { ilanlar: Ilan[]; dil: 
     { ad: t("toplamOdeme", dil), degerler: ilanlar.map((i) => yaz(maliyetHesapla(i, dil, { ilkAlimHakki: false, yabanciAlici: true }).toplam)) },
     { ad: t("m2Fiyat", dil), degerler: ilanlar.map((i) => m2FiyatYaz(i.fiyat, i.m2, para, dil) ?? "—") },
     { ad: t("konum", dil), degerler: ilanlar.map((i) => `${i.bolge}, ${sehirAdi(i.sehir, dil)}`) },
-    { ad: t("tumTipler", dil), degerler: ilanlar.map((i) => tipAdi(i.tip, dil)) },
+    { ad: t("emlakTipi", dil), degerler: ilanlar.map((i) => tipAdi(i.tip, dil)) },
     { ad: t("oda", dil), degerler: ilanlar.map((i) => odaYaz(i.oda, dil)) },
     { ad: t("banyo", dil), degerler: ilanlar.map((i) => String(i.banyo)) },
     { ad: t("alan", dil), degerler: ilanlar.map((i) => alanYaz(i.m2, i.tip, dil)) },
