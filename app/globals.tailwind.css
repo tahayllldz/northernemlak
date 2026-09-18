@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+
+@theme {
+  /* Akdeniz Editoryal paleti */
+  --color-kum-50:  #FBF9F5;
+  --color-kum-100: #F5F0E8;
+  --color-kum-200: #EBE3D6;
+  --color-kum-300: #DDD1BE;
+  --color-kum-400: #C4B69C;
+
+  --color-deniz-50:  #EFF6F8;
+  --color-deniz-100: #D6E8ED;
+  --color-deniz-300: #7FB0BE;
+  --color-deniz-500: #2E6E82;
+  --color-deniz-700: #1B4D5C;
+  --color-deniz-900: #0E2C36;
+
+  --color-terra-100: #F6E3DA;
+  --color-terra-400: #D98A61;
+  --color-terra-500: #C4663A;
+  --color-terra-600: #A5502B;
+
+  --color-murekkep: #1C2024;
+  --color-sis:      #6B7780;
+  --color-hat:      #E4DDD1;
+
+  --font-baslik: "Playfair Display Variable", Georgia, serif;
+  --font-govde:  "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-kart: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-kum-100);
+  color: var(--color-murekkep);
+  font-family: var(--font-govde);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .baslik { font-family: var(--font-baslik); font-weight: 500; letter-spacing: -0.015em; }
+
+::selection { background: var(--color-terra-500); color: #fff; }
+
+/* ince kaydirma cubugu */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-kum-200); }
+::-webkit-scrollbar-thumb { background: var(--color-kum-400); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-deniz-300); }
+
+@utility kapsayici { @apply mx-auto w-full max-w-[1280px] px-5 md:px-8; }
+
+@utility etiket {
+  @apply text-[11px] uppercase tracking-[0.14em] font-medium;
+}
+
+.kart-golge { box-shadow: 0 1px 2px rgba(28,32,36,.04), 0 8px 24px -12px rgba(28,32,36,.14); }
+.kart-golge-yukari { box-shadow: 0 2px 4px rgba(28,32,36,.05), 0 18px 40px -16px rgba(28,32,36,.22); }
+
+@keyframes belir { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.belir { animation: belir .5s cubic-bezier(.2,.7,.3,1) both; }
