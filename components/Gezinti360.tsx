@@ -130,9 +130,15 @@ export default function Gezinti360({ kaynak, dil, baslik }: { kaynak: string; di
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, gorsel);
       setYukleniyor(false);
     };
-    gorsel.onerror = () => { setHata(true); setYukleniyor(false); };
-    // Next'in eniyileyicisi ayni kaynaktan WebP dondurur
-    gorsel.src = `/_next/image?url=${encodeURIComponent(kaynak)}&w=2048&q=80`;
+    // Eniyileyici bir sebeple reddederse ham dosyaya dus; gezinti yine calissin.
+    let denendi = false;
+    gorsel.onerror = () => {
+      if (!denendi) { denendi = true; gorsel.src = kaynak; return; }
+      setHata(true); setYukleniyor(false);
+    };
+    // Next'in eniyileyicisi ayni kaynaktan WebP dondurur.
+    // q yalnizca 75 olabilir (Next 16 varsayilan images.qualities); 80 -> HTTP 400.
+    gorsel.src = `/_next/image?url=${encodeURIComponent(kaynak)}&w=2048&q=75`;
 
     let calisiyor = true;
     let sonZaman = performance.now();
