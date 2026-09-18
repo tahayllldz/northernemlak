@@ -20,6 +20,10 @@ export type OzellikKodu =
   | "sehir-manzarasi" | "sehir-ici"
   | "yol-erisimi" | "su-altyapisi" | "elektrik-altyapisi" | "su-kuyusu";
 
+/** Danismanin konustugu diller. KKTC alicisi TR/EN/RU/FA/DE karisik;
+ *  propertyfinder.ae bunu danisman kartinda gosteriyor, rakipte yok. */
+export type KonusulanDil = "tr" | "en" | "ru" | "de" | "fa";
+
 export interface Emlakci {
   slug: string;
   ad: string;
@@ -29,6 +33,7 @@ export interface Emlakci {
   whatsapp: string;
   ruhsatNo: string;
   ruhsatDogrulandi: boolean;
+  konustuguDiller: KonusulanDil[];
 }
 
 export interface AiTasarim {

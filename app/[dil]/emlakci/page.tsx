@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Ustbilgi from "@/components/Ustbilgi";
 import { Dil } from "@/lib/tipler";
-import { t } from "@/lib/sozluk";
+import { t, KONUSULAN_DIL_ADI } from "@/lib/sozluk";
 import { EMLAKCILAR, ILANLAR } from "@/lib/veri";
 
 export default async function EmlakciListe({ params }: { params: Promise<{ dil: string }> }) {
@@ -41,6 +41,10 @@ export default async function EmlakciListe({ params }: { params: Promise<{ dil: 
                   )}
                   <span className="rounded bg-kum-100 px-2 py-1 text-[11.5px] text-deniz-700">{ilanlar.length} {t("ilan", dil)}</span>
                 </div>
+                <p className="mt-3 text-[12.5px] text-sis">
+                  <span className="text-murekkep">{t("konusulanDiller", dil)}:</span>{" "}
+                  {e.konustuguDiller.map((k) => KONUSULAN_DIL_ADI[k][dil]).join(", ")}
+                </p>
                 <div className="mt-4 flex gap-1.5">
                   {ilanlar.slice(0, 3).map((i) => (
                     <Link key={i.id} href={`/${dil}/ilan/${i.slug}`} className="relative h-[58px] flex-1 overflow-hidden rounded-md">

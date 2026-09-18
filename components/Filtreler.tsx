@@ -50,7 +50,7 @@ export default function Filtreler({ dil, adet }: { dil: Dil; adet: number }) {
             </div>
 
             <select aria-label={t("tumSehirler", dil)} value={g("sehir")}
-              onChange={(e) => ayarla("sehir", e.target.value)} className={kutu}>
+              onChange={(e) => ayarla("sehir", e.target.value)} className={`${kutu} hidden md:block`}>
               <option value="">{t("tumSehirler", dil)}</option>
               {SEHIRLER.map((s) => (
                 <option key={s} value={s}>
@@ -60,7 +60,7 @@ export default function Filtreler({ dil, adet }: { dil: Dil; adet: number }) {
             </select>
 
             <select aria-label={t("tumTipler", dil)} value={g("tip")}
-              onChange={(e) => ayarla("tip", e.target.value)} className={kutu}>
+              onChange={(e) => ayarla("tip", e.target.value)} className={`${kutu} hidden md:block`}>
               <option value="">{t("tumTipler", dil)}</option>
               {TIPLER.map((x) => <option key={x} value={x}>{tipAdi(x, dil)}</option>)}
             </select>

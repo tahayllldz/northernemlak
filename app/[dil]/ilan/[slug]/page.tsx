@@ -12,7 +12,7 @@ import { Fiyat } from "@/components/Fiyat";
 import { Dil } from "@/lib/tipler";
 import { t, ozellikAdi } from "@/lib/sozluk";
 import { ILANLAR } from "@/lib/veri";
-import { emlakciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz } from "@/lib/yardimci";
+import { emlakciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz, odaYaz } from "@/lib/yardimci";
 
 export function generateStaticParams() {
   return ["tr", "en", "ru"].flatMap((dil) => ILANLAR.map((i) => ({ dil, slug: i.slug })));
@@ -38,7 +38,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
   ];
 
   const kunye: [string, string][] = [
-    [t("oda", dil), ilan.oda],
+    [t("oda", dil), odaYaz(ilan.oda, dil)],
     [t("banyo", dil), String(ilan.banyo)],
     [t("alan", dil), `${ilan.m2} m²`],
     ...(ilan.islem === "satilik" && m2Fiyat ? [[t("m2Fiyat", dil), m2Fiyat] as [string, string]] : []),

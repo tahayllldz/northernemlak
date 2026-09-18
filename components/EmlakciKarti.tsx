@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Dil, Emlakci } from "@/lib/tipler";
-import { t } from "@/lib/sozluk";
+import { t, KONUSULAN_DIL_ADI } from "@/lib/sozluk";
 
 export default function EmlakciKarti({ e, dil }: { e: Emlakci; dil: Dil }) {
   const [acik, setAcik] = useState(false);
@@ -33,6 +33,12 @@ export default function EmlakciKarti({ e, dil }: { e: Emlakci; dil: Dil }) {
         )}
       </div>
       <p className="mt-2 font-mono text-[10.5px] tracking-tight text-sis">{e.ruhsatNo}</p>
+
+      {/* Konustugu diller — KKTC alicisi TR/EN/RU/FA karisik, rakipte yok */}
+      <p className="mt-3 border-t border-hat pt-3 text-[12.5px] text-sis">
+        <span className="text-murekkep">{t("konusulanDiller", dil)}:</span>{" "}
+        {e.konustuguDiller.map((k) => KONUSULAN_DIL_ADI[k][dil]).join(", ")}
+      </p>
 
       <div className="mt-4 space-y-2">
         <button onClick={() => setAcik(true)}

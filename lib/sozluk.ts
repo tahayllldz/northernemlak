@@ -1,4 +1,4 @@
-import { Dil, Metin, OzellikGrubu, OzellikKodu } from "./tipler";
+import { Dil, KonusulanDil, Metin, OzellikGrubu, OzellikKodu } from "./tipler";
 
 export const DILLER: { kod: Dil; ad: string; kisa: string }[] = [
   { kod: "tr", ad: "Türkçe", kisa: "TR" },
@@ -105,6 +105,7 @@ const S = {
   mesajGonder:    { tr: "Mesaj gönder", en: "Send message", ru: "Написать" },
   whatsapp:       { tr: "WhatsApp", en: "WhatsApp", ru: "WhatsApp" },
   yil:            { tr: ". yılı", en: "th year", ru: "-й год" },
+  konusulanDiller:{ tr: "Konuştuğu diller", en: "Speaks", ru: "Языки" },
   ruhsatli:       { tr: "Ruhsatlı emlakçı", en: "Licensed agent", ru: "Лицензированный агент" },
   digerIlanlari:  { tr: "Bu danışmanın diğer ilanları", en: "Other listings by this agent", ru: "Другие объявления агента" },
   benzerIlanlar:  { tr: "Benzer ilanlar", en: "Similar listings", ru: "Похожие объявления" },
@@ -204,6 +205,15 @@ export const OZELLIK_GRUPLARI: Record<OzellikGrubu, { ad: Metin; kodlar: Ozellik
     ad: { tr: "Arsa altyapısı", en: "Land infrastructure", ru: "Инфраструктура участка" },
     kodlar: ["yol-erisimi", "su-altyapisi", "elektrik-altyapisi", "su-kuyusu"],
   },
+};
+
+/** Danismanin konustugu dillerin adlari. */
+export const KONUSULAN_DIL_ADI: Record<KonusulanDil, Metin> = {
+  tr: { tr: "Türkçe",  en: "Turkish", ru: "Турецкий" },
+  en: { tr: "İngilizce", en: "English", ru: "Английский" },
+  ru: { tr: "Rusça",   en: "Russian", ru: "Русский" },
+  de: { tr: "Almanca", en: "German",  ru: "Немецкий" },
+  fa: { tr: "Farsça",  en: "Persian", ru: "Персидский" },
 };
 
 export const ozellikAdi = (kod: OzellikKodu, dil: Dil) => OZELLIK_ADI[kod]?.[dil] ?? kod;

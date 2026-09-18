@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Ilan, Dil } from "@/lib/tipler";
-import { fiyatYaz, m2FiyatYaz, tazelikYaz, sehirAdi, tipAdi, tapuAdi } from "@/lib/yardimci";
+import { fiyatYaz, m2FiyatYaz, odaYaz, tazelikYaz, sehirAdi, tipAdi, tapuAdi } from "@/lib/yardimci";
 import { t } from "@/lib/sozluk";
 import { useAyarlar } from "./Ayarlar";
 import { FavoriDugme } from "./Favoriler";

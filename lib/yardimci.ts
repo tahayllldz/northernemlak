@@ -195,3 +195,16 @@ export function mesafeler(konum: { lat: number; lng: number }, sehir: string, di
 
   return [...liste, ...digerleri];
 }
+
+/**
+ * "3+1" yerel bir gosterim; Ingiliz/Rus alici bunu okumayi bilmiyor.
+ * TR'de oldugu gibi kalir, diger dillerde acilir. Rakip bunu yapmiyor.
+ */
+export function odaYaz(oda: string, dil: Dil) {
+  if (dil === "tr" || oda === "—") return oda;
+  const [yatak, salon] = oda.split("+").map((x) => parseInt(x, 10));
+  if (!Number.isFinite(yatak)) return oda;
+  if (salon === 0) return dil === "en" ? "Studio" : "Студия";
+  const ek = dil === "en" ? `${yatak} bed + lounge` : `${yatak} спальни + гостиная`;
+  return `${oda} · ${ek}`;
+}

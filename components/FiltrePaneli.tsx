@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Dil, OzellikKodu, TapuTipi } from "@/lib/tipler";
 import { t, OZELLIK_GRUPLARI, ozellikAdi } from "@/lib/sozluk";
-import { TAPULAR, filtreOku, ilanlariSuz, tapuAdi } from "@/lib/yardimci";
+import { SEHIRLER, TIPLER, TAPULAR, filtreOku, ilanlariSuz, sehirAdi, sehirSayilari, tapuAdi, tipAdi } from "@/lib/yardimci";
 
 type Taslak = Record<string, string>;
 
@@ -85,6 +85,30 @@ export default function FiltrePaneli({
 
         <div className="panel-govde">
           <div className="space-y-6 pt-5">
+            {/* BOLGE / TIP — mobilde ust cubukta yer yok, panele alindi */}
+            <div className="grid gap-4 sm:grid-cols-2 md:hidden">
+              <div>
+                <span className="alan-etiket">{t("tumSehirler", dil)}</span>
+                <select className="alan" aria-label={t("tumSehirler", dil)}
+                  value={g("sehir")} onChange={(e) => ayarla("sehir", e.target.value)}>
+                  <option value="">{t("tumSehirler", dil)}</option>
+                  {SEHIRLER.map((s) => (
+                    <option key={s} value={s}>
+                      {sehirAdi(s, dil)} ({sehirSayilari().find((x) => x.sehir === s)?.adet ?? 0})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <span className="alan-etiket">{t("tumTipler", dil)}</span>
+                <select className="alan" aria-label={t("tumTipler", dil)}
+                  value={g("tip")} onChange={(e) => ayarla("tip", e.target.value)}>
+                  <option value="">{t("tumTipler", dil)}</option>
+                  {TIPLER.map((x) => <option key={x} value={x}>{tipAdi(x, dil)}</option>)}
+                </select>
+              </div>
+            </div>
+
             {/* FIYAT — cift uclu (Rightmove standardi; onceden sadece max vardi) */}
             <div>
               <span className="alan-etiket">{t("fiyatGbp", dil)}</span>

@@ -2,11 +2,11 @@
 import { Emlakci, Ilan } from "./tipler";
 
 export const EMLAKCILAR: Emlakci[] = [
-  { slug: "yeliz-akinci", ad: "Yeliz Akıncı", firma: "Kıbrıs Kıyı Emlak", kidemYil: 8, telefon: "+90 533 853 00 80", whatsapp: "905338530080", ruhsatNo: "KKTC-EM-2018-0431", ruhsatDogrulandi: true },
-  { slug: "mert-ozan", ad: "Mert Ozan", firma: "Bellapais Property", kidemYil: 5, telefon: "+90 542 871 22 14", whatsapp: "905428712214", ruhsatNo: "KKTC-EM-2021-0912", ruhsatDogrulandi: true },
-  { slug: "deniz-tuncel", ad: "Deniz Tuncel", firma: "Levant Estates", kidemYil: 11, telefon: "+90 548 330 45 09", whatsapp: "905483304509", ruhsatNo: "KKTC-EM-2015-0117", ruhsatDogrulandi: true },
-  { slug: "ayse-kurtulus", ad: "Ayşe Kurtuluş", firma: "Long Beach Yatırım", kidemYil: 3, telefon: "+90 533 442 77 65", whatsapp: "905334427765", ruhsatNo: "KKTC-EM-2023-1284", ruhsatDogrulandi: false },
-  { slug: "kemal-arda", ad: "Kemal Arda", firma: "Arda İnşaat", kidemYil: 16, telefon: "+90 542 209 61 30", whatsapp: "905422096130", ruhsatNo: "KKTC-IN-2010-0044", ruhsatDogrulandi: true },
+  { slug: "yeliz-akinci", ad: "Yeliz Akıncı", firma: "Kıbrıs Kıyı Emlak", kidemYil: 8, telefon: "+90 533 853 00 80", whatsapp: "905338530080", ruhsatNo: "KKTC-EM-2018-0431", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en"] },
+  { slug: "mert-ozan", ad: "Mert Ozan", firma: "Bellapais Property", kidemYil: 5, telefon: "+90 542 871 22 14", whatsapp: "905428712214", ruhsatNo: "KKTC-EM-2021-0912", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "ru"] },
+  { slug: "deniz-tuncel", ad: "Deniz Tuncel", firma: "Levant Estates", kidemYil: 11, telefon: "+90 548 330 45 09", whatsapp: "905483304509", ruhsatNo: "KKTC-EM-2015-0117", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "de"] },
+  { slug: "ayse-kurtulus", ad: "Ayşe Kurtuluş", firma: "Long Beach Yatırım", kidemYil: 3, telefon: "+90 533 442 77 65", whatsapp: "905334427765", ruhsatNo: "KKTC-EM-2023-1284", ruhsatDogrulandi: false, konustuguDiller: ["tr", "ru"] },
+  { slug: "kemal-arda", ad: "Kemal Arda", firma: "Arda İnşaat", kidemYil: 16, telefon: "+90 542 209 61 30", whatsapp: "905422096130", ruhsatNo: "KKTC-IN-2010-0044", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "ru", "fa"] },
 ];
 
 export const ILANLAR: Ilan[] = [
