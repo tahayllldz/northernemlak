@@ -28,6 +28,13 @@ export const SABITLER = {
   izinBasvurusu: 500,     // yabanci alici icin satin alma izni basvurusu
 } as const;
 
+/** Yuzde gosterimi dile gore: TR "%6", EN/RU "6%". */
+function oranYaz(oran: number, dil: Dil) {
+  const yerel = dil === "tr" ? "tr-TR" : dil === "ru" ? "ru-RU" : "en-GB";
+  const sayi = (oran * 100).toLocaleString(yerel, { maximumFractionDigits: 2 });
+  return dil === "tr" ? `%${sayi}` : `${sayi}%`;
+}
+
 export interface MaliyetKalemi {
   anahtar: string;
   ad: string;
@@ -51,7 +58,7 @@ export function maliyetHesapla(ilan: Ilan, dil: Dil, secenek: MaliyetSecenek) {
       anahtar: "kdv",
       ad: t("mKdv", dil),
       aciklama: t("mKdvNot", dil),
-      oran: "%5",
+      oran: oranYaz(ORANLAR.kdv, dil),
       tutar: fiyat * ORANLAR.kdv,
     });
   }
@@ -61,7 +68,7 @@ export function maliyetHesapla(ilan: Ilan, dil: Dil, secenek: MaliyetSecenek) {
     anahtar: "devir",
     ad: t("mDevir", dil),
     aciklama: secenek.ilkAlimHakki ? t("mDevirIlkNot", dil) : t("mDevirNot", dil),
-    oran: secenek.ilkAlimHakki ? "%3" : "%6",
+    oran: oranYaz(devirOran, dil),
     tutar: fiyat * devirOran,
   });
 
@@ -69,7 +76,7 @@ export function maliyetHesapla(ilan: Ilan, dil: Dil, secenek: MaliyetSecenek) {
     anahtar: "damga",
     ad: t("mDamga", dil),
     aciklama: t("mDamgaNot", dil),
-    oran: "%0,5",
+    oran: oranYaz(ORANLAR.damga, dil),
     tutar: fiyat * ORANLAR.damga,
   });
 
