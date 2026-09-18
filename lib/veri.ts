@@ -9,6 +9,7 @@ export const GELISTIRICILER: Gelistirici[] = [
 ];
 
 export const EMLAKCILAR: Emlakci[] = [
+  { slug: "taha-yildiz", ad: "Taha Yıldız", firma: "NorthernEmlak", kidemYil: 1, telefon: "+90 533 000 00 00", whatsapp: "905330000000", ruhsatNo: "KKTC-DEMO-0000", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en"] },
   { slug: "selin-k", ad: "Selin K.", firma: "Kuzey Pusula Emlak", kidemYil: 8, telefon: "+90 533 000 00 01", whatsapp: "905330000001", ruhsatNo: "KKTC-DEMO-0001", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en"] },
   { slug: "emre-t", ad: "Emre T.", firma: "Zeytinlik Kıyı Emlak", kidemYil: 5, telefon: "+90 533 000 00 02", whatsapp: "905330000002", ruhsatNo: "KKTC-DEMO-0002", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "ru"] },
   { slug: "derya-a", ad: "Derya A.", firma: "Beşparmak Panorama Emlak", kidemYil: 11, telefon: "+90 533 000 00 03", whatsapp: "905330000003", ruhsatNo: "KKTC-DEMO-0003", ruhsatDogrulandi: true, konustuguDiller: ["tr", "en", "de"] },
@@ -557,5 +558,28 @@ export const ILANLAR: Ilan[] = [
     yayinTarihi: "2026-09-14", guncelleme: "2026-09-14",
     goruntulenme: 325,
     konum: { lat: 35.3391, lng: 33.2119 },
+  },
+  {
+    id: 126, slug: "girne-salon-test",
+    baslik: { tr: "Girne merkezde eşyalı 2+1 daire", en: "Girne merkezde eşyalı 2+1 daire", ru: "Girne merkezde eşyalı 2+1 daire" },
+    aciklama: { tr: "Gerçek fotoğraflarla hazırlanmış örnek ilan. AI sanal dekorasyon ve 360° gezinti bu fotoğraflardan üretildi.", en: "Sample listing built from real photographs. AI staging and the 360° tour were generated from these photos.", ru: "Объявление с реальными фотографиями. AI-дизайн и 360° тур созданы из этих фото." },
+    cevrilmis: false,
+    islem: "satilik", tip: "daire", fiyat: 135000,
+    sehir: "Girne", bolge: "Merkez",
+    oda: "2+1", banyo: 1, m2: 95, binaYasi: 5, kdvDahil: true,
+    esyali: "esyali", tapu: "turk-kocani", tapuAsama: "devredildi", yabanciUygun: true,
+    ozellikler: ["asansor", "balkon", "sehir-ici", "otopark"],
+    kapak: "/gorsel/ev/girne-salon-test-01.jpeg",
+    gercekGorsel: true,
+    gorseller: ["/gorsel/ev/girne-salon-test-01.jpeg","/gorsel/ev/girne-salon-test-02.jpeg","/gorsel/ev/girne-salon-test-03.jpeg","/gorsel/ev/girne-salon-test-04.jpeg","/gorsel/ev/girne-salon-test-05.jpeg","/gorsel/ev/girne-salon-test-06.jpeg"],
+    emlakci: "taha-yildiz",
+    yayinTarihi: "2026-09-18", guncelleme: "2026-09-18",
+    goruntulenme: 1,
+    vitrin: true,
+    aiOdaGorseli: "/gorsel/ev/girne-salon-test-01.jpeg",
+    gezinti360: "/gorsel/360/girne-salon-test-01.png",
+    gezintiOdalari: ["/gorsel/360/girne-salon-test-01.png","/gorsel/360/girne-salon-test-02.png","/gorsel/360/girne-salon-test-03.png","/gorsel/360/girne-salon-test-04.png","/gorsel/360/girne-salon-test-05.png","/gorsel/360/girne-salon-test-06.png"],
+    aiTasarimlar: [{"stil":"akdeniz","ad":{"tr":"Akdeniz","en":"Mediterranean","ru":"Средиземноморский"},"gorsel":"/gorsel/ai/girne-salon-test__akdeniz.png"},{"stil":"modern-minimal","ad":{"tr":"Modern Minimal","en":"Modern Minimal","ru":"Модерн-минимализм"},"gorsel":"/gorsel/ai/girne-salon-test__modern-minimal.png"},{"stil":"iskandinav","ad":{"tr":"İskandinav","en":"Scandinavian","ru":"Скандинавский"},"gorsel":"/gorsel/ai/girne-salon-test__iskandinav.png"},{"stil":"modern-luks","ad":{"tr":"Modern Lüks","en":"Modern Luxury","ru":"Современная роскошь"},"gorsel":"/gorsel/ai/girne-salon-test__modern-luks.png"}],
+    konum: { lat: 35.3364, lng: 33.3192 },
   },
 ];
