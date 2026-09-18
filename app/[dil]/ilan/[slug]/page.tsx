@@ -11,6 +11,9 @@ import Maliyet from "@/components/Maliyet";
 import Gezinti360 from "@/components/Gezinti360";
 import TapuZinciri from "@/components/TapuZinciri";
 import GelistiriciKarti from "@/components/GelistiriciKarti";
+import Getiri from "@/components/Getiri";
+import Altyapi from "@/components/Altyapi";
+import BenzerUyari from "@/components/BenzerUyari";
 import SonBakilanlar, { SonBakilanKaydet } from "@/components/SonBakilanlar";
 import IlanKarti from "@/components/IlanKarti";
 import { Fiyat } from "@/components/Fiyat";
@@ -42,6 +45,8 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
     ...(ilan.gezinti360 ? [{ id: "bolum-360", ad: t("gezinti360", dil) }] : []),
     ...(ilan.aiTasarimlar?.length ? [{ id: "bolum-ai", ad: t("aiIleTasarlandi", dil) }] : []),
     { id: "bolum-maliyet", ad: t("maliyetBaslik", dil) },
+    ...(ilan.islem === "satilik" && ilan.tip !== "arsa" ? [{ id: "bolum-getiri", ad: t("getiriBaslik", dil) }] : []),
+    { id: "bolum-altyapi", ad: t("altyapiBaslik", dil) },
     { id: "bolum-aciklama", ad: t("aciklama", dil) },
     { id: "bolum-ozellikler", ad: t("ozellikler", dil) },
     { id: "bolum-konum", ad: t("konum", dil) },
@@ -141,6 +146,9 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
             {/* TOPLAM MALIYET — rakipte karsiligi yok */}
             <Maliyet ilan={ilan} dil={dil} />
 
+            {/* YATIRIM GETIRISI — universite donemi mevsimselligiyle */}
+            <Getiri ilan={ilan} dil={dil} />
+
             {/* 360 GEZINTI */}
             {ilan.gezinti360 && (
               <section id="bolum-360">
@@ -181,6 +189,12 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
                 ))}
               </div>
             </section>
+
+            {/* ALTYAPI HAZIRLIGI — jeneratorun neden bir ozellik oldugunu konusuyoruz */}
+            <Altyapi ilan={ilan} dil={dil} />
+
+            {/* MUKERRER ILAN SEFFAFLIGI */}
+            <BenzerUyari ilan={ilan} dil={dil} />
 
             <Konum dil={dil} bolge={ilan.bolge} sehir={ilan.sehir} konum={ilan.konum} />
 

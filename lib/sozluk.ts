@@ -87,6 +87,53 @@ const S = {
   yabanciUygunDegil:{ tr: "Yabancı alımı kısıtlı", en: "Restricted for foreign buyers", ru: "Ограничено для иностранцев" },
   tapuNot:    { tr: "Bilgilendirme amaçlıdır, hukuki tavsiye değildir.", en: "For information only, not legal advice.", ru: "Только для информации, не юридическая консультация." },
 
+  // --- Kira getirisi ---
+  getiriBaslik: { tr: "Yatırım getirisi", en: "Investment return", ru: "Доходность инвестиции" },
+  getiriAlt: {
+    tr: "Kira tahmini, aynı bölgedeki kiralık ilanlarımızın m² medyanından hesaplanır. Uydurulmuş bir rakam değildir.",
+    en: "Rent is estimated from the median £/m² of our own rental listings in the same area. It is not an invented figure.",
+    ru: "Аренда оценивается по медиане £/м² наших объявлений аренды в том же районе.",
+  },
+  tahminiKira:   { tr: "Tahmini aylık kira", en: "Estimated monthly rent", ru: "Оценка аренды в месяц" },
+  yazSezonu:     { tr: "Yaz sezonu (öğrenci yok)", en: "Summer (no students)", ru: "Лето (без студентов)" },
+  yillikBrutKira:{ tr: "Yıllık brüt kira", en: "Annual gross rent", ru: "Валовая аренда в год" },
+  yillikNetKira: { tr: "Yıllık net (gider sonrası)", en: "Annual net (after costs)", ru: "Чистый доход в год" },
+  alimMaliyetiSat:{ tr: "Toplam alım maliyeti", en: "Total purchase cost", ru: "Общая стоимость покупки" },
+  brutGetiri:    { tr: "Brüt getiri", en: "Gross yield", ru: "Валовая доходность" },
+  netGetiri:     { tr: "Net getiri", en: "Net yield", ru: "Чистая доходность" },
+  geriOdeme:     { tr: "Kendini amorti etme", en: "Payback period", ru: "Срок окупаемости" },
+  yilKisa:       { tr: "yıl", en: "yrs", ru: "лет" },
+  ogrenciNot: {
+    tr: "Üniversite kenti: kira dönem içinde dolu, yaz aylarında düşer. Hesap bunu 9 ay tam + 3 ay düşük sezon olarak modelliyor — rakiplerde bu ayrım yok.",
+    en: "University town: rent holds during term and drops in summer. The model uses 9 full months + 3 low-season months — no competitor makes this distinction.",
+    ru: "Университетский город: аренда падает летом. Модель: 9 месяцев полных + 3 низкого сезона.",
+  },
+  getiriUyari: {
+    tr: "Yönetim %8 ve bakım %5 varsayılmıştır. Tahmindir, garanti değildir.",
+    en: "Assumes 8% management and 5% maintenance. An estimate, not a guarantee.",
+    ru: "Предполагается 8% управление и 5% обслуживание. Это оценка, не гарантия.",
+  },
+  ornekIlan:     { tr: "kiralık ilandan hesaplandı", en: "rental listings used", ru: "объявлений аренды использовано" },
+
+  // --- Altyapi ---
+  altyapiBaslik: { tr: "Altyapı hazırlığı", en: "Infrastructure readiness", ru: "Готовность инфраструктуры" },
+  altyapiAlt: {
+    tr: "KKTC'de elektrik ve su kesintileri olur. “Jeneratör” bu yüzden bir lüks değil, bir ihtiyaçtır. Yerli alıcı bunu bilir, yabancı alıcı taşındıktan sonra öğrenir.",
+    en: "Power and water cuts happen in North Cyprus. A generator is a necessity, not a luxury. Locals know this; foreign buyers find out after moving in.",
+    ru: "В Северном Кипре бывают отключения электричества и воды. Генератор — необходимость, а не роскошь.",
+  },
+  altyapiVar:    { tr: "var", en: "yes", ru: "есть" },
+  altyapiYok:    { tr: "belirtilmemiş", en: "not stated", ru: "не указано" },
+
+  // --- Mukerrer ilan ---
+  mukerrerBaslik:{ tr: "Bu mülke çok benzeyen ilanlar", en: "Very similar listings", ru: "Очень похожие объявления" },
+  mukerrerAlt: {
+    tr: "Aynı bölgede, aynı tipte ve neredeyse aynı büyüklükte başka ilanlar. KKTC'de bir mülk sıklıkla birden çok ofiste, farklı fiyatlarla listelenir. Hiçbir portal bunu göstermiyor.",
+    en: "Other listings in the same area, same type, nearly the same size. In North Cyprus one property is often listed by several agencies at different prices. No portal shows this.",
+    ru: "Другие объявления в том же районе того же типа и размера. Ни один портал этого не показывает.",
+  },
+  fiyatFarki:    { tr: "Fiyat farkı", en: "Price spread", ru: "Разброс цен" },
+
   // --- Tapu zinciri ---
   tapuZinciri:   { tr: "Tapu süreci", en: "Title process", ru: "Процесс оформления титула" },
   tapuZinciriAlt:{

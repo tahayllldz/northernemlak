@@ -224,3 +224,22 @@ export function alanYaz(m2: number, tip: string, dil: Dil) {
   const yerel = dil === "tr" ? "tr-TR" : dil === "ru" ? "ru-RU" : "en-GB";
   return `${donum.toLocaleString(yerel, { maximumFractionDigits: 1 })} ${t("donum", dil)} · ${temel}`;
 }
+
+/**
+ * COK BENZER ILANLAR — mukerrer ilan seffafligi.
+ *
+ * KKTC'de bir mulk siklikla birden cok ofiste, farkli fiyatlarla listelenir ve
+ * alici bunu goremez. Portallar bunu gizler (moderasyonla siler) — biz
+ * gosteriyoruz. Ayni bolge + ayni tip + ayni oda + %8 tolerans icinde m2.
+ */
+export function cokBenzerler(ilan: Ilan) {
+  return ILANLAR.filter(
+    (x) =>
+      x.id !== ilan.id &&
+      x.islem === ilan.islem &&
+      x.tip === ilan.tip &&
+      x.bolge === ilan.bolge &&
+      x.oda === ilan.oda &&
+      Math.abs(x.m2 - ilan.m2) / Math.max(1, ilan.m2) <= 0.08
+  );
+}
