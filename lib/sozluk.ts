@@ -183,6 +183,29 @@ const S = {
   },
   fiyatFarki:    { tr: "Fiyat farkı", en: "Price spread", ru: "Разброс цен" },
 
+  // --- Kiralik sartlari ---
+  kiraSartlari: { tr: "Kiralama şartları", en: "Rental terms", ru: "Условия аренды" },
+  kiraSartlariAlt: {
+    tr: "KKTC'de kiralamada peşin ödeme ve depozito alışılmışın üstünde olabilir; ilan fiyatı aylık kirayı gösterir, girişte ödenecek tutarı değil.",
+    en: "Up-front payment and deposits in North Cyprus can be higher than expected; the listed price is the monthly rent, not what you pay on move-in.",
+    ru: "Предоплата и депозит могут быть выше ожидаемого; указана месячная аренда.",
+  },
+  depozito:   { tr: "Depozito", en: "Deposit", ru: "Депозит" },
+  pesinOdeme: { tr: "Peşin ödeme", en: "Paid up front", ru: "Предоплата" },
+  minSure:    { tr: "Asgari süre", en: "Minimum term", ru: "Минимальный срок" },
+  girisToplam:{ tr: "Girişte ödenecek", en: "Due on move-in", ru: "К оплате при заселении" },
+  ayKisa:     { tr: "ay", en: "months", ru: "мес." },
+
+  // --- AI eleme modu ---
+  aiModAc:  { tr: "AI ile döşenmiş hâlini göster", en: "Show AI-staged version", ru: "Показать с AI-дизайном" },
+  aiModKapat:{ tr: "Gerçek fotoğrafa dön", en: "Back to real photos", ru: "Вернуть реальные фото" },
+  aiModNot: {
+    tr: "Kartlardaki kapak fotoğrafı, AI ile döşenmiş hâliyle değişti. Boş veya eski döşenmiş daireleri eleme anında değerlendirmenizi sağlar. Tüm AI görselleri temsilîdir.",
+    en: "Cover photos now show the AI-staged version, so you can judge empty or dated flats while you are still shortlisting. All AI images are illustrative.",
+    ru: "Обложки показывают версию с AI-дизайном. Все AI-изображения иллюстративны.",
+  },
+  aiRozetKisa: { tr: "AI", en: "AI", ru: "AI" },
+
   // --- Projeler ---
   projelerBaslik: { tr: "Projeler", en: "New developments", ru: "Новостройки" },
   projelerAlt: {

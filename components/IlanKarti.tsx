@@ -12,8 +12,17 @@ import { FavoriDugme } from "./Favoriler";
  * Golge, cerceve ve yukselme hareketi kaldirildi; fotograf karttir.
  * Fotograf ustunde en fazla iki rozet + zorunlu "temsili" damgasi kalir.
  */
-export default function IlanKarti({ ilan, dil, oncelik = false }: { ilan: Ilan; dil: Dil; oncelik?: boolean }) {
+export default function IlanKarti({ ilan, dil, oncelik = false, aiMod = false }: { ilan: Ilan; dil: Dil; oncelik?: boolean; aiMod?: boolean }) {
   const { para } = useAyarlar();
+  /**
+   * AI ELEME MODU
+   * AI en guclu ozellikti ama detay sayfasinin ortasina gomuluydu — kullanici
+   * ilani sectikten SONRA goruyordu. Oysa "bu bos daire dosenince nasil gorunur"
+   * argumani eleme aninda, listede ise yarar. Mod acikken kapak fotografi
+   * AI dosenmis haliyle degisiyor.
+   */
+  const aiKapak = aiMod ? ilan.aiTasarimlar?.[0]?.gorsel : undefined;
+  const kapak = aiKapak ?? ilan.kapak;
   const aiVar = !!ilan.aiTasarimlar?.length;
   const m2Fiyat = ilan.islem === "satilik" ? m2FiyatYaz(ilan.fiyat, ilan.m2, para, dil) : null;
 
@@ -29,7 +38,7 @@ export default function IlanKarti({ ilan, dil, oncelik = false }: { ilan: Ilan; 
       <article>
         <div className="kart-medya">
           <Image
-            src={ilan.kapak}
+            src={kapak}
             alt={ilan.baslik[dil]}
             fill
             sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
@@ -56,7 +65,8 @@ export default function IlanKarti({ ilan, dil, oncelik = false }: { ilan: Ilan; 
             </span>
           )}
 
-          {!ilan.gercekGorsel && <span className="damga">{t("temsiliGorsel", dil)}</span>}
+          {aiKapak ? <span className="damga">{t("aiRozet", dil)}</span>
+            : !ilan.gercekGorsel && <span className="damga">{t("temsiliGorsel", dil)}</span>}
         </div>
 
         <div className="pt-3.5">

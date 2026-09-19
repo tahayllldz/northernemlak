@@ -124,6 +124,9 @@ export interface Ilan {
   projedenIkinciEl?: boolean;  // "Projeden Ikinci El" — 101evler'in ayri kategorisi
   yabanciUygun: boolean;
   aidat?: number;              // GBP / ay
+  depozito?: number;           // GBP — kiralikta
+  pesinAy?: number;            // kac ay pesin isteniyor
+  minSureAy?: number;          // asgari kira suresi
   kdvDahil: boolean;           // fiyata KDV dahil mi — KKTC alicisinin en buyuk surprizi
   ozellikler: OzellikKodu[];
   gorseller: string[];

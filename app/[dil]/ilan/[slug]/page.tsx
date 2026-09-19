@@ -12,6 +12,7 @@ import Gezinti360 from "@/components/Gezinti360";
 import TapuZinciri from "@/components/TapuZinciri";
 import GelistiriciKarti from "@/components/GelistiriciKarti";
 import Getiri from "@/components/Getiri";
+import KiraSartlari from "@/components/KiraSartlari";
 import Altyapi from "@/components/Altyapi";
 import BenzerUyari from "@/components/BenzerUyari";
 import SesliTur from "@/components/SesliTur";
@@ -46,7 +47,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
     ...(gelistirici ? [{ id: "bolum-gelistirici", ad: t("gelistiriciBaslik", dil) }] : []),
     ...(ilan.gezinti360 ? [{ id: "bolum-360", ad: t("gezinti360", dil) }] : []),
     ...(ilan.aiTasarimlar?.length ? [{ id: "bolum-ai", ad: t("aiIleTasarlandi", dil) }] : []),
-    { id: "bolum-maliyet", ad: t("maliyetBaslik", dil) },
+    ...(ilan.islem === "satilik" ? [{ id: "bolum-maliyet", ad: t("maliyetBaslik", dil) }] : [{ id: "bolum-kira", ad: t("kiraSartlari", dil) }]),
     ...(ilan.islem === "satilik" && ilan.tip !== "arsa" ? [{ id: "bolum-getiri", ad: t("getiriBaslik", dil) }] : []),
     { id: "bolum-altyapi", ad: t("altyapiBaslik", dil) },
     { id: "bolum-aciklama", ad: t("aciklama", dil) },
@@ -162,6 +163,9 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
 
             {/* YATIRIM GETIRISI — universite donemi mevsimselligiyle */}
             <Getiri ilan={ilan} dil={dil} />
+
+            {/* KIRALIK SARTLARI — satiliktaki maliyet bolumunun karsiligi */}
+            <KiraSartlari ilan={ilan} dil={dil} />
 
             {/* 360 GEZINTI */}
             {ilan.gezinti360 && (

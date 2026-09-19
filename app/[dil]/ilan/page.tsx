@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import Ustbilgi from "@/components/Ustbilgi";
 import Filtreler from "@/components/Filtreler";
-import IlanKarti from "@/components/IlanKarti";
+import AiModListe from "@/components/AiModListe";
 import SonBakilanlar from "@/components/SonBakilanlar";
 import Sayfalama, { SAYFA_BOYU } from "@/components/Sayfalama";
 import { Dil } from "@/lib/tipler";
@@ -61,9 +61,7 @@ export default async function ListeSayfasi({
           </div>
         ) : (
           <>
-            <div className="grid gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {liste.map((i, n) => <IlanKarti key={i.id} ilan={i} dil={dil} oncelik={n < 4} />)}
-            </div>
+            <AiModListe ilanlar={liste} dil={dil} />
 
             <Sayfalama dil={dil} sayfa={sayfa} toplamSayfa={toplamSayfa} sorgu={sp} />
 
