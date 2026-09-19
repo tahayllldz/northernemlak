@@ -21,7 +21,7 @@ import { Fiyat } from "@/components/Fiyat";
 import { Dil } from "@/lib/tipler";
 import { t, ozellikAdi } from "@/lib/sozluk";
 import { ILANLAR } from "@/lib/veri";
-import { emlakciBul, gelistiriciBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz, odaYaz, alanYaz } from "@/lib/yardimci";
+import { emlakciBul, gelistiriciBul, projeBul, ilanBul, sehirAdi, tipAdi, tapuAdi, tarihYaz, tazelikYaz, m2FiyatYaz, odaYaz, alanYaz } from "@/lib/yardimci";
 
 export function generateStaticParams() {
   return ["tr", "en", "ru"].flatMap((dil) => ILANLAR.map((i) => ({ dil, slug: i.slug })));
@@ -34,6 +34,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
   if (!ilan) notFound();
   const e = emlakciBul(ilan.emlakci);
   const gelistirici = gelistiriciBul(ilan.gelistirici);
+  const proje = projeBul(ilan.proje);
 
   const benzer = ILANLAR.filter((x) => x.id !== ilan.id && (x.sehir === ilan.sehir || x.tip === ilan.tip)).slice(0, 4);
   // Not: m2 fiyati sunucuda GBP olarak yazilir; para birimi secimi istemci tarafinda.
@@ -137,6 +138,18 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
               </div>
               <p className="border-t border-deniz-100 px-5 py-2.5 text-[11.5px] text-deniz-500">{t("tapuNot", dil)}</p>
             </section>
+
+            {/* PROJE BAGI — maketten satis katmani */}
+            {proje && (
+              <Link href={`/${dil}/proje/${proje.slug}`}
+                className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-deniz-100 bg-deniz-50 px-5 py-4 transition hover:border-deniz-300">
+                <span>
+                  <span className="etiket block text-deniz-500">{t("projeninParcasi", dil)}</span>
+                  <span className="baslik mt-1 block text-[19px] text-deniz-700">{proje.ad}</span>
+                </span>
+                <span className="text-[13.5px] font-medium text-deniz-700">{t("projeyiGor", dil)} →</span>
+              </Link>
+            )}
 
             {/* TAPU ZINCIRI — rakipte karsiligi yok */}
             <TapuZinciri asama={ilan.tapuAsama} dil={dil} />

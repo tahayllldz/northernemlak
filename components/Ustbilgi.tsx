@@ -23,7 +23,7 @@ export default function Ustbilgi({ dil, seffaf = false }: { dil: Dil; seffaf?: b
   const bag = [
     { ad: t("satilik", dil),   href: `/${dil}/ilan?islem=satilik` },
     { ad: t("kiralik", dil),   href: `/${dil}/ilan?islem=kiralik` },
-    { ad: t("projeler", dil),  href: `/${dil}/ilan?tip=rezidans` },
+    { ad: t("projeler", dil),  href: `/${dil}/proje` },
     { ad: t("emlakcilar", dil),href: `/${dil}/emlakci` },
   ];
 

@@ -1,5 +1,5 @@
-import { Dil, Ilan, OzellikKodu, TapuTipi } from "./tipler";
-import { EMLAKCILAR, GELISTIRICILER, ILANLAR } from "./veri";
+import { Dil, Ilan, OzellikKodu, ProjeDurum, TapuTipi } from "./tipler";
+import { EMLAKCILAR, GELISTIRICILER, ILANLAR, PROJELER } from "./veri";
 import { t } from "./sozluk";
 
 export const KURLAR = { GBP: 1, EUR: 1.17, USD: 1.27, TRY: 61.8 } as const;
@@ -246,4 +246,20 @@ export function cokBenzerler(ilan: Ilan) {
       x.oda === ilan.oda &&
       Math.abs(x.m2 - ilan.m2) / Math.max(1, ilan.m2) <= 0.08
   );
+}
+
+/* --- Projeler --- */
+export const projeBul = (slug?: string) => (slug ? PROJELER.find((p) => p.slug === slug) : undefined);
+export const projeIlanlari = (slug: string) => ILANLAR.filter((i) => i.proje === slug);
+
+export function projeDurumAdi(d: ProjeDurum, dil: Dil) {
+  return t(d === "on-satis" ? "dOnSatis" : d === "insaat" ? "dInsaat" : "dTamamlandi", dil);
+}
+
+/** Teslim etiketi: "2027-Q2" -> "2027 2. çeyrek" */
+export function teslimYaz(teslim: string, dil: Dil) {
+  const [yil, ceyrek] = teslim.split("-");
+  if (!ceyrek) return teslim;
+  const n = ceyrek.replace("Q", "");
+  return dil === "tr" ? `${yil} ${n}. çeyrek` : dil === "ru" ? `${n} кв. ${yil}` : `Q${n} ${yil}`;
 }

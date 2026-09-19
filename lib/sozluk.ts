@@ -183,6 +183,35 @@ const S = {
   },
   fiyatFarki:    { tr: "Fiyat farkı", en: "Price spread", ru: "Разброс цен" },
 
+  // --- Projeler ---
+  projelerBaslik: { tr: "Projeler", en: "New developments", ru: "Новостройки" },
+  projelerAlt: {
+    tr: "KKTC'de yabancıya satışın büyük kısmı maketten. Teslim tarihi, ödeme planı ve geliştiricinin teslim sicili her projede açıkça yazar.",
+    en: "Most foreign purchases in North Cyprus are off-plan. Handover date, payment plan and the developer's delivery record are stated on every project.",
+    ru: "Большинство покупок иностранцами — на стадии строительства. Срок сдачи, план оплаты и история застройщика указаны в каждом проекте.",
+  },
+  dOnSatis:      { tr: "Ön satış", en: "Pre-launch", ru: "Предпродажа" },
+  dInsaat:       { tr: "İnşaat halinde", en: "Under construction", ru: "Строится" },
+  dTamamlandi:   { tr: "Teslim edildi", en: "Delivered", ru: "Сдан" },
+  teslimTarihi:  { tr: "Teslim", en: "Handover", ru: "Сдача" },
+  konutSayisi:   { tr: "Konut", en: "Units", ru: "Единиц" },
+  satilanOran:   { tr: "Satıldı", en: "Sold", ru: "Продано" },
+  baslangicFiyat:{ tr: "Başlangıç fiyatı", en: "From", ru: "Цена от" },
+  pesinat:       { tr: "Peşinat", en: "Down payment", ru: "Первый взнос" },
+  taksitPlani:   { tr: "Taksit", en: "Instalments", ru: "Рассрочка" },
+  ayTaksit:      { tr: "ay", en: "months", ru: "мес." },
+  odaSecenek:    { tr: "Oda seçenekleri", en: "Unit types", ru: "Планировки" },
+  projeIlanlari: { tr: "Bu projedeki ilanlar", en: "Listings in this project", ru: "Объявления в проекте" },
+  projedenIkinciEl:{ tr: "Projeden ikinci el", en: "Off-plan resale", ru: "Перепродажа" },
+  projeninParcasi:{ tr: "Bu konut bir projenin parçası", en: "Part of a development", ru: "Часть проекта" },
+  projeyiGor:    { tr: "Projeyi incele", en: "View development", ru: "Смотреть проект" },
+  projeYok:      { tr: "Bu kriterlere uygun proje yok.", en: "No developments match.", ru: "Проектов не найдено." },
+  projeUyari: {
+    tr: "Proje bilgileri prototip demosudur. Gerçek sürümde geliştiriciden alınan ve doğrulanabilir veriler yayınlanır.",
+    en: "Project data is a prototype demo. The live product publishes verifiable data obtained from the developer.",
+    ru: "Данные проекта — демонстрация прототипа.",
+  },
+
   // --- Tapu zinciri ---
   tapuZinciri:   { tr: "Tapu süreci", en: "Title process", ru: "Процесс оформления титула" },
   tapuZinciriAlt:{

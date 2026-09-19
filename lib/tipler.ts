@@ -37,6 +37,37 @@ export type TapuAsama =
   | "izin-alindi"    // izin cikti, devir bekliyor
   | "devredildi";    // tapu satici adina, temiz devir
 
+/**
+ * PROJE / MAKETTEN SATIS KATMANI
+ *
+ * Analizdeki en buyuk yapisal boslugun karsiligi: 101evler'de "Projeler" ve
+ * "Projeden Ikinci El" birinci sinif kategori, propertyfinder'da "Off-plan /
+ * Ready / Offplan: Re-Sale" var. KKTC'de yabanciya satisin agirligi maketten.
+ * Ustbilgideki Projeler baglantisi daha once ?tip=rezidans'a gidiyordu — sahteydi.
+ */
+export type ProjeDurum = "on-satis" | "insaat" | "tamamlandi";
+
+export interface Proje {
+  slug: string;
+  ad: string;
+  gelistirici: string;          // slug
+  sehir: string;
+  bolge: string;
+  durum: ProjeDurum;
+  teslim: string;               // "2027-Q2" gibi
+  konutSayisi: number;
+  satilan: number;
+  baslangicFiyat: number;       // GBP
+  pesinatOrani: number;         // 0.30 -> %30
+  taksitAy: number;             // teslime kadar taksit ayi
+  odaSecenekleri: string[];
+  aciklama: Metin;
+  ozellikler: OzellikKodu[];
+  kapak: string;
+  gorseller: string[];
+  konum: { lat: number; lng: number };
+}
+
 /** Muteahhit sicili — maketten alicinin tek gercek sorusu: teslim eder mi? */
 export interface Gelistirici {
   slug: string;
@@ -89,6 +120,8 @@ export interface Ilan {
   tapu: TapuTipi;
   tapuAsama: TapuAsama;
   gelistirici?: string;        // slug — yalnizca proje/sifir konutlarda
+  proje?: string;              // slug — bu ilan bir projenin dairesiyse
+  projedenIkinciEl?: boolean;  // "Projeden Ikinci El" — 101evler'in ayri kategorisi
   yabanciUygun: boolean;
   aidat?: number;              // GBP / ay
   kdvDahil: boolean;           // fiyata KDV dahil mi — KKTC alicisinin en buyuk surprizi
