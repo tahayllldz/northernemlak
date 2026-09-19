@@ -142,6 +142,28 @@ Bunlar "güzel olmuş" özellikler değil, ürünün satış argümanı. Silme, 
 
 - Detaylı gerekçeler: `analiz/arayuz-analizi.md`.
 
+## 19 Eylül 2026 — eksiklerin kapatılması
+
+- **Proje katmanı geldi.** `Proje` tipi, 4 demo proje, `/[dil]/proje` liste ve
+  `/[dil]/proje/[slug]` detay. Üstbilgideki **Projeler artık gerçek sayfaya gidiyor**
+  (eskiden `?tip=rezidans` idi — sahteydi). İlanlar `proje` slug'ı ile bağlanıyor,
+  detayda proje bağlantısı çıkıyor. Bu, analizdeki en büyük yapısal boşluktu.
+- **Danışman profili** `/[dil]/emlakci/[slug]` — portföy, bölgeler, istatistik.
+- **"Mesaj gönder" artık çalışıyor** (`MesajKutusu`): sunucu yok, metin WhatsApp'a
+  aktarılıyor ve bu durum kullanıcıya yazıyor. Faz 1'de lead sistemine bağlanır.
+- **Sayfalama** (`SAYFA_BOYU = 12`), sunucu tarafında, bağlantıyla — JS'siz de çalışır.
+- **Liste sayfasında arama** + aktif arama çipi. `q` artık aktif filtre sayılır,
+  "Temizle" aramayı da siler.
+- **Sıralama**: m² fiyatı artan/azalan ve son güncellenen eklendi.
+- **AI eleme modu** (`AiModListe`): liste sayfasında tek düğmeyle kart kapakları
+  AI ile döşenmiş hâline geçiyor. Üç turdur savunduğum şey — AI'nın değeri eleme
+  anında, detay sayfasında değil. **Kaldırma.**
+- **Kiralama şartları** bölümü: depozito, peşin ay, asgari süre, girişte ödenecek
+  toplam. Satılıktaki maliyet bölümünün kiralık karşılığı.
+- **Mahremiyet**: test ilanında buzdolabı magnetlerinde yüz görünen iki fotoğraf
+  galeriden çıkarıldı (dosyalar duruyor).
+- Mobilde filtre çubuğu 198px'e çıkmıştı; arama satırı panele taşındı, 150px.
+
 ## Yayın
 
 Canlı: **https://northernemlak.vercel.app** (Vercel, production).
