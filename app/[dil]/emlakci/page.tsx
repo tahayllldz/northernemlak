@@ -24,6 +24,7 @@ export default async function EmlakciListe({ params }: { params: Promise<{ dil: 
             const bas = e.ad.split(" ").map((x) => x[0]).join("").slice(0, 2);
             return (
               <div key={e.slug} className="rounded-xl border border-hat bg-white p-5 kart-golge">
+                <Link href={`/${dil}/emlakci/${e.slug}`} className="block">
                 <div className="flex items-center gap-3.5">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-deniz-700 baslik text-[17px] text-kum-50">{bas}</div>
                   <div className="min-w-0">
@@ -31,6 +32,7 @@ export default async function EmlakciListe({ params }: { params: Promise<{ dil: 
                     <p className="truncate text-[13px] text-sis">{e.firma}</p>
                   </div>
                 </div>
+                </Link>
                 <div className="mt-3.5 flex flex-wrap gap-1.5">
                   <span className="rounded bg-kum-100 px-2 py-1 text-[11.5px] text-deniz-700">{e.kidemYil}{t("yil", dil)}</span>
                   <span className="rounded bg-terra-100 px-2 py-1 text-[11.5px] text-terra-600">{t("demoKayit", dil)}</span>

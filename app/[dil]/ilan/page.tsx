@@ -4,6 +4,7 @@ import Ustbilgi from "@/components/Ustbilgi";
 import Filtreler from "@/components/Filtreler";
 import IlanKarti from "@/components/IlanKarti";
 import SonBakilanlar from "@/components/SonBakilanlar";
+import Sayfalama, { SAYFA_BOYU } from "@/components/Sayfalama";
 import { Dil } from "@/lib/tipler";
 import { t } from "@/lib/sozluk";
 import { filtreOku, ilanlariSuz, aktifFiltreSayisi } from "@/lib/yardimci";
@@ -15,8 +16,12 @@ export default async function ListeSayfasi({
   const sp = await searchParams;
   const dil = d as Dil;
 
-  const liste = ilanlariSuz(filtreOku(sp), dil);
+  const tumu = ilanlariSuz(filtreOku(sp), dil);
   const filtreVar = aktifFiltreSayisi(sp) > 0;
+
+  const toplamSayfa = Math.max(1, Math.ceil(tumu.length / SAYFA_BOYU));
+  const sayfa = Math.min(Math.max(1, Number(sp.sayfa) || 1), toplamSayfa);
+  const liste = tumu.slice((sayfa - 1) * SAYFA_BOYU, sayfa * SAYFA_BOYU);
 
   const baslik = sp.islem === "kiralik" ? t("kiralik", dil)
     : sp.islem === "satilik" ? t("satilik", dil)
@@ -26,14 +31,21 @@ export default async function ListeSayfasi({
     <>
       <Ustbilgi dil={dil} />
       <div className="h-[68px]" />
-      <Suspense fallback={<div className="h-[104px] border-b border-hat" />}>
-        <Filtreler dil={dil} adet={liste.length} />
+      <Suspense fallback={<div className="h-[152px] border-b border-hat" />}>
+        <Filtreler dil={dil} adet={tumu.length} />
       </Suspense>
 
       <main id="icerik" className="kapsayici py-8">
-        <h1 className="baslik mb-6 text-[28px] text-deniz-700">{baslik}</h1>
+        <div className="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          <h1 className="baslik text-[28px] text-deniz-700">{baslik}</h1>
+          {toplamSayfa > 1 && (
+            <span className="text-[13px] text-sis">
+              {t("sayfa", dil)} {sayfa} / {toplamSayfa}
+            </span>
+          )}
+        </div>
 
-        {liste.length === 0 ? (
+        {tumu.length === 0 ? (
           <div className="mx-auto max-w-[460px] py-20 text-center">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3"
               className="mx-auto text-kum-300" aria-hidden>
@@ -52,6 +64,8 @@ export default async function ListeSayfasi({
             <div className="grid gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {liste.map((i, n) => <IlanKarti key={i.id} ilan={i} dil={dil} oncelik={n < 4} />)}
             </div>
+
+            <Sayfalama dil={dil} sayfa={sayfa} toplamSayfa={toplamSayfa} sorgu={sp} />
 
             {/* Ucretli yerlesim ifsasi — funda.nl yapiyor, 101evler yapmiyor. */}
             {liste.some((i) => i.vitrin) && (

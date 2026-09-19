@@ -113,7 +113,7 @@ export function aktifFiltreSayisi(sp: URLSearchParams | Record<string, string | 
   const giris = sp instanceof URLSearchParams ? Object.fromEntries(sp.entries()) : sp;
   let n = 0;
   for (const [k, v] of Object.entries(giris)) {
-    if (!v || k === "sirala" || k === "q") continue;
+    if (!v || k === "sirala" || k === "sayfa") continue;
     n += k === "oz" ? v.split(",").filter(Boolean).length : 1;
   }
   return n;
@@ -143,8 +143,12 @@ export function ilanlariSuz(f: Filtre, dil: Dil = "tr"): Ilan[] {
       i.bolge.toLocaleLowerCase("tr").includes(q) ||
       i.sehir.toLocaleLowerCase("tr").includes(q));
   }
+  const m2f = (i: Ilan) => (i.m2 > 0 ? i.fiyat / i.m2 : Number.MAX_SAFE_INTEGER);
   if (f.sirala === "fiyat-artan")  liste.sort((a, b) => a.fiyat - b.fiyat);
   else if (f.sirala === "fiyat-azalan") liste.sort((a, b) => b.fiyat - a.fiyat);
+  else if (f.sirala === "m2-artan")  liste.sort((a, b) => m2f(a) - m2f(b));
+  else if (f.sirala === "m2-azalan") liste.sort((a, b) => m2f(b) - m2f(a));
+  else if (f.sirala === "guncel")    liste.sort((a, b) => b.guncelleme.localeCompare(a.guncelleme));
   else liste.sort((a, b) => (a.vitrin === b.vitrin ? b.guncelleme.localeCompare(a.guncelleme) : a.vitrin ? -1 : 1));
   return liste;
 }

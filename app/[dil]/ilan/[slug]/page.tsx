@@ -220,7 +220,7 @@ export default async function IlanDetay({ params }: { params: Promise<{ dil: str
 
           {/* YAN SUTUN */}
           <aside className="lg:sticky lg:top-[136px] lg:self-start">
-            <EmlakciKarti e={e} dil={dil} />
+            <EmlakciKarti e={e} dil={dil} ilanBaslik={ilan.baslik[dil]} ilanYolu={`/${dil}/ilan/${ilan.slug}`} />
           </aside>
         </div>
 

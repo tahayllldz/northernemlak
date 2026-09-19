@@ -11,12 +11,14 @@ export default function Filtreler({ dil, adet }: { dil: Dil; adet: number }) {
   const router = useRouter();
   const yol = usePathname();
   const [panelAcik, setPanelAcik] = useState(false);
+  const [aramaMetni, setAramaMetni] = useState(sp.get("q") ?? "");
 
   const yaz = (p: URLSearchParams) => router.push(p.toString() ? `${yol}?${p}` : yol, { scroll: false });
 
   const ayarla = (k: string, v: string) => {
     const p = new URLSearchParams(sp.toString());
     if (v) p.set(k, v); else p.delete(k);
+    p.delete("sayfa"); // filtre degisince ilk sayfaya don
     yaz(p);
   };
 
@@ -113,11 +115,47 @@ ${typeof window !== "undefined" ? window.location.href : ""}`;
                 <option value="">{t("sonEklenen", dil)}</option>
                 <option value="fiyat-artan">{t("fiyatArtan", dil)}</option>
                 <option value="fiyat-azalan">{t("fiyatAzalan", dil)}</option>
+                <option value="m2-artan">{t("m2Artan", dil)}</option>
+                <option value="m2-azalan">{t("m2Azalan", dil)}</option>
+                <option value="guncel">{t("enYeniGuncel", dil)}</option>
               </select>
             </div>
           </div>
 
-          {/* 2. SATIR — hizli cipler. Mobilde yatay kayar (tasma degil, kasitli). */}
+          {/* 2. SATIR — metin aramasi. Onceden yalnizca ana sayfadan girilebiliyordu;
+              liste sayfasinda ne aranabiliyor ne de aktif arama gorunuyordu. */}
+          <form className="mt-2.5 flex items-center gap-2"
+            onSubmit={(e) => { e.preventDefault(); ayarla("q", aramaMetni.trim()); }}>
+            <div className="relative flex-1">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sis" aria-hidden>
+                <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" strokeLinecap="round" />
+              </svg>
+              <input value={aramaMetni} onChange={(e) => setAramaMetni(e.target.value)}
+                placeholder={t("aramaYer", dil)} aria-label={t("aramaYer", dil)}
+                className="w-full rounded-md border border-hat bg-white py-2 pl-9 pr-3 text-[13.5px] text-murekkep outline-none transition placeholder:text-sis focus:border-deniz-300" />
+            </div>
+            <button type="submit"
+              className="rounded-md bg-deniz-700 px-4 py-2 text-[13px] font-medium text-kum-50 transition hover:bg-deniz-900">
+              {t("ara", dil)}
+            </button>
+          </form>
+
+          {g("q") && (
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <span className="cip cip-tapu">
+                {t("aramaAktif", dil)}: “{g("q")}”
+                <button type="button" onClick={() => { setAramaMetni(""); ayarla("q", ""); }}
+                  aria-label={t("temizle", dil)} className="ml-1 text-deniz-500 hover:text-terra-500">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" aria-hidden>
+                    <path d="M18 6 6 18M6 6l12 12" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </span>
+            </div>
+          )}
+
+          {/* 3. SATIR — hizli cipler. Mobilde yatay kayar (tasma degil, kasitli). */}
           <div className="cip-serit mt-2.5">
             <button type="button" onClick={() => ayarla("ai", g("ai") ? "" : "1")}
               aria-pressed={!!g("ai")} className="cip-dugme">

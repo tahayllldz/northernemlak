@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Dil, Emlakci } from "@/lib/tipler";
+import Link from "next/link";
 import { t, KONUSULAN_DIL_ADI } from "@/lib/sozluk";
+import MesajKutusu from "./MesajKutusu";
 
-export default function EmlakciKarti({ e, dil }: { e: Emlakci; dil: Dil }) {
+export default function EmlakciKarti({ e, dil, ilanBaslik, ilanYolu }: { e: Emlakci; dil: Dil; ilanBaslik?: string; ilanYolu?: string }) {
   const [acik, setAcik] = useState(false);
   const bas = e.ad.split(" ").map((x) => x[0]).join("").slice(0, 2);
 
@@ -14,7 +16,7 @@ export default function EmlakciKarti({ e, dil }: { e: Emlakci; dil: Dil }) {
           {bas}
         </div>
         <div className="min-w-0">
-          <p className="truncate text-[15px] font-medium text-murekkep">{e.ad}</p>
+          <Link href={`/${dil}/emlakci/${e.slug}`} className="block truncate text-[15px] font-medium text-murekkep transition hover:text-terra-500">{e.ad}</Link>
           <p className="truncate text-[13px] text-sis">{e.firma}</p>
         </div>
       </div>
@@ -54,9 +56,11 @@ export default function EmlakciKarti({ e, dil }: { e: Emlakci; dil: Dil }) {
           </svg>
           {t("whatsapp", dil)}
         </a>
-        <button className="w-full rounded-md border border-hat bg-white py-2.5 text-[14px] text-murekkep transition hover:bg-kum-100">
-          {t("mesajGonder", dil)}
-        </button>
+        <MesajKutusu e={e} dil={dil} ilanBaslik={ilanBaslik} ilanYolu={ilanYolu} />
+        <Link href={`/${dil}/emlakci/${e.slug}`}
+          className="block w-full rounded-md py-2 text-center text-[13px] text-sis transition hover:text-terra-500">
+          {t("danismanProfil", dil)} →
+        </Link>
       </div>
 
       <p className="mt-4 border-t border-hat pt-3 text-[11.5px] leading-relaxed text-sis">
