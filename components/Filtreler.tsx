@@ -124,7 +124,7 @@ ${typeof window !== "undefined" ? window.location.href : ""}`;
 
           {/* 2. SATIR — metin aramasi. Onceden yalnizca ana sayfadan girilebiliyordu;
               liste sayfasinda ne aranabiliyor ne de aktif arama gorunuyordu. */}
-          <form className="mt-2.5 flex items-center gap-2"
+          <form className="mt-2.5 hidden items-center gap-2 md:flex"
             onSubmit={(e) => { e.preventDefault(); ayarla("q", aramaMetni.trim()); }}>
             <div className="relative flex-1">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"

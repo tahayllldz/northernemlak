@@ -85,6 +85,13 @@ export default function FiltrePaneli({
 
         <div className="panel-govde">
           <div className="space-y-6 pt-5">
+            {/* ARAMA — mobilde ust cubukta yer yok, panele alindi */}
+            <div className="md:hidden">
+              <span className="alan-etiket">{t("aramaAktif", dil)}</span>
+              <input value={g("q")} onChange={(e) => ayarla("q", e.target.value)}
+                placeholder={t("aramaYer", dil)} aria-label={t("aramaYer", dil)} className="alan" />
+            </div>
+
             {/* BOLGE / TIP — mobilde ust cubukta yer yok, panele alindi */}
             <div className="grid gap-4 sm:grid-cols-2 md:hidden">
               <div>
