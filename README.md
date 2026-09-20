@@ -61,3 +61,20 @@ Gerekçeleri ve hangisinin rakipte olup olmadığı: [analiz/arayuz-analizi.md](
 
 Emlakçı paneli, admin moderasyonu, üyelik/giriş, lead sistemi,
 6 dil (şu an 3), harita, ödeme, SEO altyapısı.
+
+## Geliştirmeye katılma
+
+```bash
+git clone <depo-url>
+cd northernemlak
+npm install
+npm run dev
+```
+
+Uygulama hiçbir API anahtarı olmadan çalışır (demo veriler `lib/` altında).
+
+Yalnızca `scripts/` altındaki AI görsel üretme scriptleri (`panorama-uret.mjs`, `ev-ekle.mjs`)
+bir Google Gemini anahtarı ister. Bu scriptler anahtarı deponun **bir üst klasöründeki** `.env`
+dosyasından okur; örnek için `.env.example` dosyasına bak. `.env` dosyasını asla commit etme.
+
+Kontroller: `npm run tip` (TypeScript), `npm run build` (üretim derlemesi).
